@@ -1,4 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Tu Página</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
 <app-header></app-header>
-<h1 class="text-3xl font-bold underline">
-    Hello world!
-</h1>
+<body class="min-h-screen bg-gray-100">
+    <div class="flex h-screen">
+        <!-- Div contenedor de la imagen (ocupando toda la pantalla) -->
+        <div class="bg-white w-3/5 h-full p-8 pt-48 opacity-80">
+            <div class="max-w-md ml-20">
+                <h1 class="text-4xl font-bold">Aprende y Prospera</h1>
+                <br>
+                <p class="text-3xl text-gray-800 text-justify">Descubre cómo gestionar tus finanzas de manera eficaz y toma el control de tu negocio con nuestros cursos interactivos de contabilidad. ¡Comienza tu viaje hacia el éxito financiero hoy mismo!</p>
+                <br>
+                <br>
+                <button class="cursor-pointer transition-all bg-amber-400 text-white px-6 py-2 rounded-lg border-amber-500 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] justify-center mt-auto">
+                  Empezar
+              </button>
+            </div>
+        </div>       
+        <!-- Segundo div que ocupa el 2/5 de la página -->
+        <div class="bg-[#22417F] w-2/5 p-6 text-white">
+        </div>
+    </div>
+    <img src="../../../assets/img/pexels-karolina-grabowska-4386366 1.png" alt="Descripción de la imagen" class="absolute top-40 left-1/2 h-2/4 w-2/5 transform translate-x-[-50%] translate-y-[-50%]">
+</body>
+</html>
