@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+  currentPage: string;
 
+  constructor(private location: Location) {
+    this.currentPage = this.location.path();
+  }
 }

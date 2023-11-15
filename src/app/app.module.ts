@@ -11,6 +11,7 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { LoginComponent } from './components/login/login.component';
 import {HeaderComponent} from "./components/header/header.component";
 import {RegisterComponent} from "./components/register/register.component";
+import { InicioCursoComponent } from './components/inicio-curso/inicio-curso.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {RegisterComponent} from "./components/register/register.component";
     AppComponent,
     InicioComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    InicioCursoComponent
   ],
   imports: [
     BrowserModule,
