@@ -9,10 +9,12 @@ import { AppComponent } from './app.component';
 //Components
 import { InicioComponent } from './components/inicio/inicio.component';
 import { LoginComponent } from './components/login/login.component';
-import { HeaderComponent } from './components/header/header.component';
+import {HeaderComponent} from "./components/header/header.component";
+import {RegisterComponent} from "./components/register/register.component";
 
 @NgModule({
   declarations: [
+    RegisterComponent,
     AppComponent,
     InicioComponent,
     LoginComponent,
