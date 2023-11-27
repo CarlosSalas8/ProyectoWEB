@@ -7,18 +7,22 @@ import { Component } from '@angular/core';
 })
 export class ContenidoCursoComponent {
   slides = [
-    { image: 'https://via.placeholder.com/800x400', title: 'Slide 1', description: 'Description 1' },
-    { image: 'https://via.placeholder.com/800x400', title: 'Slide 2', description: 'Description 2' },
-    { image: 'https://via.placeholder.com/800x400', title: 'Slide 3', description: 'Description 3' }
+    { title: 'Slide 1', content: 'Contenido del Slide 1' },
+    { title: 'Slide 2', content: 'Contenido del Slide 2' },
+    { title: 'Slide 3', content: 'Contenido del Slide 3' },
   ];
 
-  currentIndex = 0;
+  currentSlideIndex = 0;
 
   nextSlide() {
-    this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+    if (this.currentSlideIndex < this.slides.length - 1) {
+      this.currentSlideIndex++;
+    }
   }
 
   prevSlide() {
-    this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+    if (this.currentSlideIndex > 0) {
+      this.currentSlideIndex--;
+    }
   }
 }

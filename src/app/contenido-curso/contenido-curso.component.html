@@ -1,22 +1,49 @@
-<!-- carousel.component.html -->
-<div class="relative w-full">
-  <!-- Carousel wrapper -->
-  <div class="relative h-64 overflow-hidden rounded-lg border border-gray-300">
-    <!-- Carousel items -->
-    <div *ngFor="let slide of slides; let i = index" [class.hidden]="currentIndex !== i" class="h-full transition-transform duration-300 transform translate-x-{{ -currentIndex * 100 }}%">
-      <img [src]="slide.image" alt="Slide Image" class="object-cover w-full h-full">
-      <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-        <div class="text-white text-center">
-          <h1 class="text-2xl font-bold">{{ slide.title }}</h1>
-          <p class="mt-2">{{ slide.description }}</p>
-        </div>
-      </div>
-    </div>
+<div *ngIf="currentSlideIndex < slides.length" class="carousel">
+  <div class="slide">
+    <h2>{{ slides[currentSlideIndex].title }}</h2>
+    <p>{{ slides[currentSlideIndex].content }}</p>
+    <!-- Agrega aquí tu contenido adicional para la tarjeta -->
   </div>
 
-  <!-- Slider controls -->
-  <div class="absolute top-1/2 -translate-y-1/2 left-0 w-full flex justify-between px-4">
-    <button (click)="prevSlide()" class="text-white bg-indigo-500 p-2 rounded focus:outline-none">&lt;</button>
-    <button (click)="nextSlide()" class="text-white bg-indigo-500 p-2 rounded focus:outline-none">&gt;</button>
+
+<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+  <a href="#">
+      <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
+  </a>
+  <div class="p-5">
+      <a href="#">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><h2>{{ slides[currentSlideIndex].title }}</h2></h5>
+      </a>
+     <img src="../../assets/img/4.jpg" alt="">
+
+  </div>
+  <button class="button">
+    <div class="button-box"></div>
+
+  </button>
+</div>
+
+  <div class="buttons">
+    <button (click)="prevSlide()" [disabled]="currentSlideIndex === 0">Anterior</button>
+    <button (click)="nextSlide()" [disabled]="currentSlideIndex === slides.length - 1">Siguiente</button>
   </div>
 </div>
+<button (click)="prevSlide()" [disabled]="currentSlideIndex === 0">
+  <div class="svg-wrapper-1">
+    <div class="svg-wrapper">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+      >
+        <path fill="none" d="M0 0h24v24H0z"></path>
+        <path
+          fill="currentColor"
+          d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+        ></path>
+      </svg>
+    </div>
+  </div>
+  <span>Anterior</span>
+</button>
