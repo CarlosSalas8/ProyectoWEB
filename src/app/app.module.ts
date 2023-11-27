@@ -13,6 +13,7 @@ import {HeaderComponent} from "./components/header/header.component";
 import {RegisterComponent} from "./components/register/register.component";
 import { InicioCursoComponent } from './components/inicio-curso/inicio-curso.component';
 import { AprenderContabilidadComponent } from './components/aprender-contabilidad/aprender-contabilidad.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AprenderContabilidadComponent } from './components/aprender-contabilida
     LoginComponent,
     HeaderComponent,
     InicioCursoComponent,
-    AprenderContabilidadComponent
+    AprenderContabilidadComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
