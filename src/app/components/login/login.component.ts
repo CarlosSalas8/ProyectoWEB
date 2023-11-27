@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from "../../services/login.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,40 +12,59 @@ export class LoginComponent {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
-  login(event: Event, email: string, password: string): void {
+  login(event: Event): void {
     event.preventDefault();
     this.errorMessage = '';
-    console.log(`Email: ${this.email}, Password: ${this.password}`); // debug values
 
-    if(this.email && this.password) {
-      this.authService.login(this.email, this.password)
-        .then((data) => {
-          console.log('Logged in');
-          console.log(data);  // <-- Aquí encontrarás los datos devueltos por la API
-        })
-        .catch(error => {
-          // handle the error
-          console.error(error);
-          if (error.response) {
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-            this.errorMessage = 'Error: ' + error.response.data;
-          } else if (error.request) {
-            // The request was made but no response was received
-            console.log(error.request);
-            this.errorMessage = 'Error: No response from server.';
-          } else if (error.message) {
-            // Something happened in setting up the request that triggered an Error
-            console.log('Error', error.message);
-            this.errorMessage = 'Error: ' + error.message;
-          }
-        });
-    } else {
-      // handle invalid credentials
-      this.errorMessage = 'Por favor introduce un correo electrónico y una contraseña válidos.';
+    if (!this.isEmailValid(this.email)) {
+      this.errorMessage = 'Por favor, introduce un correo electrónico válido.';
+      return;
+    }
+
+    if (this.isPasswordInvalid(this.password)) {
+      this.errorMessage = 'La contraseña debe tener al menos 6 caracteres.';
+      return;
+    }
+
+    this.authenticateUser(this.email, this.password);
+  }
+
+  private isEmailValid(email: string): boolean {
+    const emailRegex = new RegExp('^(([^<>()[\\].,;:\\s@"]+(\\.[^<>()[\\].,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$');
+    return emailRegex.test(email);
+  }
+
+  private isPasswordInvalid(password: string): boolean {
+    return password.length < 6;
+  }
+
+  private authenticateUser(email: string, password: string): void {
+    this.authService.login(email, password)
+      .then((data) => {
+        console.log('Inicio de sesión exitoso');
+        console.log(data);
+        this.router.navigate(['/inicioCurso']);
+      })
+      .catch(error => {
+        this.handleError(error);
+      });
+  }
+
+  private handleError(error: any): void {
+    console.error(error);
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+      this.errorMessage = 'Error: ' + error.response.data;
+    } else if (error.request) {
+      console.log(error.request);
+      this.errorMessage = 'Error: No se ha recibido respuesta del servidor.';
+    } else if (error.message) {
+      console.log('Error', error.message);
+      this.errorMessage = 'Error: ' + error.message;
     }
   }
 }
