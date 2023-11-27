@@ -1,0 +1,37 @@
+<app-header></app-header>
+<div class="">
+  <div class="flex pl-40  ">
+    <img src="/assets/img/ImagenRegisterCamaraComercio.png"alt="Imagen Inicio" class="absolute pt-16 right-16  w-[700px] ">
+    <div  class=" w-3/5 bg-[#FFFF] p-8">
+      <div class="max-w-md relative flex flex-col p-4 rounded-3xl text-black bg-white border border-solid border-2">
+        <div class="text-2xl font-bold mb-2 text-[#0A2FB6] text-center">Register</div>
+        <div class="text-sm font-normal mb-4 justify-center text-[#1e0e4b]">Aprende y prospera</div>
+        <form class="flex flex-col gap-3">
+          <div class="block relative">
+            <label for="email" class="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">Correo Electronico</label>
+            <input type="text" id="email" class="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2  ring-gray-900 outline-0">
+
+          </div>
+          <div class="block relative">
+            <label for="nombreUsuario" class="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">Nombre de Usuario</label>
+            <input type="text" id="nombreUsuario" class="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2  ring-gray-900 outline-0">
+
+          </div>
+          <div class="block relative">
+            <label for="password" class="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">Contraseña</label>
+            <input type="text" id="password" class="rounded border border-gray-200 text-sm w-full font-normal leading-[18px] text-black tracking-[0px] appearance-none block h-11 m-0 p-[11px] focus:ring-2 ring-offset-2 ring-gray-900 outline-0">
+
+          </div>
+          <div>
+            <a class="text-sm text-[#0A2FB6]" href="#">Olvido su contraseña?
+            </a></div>
+          <button type="submit" class="bg-[#0A2FB6] w-max m-auto px-6 py-2 rounded text-white text-sm font-normal">Registrarse</button>
+          <button type="submit" class="bg-[#0A2FB6] w-max m-auto px-6 py-2 rounded text-white text-sm font-normal" routerLink="/login">Login</button>
+
+        </form>
+        <div class="text-sm text-center mt-[1.6rem]">Ya tiene una cuenta? <a class="text-sm text-[#0A2FB6]" href="/login">Inicie Sesion!</a></div>
+      </div>
+    </div>
+    <div class="bg-[#22417F] w-2/5 h-[91vh] "></div>
+  </div>
+</div>

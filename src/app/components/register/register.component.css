@@ -1,0 +1,28 @@
+.contenedor_imagen{
+  width: 60%;
+  float: right;
+}
+
+.imagen{
+  width: 83%;
+  padding-top: 5%;
+  z-index: 1;
+  position:relative;
+}
+
+.fondo_azul{
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  float: right;
+  background-color: #153d6c;
+  z-index: 2;
+
+}
+.formulario{
+  width: 40%;
+  float: left;
+  padding-top: 5%;
+  padding-left: 5%;
+}
+
