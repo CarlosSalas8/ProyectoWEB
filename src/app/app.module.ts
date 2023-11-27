@@ -19,6 +19,7 @@ import { AprenderContabilidadComponent } from './components/aprender-contabilida
 import { EstadoComponent } from './components/estado/estado.component';
 import { FooterComponent } from './footer/footer.component';
 import { ContenidoCursoComponent } from './contenido-curso/contenido-curso.component';
+import {AuthGuard} from "./guards/auth.guard";
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { ContenidoCursoComponent } from './contenido-curso/contenido-curso.compo
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService,
+    AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,13 +7,14 @@ import {InicioCursoComponent} from "./components/inicio-curso/inicio-curso.compo
 import {AprenderContabilidadComponent} from "./components/aprender-contabilidad/aprender-contabilidad.component";
 import { EstadoComponent } from './components/estado/estado.component';
 import { ContenidoCursoComponent } from './contenido-curso/contenido-curso.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: 'inicio', pathMatch:'full'},
   {path: 'login', component: LoginComponent},
   {path: 'inicio', component: InicioComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'inicioCurso', component: InicioCursoComponent},
+  {path: 'inicioCurso', component: InicioCursoComponent, canActivate: [AuthGuard]},
   {path: 'aprenderContabilidad', component: AprenderContabilidadComponent},
   {path: 'estado', component: EstadoComponent},
   {path: 'contenido-curso', component: ContenidoCursoComponent},
