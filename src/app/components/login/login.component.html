@@ -13,10 +13,8 @@
   <div class="mx-auto max-w-lg">
 
 
-    <form
-      action=""
-      class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8 bg-white"
-    >
+    <form (submit)="login($event, email, password)">
+
     <h1 class="text-center text-2xl font-bold text-[#123d5d] sm:text-3xl">
       Iniciar Sesión
     </h1>
@@ -28,6 +26,8 @@
 
         <div class="relative">
           <input
+            name="email"
+            [(ngModel)]="email"
             type="email"
             class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
             placeholder="Email"
@@ -58,6 +58,8 @@
 
         <div class="relative">
           <input
+            name="password"
+            [(ngModel)]="password"
             type="password"
             class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
             placeholder="Contraseña"
@@ -91,9 +93,8 @@
       <button
         type="submit"
         class="block w-full rounded-lg bg-[#1fa5d3] px-5 py-3 text-sm font-medium text-white"
-        routerLink="/inicioCurso"
       >
-        Sign in
+        Iniciar sesión
       </button>
 
       <p class="text-center text-sm text-gray-500">
