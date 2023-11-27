@@ -1,0 +1,22 @@
+<!-- carousel.component.html -->
+<div class="relative w-full">
+  <!-- Carousel wrapper -->
+  <div class="relative h-64 overflow-hidden rounded-lg border border-gray-300">
+    <!-- Carousel items -->
+    <div *ngFor="let slide of slides; let i = index" [class.hidden]="currentIndex !== i" class="h-full transition-transform duration-300 transform translate-x-{{ -currentIndex * 100 }}%">
+      <img [src]="slide.image" alt="Slide Image" class="object-cover w-full h-full">
+      <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+        <div class="text-white text-center">
+          <h1 class="text-2xl font-bold">{{ slide.title }}</h1>
+          <p class="mt-2">{{ slide.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slider controls -->
+  <div class="absolute top-1/2 -translate-y-1/2 left-0 w-full flex justify-between px-4">
+    <button (click)="prevSlide()" class="text-white bg-indigo-500 p-2 rounded focus:outline-none">&lt;</button>
+    <button (click)="nextSlide()" class="text-white bg-indigo-500 p-2 rounded focus:outline-none">&gt;</button>
+  </div>
+</div>
