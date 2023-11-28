@@ -8,12 +8,13 @@ import {AprenderContabilidadComponent} from "./components/aprender-contabilidad/
 import { EstadoComponent } from './components/estado/estado.component';
 import { ContenidoCursoComponent } from './contenido-curso/contenido-curso.component';
 import { AuthGuard } from './guards/auth.guard';
+import {NoAuthGuard} from "./guards/no-auth.guard";
 
 const routes: Routes = [
   {path: '', redirectTo: 'inicio', pathMatch:'full'},
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent, canActivate: [NoAuthGuard]},
   {path: 'inicio', component: InicioComponent},
-  {path: 'register', component: RegisterComponent},
+  {path: 'register', component: RegisterComponent, canActivate: [NoAuthGuard]},
   {path: 'inicioCurso', component: InicioCursoComponent, canActivate: [AuthGuard]},
   {path: 'aprenderContabilidad', component: AprenderContabilidadComponent},
   {path: 'estado', component: EstadoComponent},

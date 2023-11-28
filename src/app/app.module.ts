@@ -20,6 +20,7 @@ import { EstadoComponent } from './components/estado/estado.component';
 import { FooterComponent } from './footer/footer.component';
 import { ContenidoCursoComponent } from './contenido-curso/contenido-curso.component';
 import {AuthGuard} from "./guards/auth.guard";
+import {NoAuthGuard} from "./guards/no-auth.guard";
 
 
 @NgModule({
@@ -43,7 +44,7 @@ import {AuthGuard} from "./guards/auth.guard";
     FormsModule
   ],
   providers: [AuthService,
-    AuthGuard],
+    AuthGuard, NoAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

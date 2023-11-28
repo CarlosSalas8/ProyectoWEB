@@ -13,16 +13,21 @@ export class AuthService {
     this._token = value;
   }
 
-  isUserAuthenticated(): boolean {
-    return !!this._token;
-  }
-
   login(username: string, password: string): Promise<void> {
     return axios.post('http://localhost:8000/api-user-login/', {
       username, password
-    }).then((response: AxiosResponse) => {
-      this._token = response.data.token;
-      return response.data; // \
-    });
+    })
+      .then((response: AxiosResponse) => {
+        this._token = response.data.token;
+        if (typeof this._token === "string") {
+          localStorage.setItem('authToken', this._token);
+        }
+        return response.data;
+      });
   }
+  isUserAuthenticated(): boolean {
+    const token = localStorage.getItem('authToken');
+    return !!token;
+  }
+
 }
