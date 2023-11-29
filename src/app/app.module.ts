@@ -17,7 +17,7 @@ import {RegisterComponent} from "./components/register/register.component";
 import { InicioCursoComponent } from './components/inicio-curso/inicio-curso.component';
 import { AprenderContabilidadComponent } from './components/aprender-contabilidad/aprender-contabilidad.component';
 import { EstadoComponent } from './components/estado/estado.component';
-import { FooterComponent } from './footer/footer.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { ContenidoCursoComponent } from './components/contenido-curso/contenido-curso.component';
 import {AuthGuard} from "./guards/auth.guard";
 import {NoAuthGuard} from "./guards/no-auth.guard";

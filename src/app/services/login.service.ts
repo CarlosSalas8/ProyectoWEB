@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import axios, {AxiosResponse} from 'axios';
+import axios, {AxiosError, AxiosResponse} from 'axios';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
   private _token: string | null = null;
+  constructor(private router: Router) { }
 
   get token(): string | null {
     return this._token;
@@ -24,6 +26,23 @@ export class AuthService {
         }
         return response.data;
       });
+  }
+  logout(): void {
+    const token = this._token;
+    this._token = null;
+    localStorage.removeItem('authToken');
+    // Aquí hacemos una petición al servidor para invalidar el token
+    axios.post('http://localhost:8000/api-logout/', {}, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then((response: AxiosResponse) => {
+        console.log('Logout successful');
+      })
+      .catch((error: AxiosError) => {
+        console.error('Logout failed', error);
+      });
+
+    this.router.navigate(['login']);
   }
   isUserAuthenticated(): boolean {
     const token = localStorage.getItem('authToken');

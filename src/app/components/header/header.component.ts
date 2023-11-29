@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
+import {AuthService} from "../../services/login.service";
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ import { Location } from '@angular/common';
 export class HeaderComponent {
   currentPage: string;
 
-  constructor(private location: Location) {
+  constructor(private location: Location, private authService: AuthService) { // Inyesctas el servicio aquí
     this.currentPage = this.location.path();
   }
 
@@ -19,6 +20,9 @@ export class HeaderComponent {
   toggleDropdown() {
     this.isDropdownVisible = !this.isDropdownVisible;
   }
-
+  logout() {
+    this.authService.logout();
+  }
 
 }
+
