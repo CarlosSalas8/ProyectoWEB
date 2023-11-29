@@ -18,7 +18,10 @@ export class HeaderComponent {
 
   // Método para alternar la visibilidad del menú desplegable
   toggleDropdown() {
-    this.isDropdownVisible = !this.isDropdownVisible;
+    // sólo alterar la visibilidad si el usuario está logueado
+    if (this.authService.isUserAuthenticated()) {
+      this.isDropdownVisible = !this.isDropdownVisible;
+    }
   }
   logout() {
     this.authService.logout();
