@@ -6,7 +6,7 @@ import {RegisterComponent} from "./components/register/register.component";
 import {InicioCursoComponent} from "./components/inicio-curso/inicio-curso.component";
 import {AprenderContabilidadComponent} from "./components/aprender-contabilidad/aprender-contabilidad.component";
 import { EstadoComponent } from './components/estado/estado.component';
-import { ContenidoCursoComponent } from './contenido-curso/contenido-curso.component';
+import { ContenidoCursoComponent } from './components/contenido-curso/contenido-curso.component';
 import { AuthGuard } from './guards/auth.guard';
 import {NoAuthGuard} from "./guards/no-auth.guard";
 
