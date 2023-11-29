@@ -12,4 +12,13 @@ export class HeaderComponent {
   constructor(private location: Location) {
     this.currentPage = this.location.path();
   }
+
+  isDropdownVisible = false;
+
+  // Método para alternar la visibilidad del menú desplegable
+  toggleDropdown() {
+    this.isDropdownVisible = !this.isDropdownVisible;
+  }
+
+
 }
