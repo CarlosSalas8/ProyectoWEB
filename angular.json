@@ -27,7 +27,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/tw-elements/dist/js/tw-elements.js"
+            ]
           },
           "configurations": {
             "production": {

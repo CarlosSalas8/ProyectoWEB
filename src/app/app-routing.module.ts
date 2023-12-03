@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [NoAuthGuard]},
   {path: 'inicio', component: InicioComponent},
   {path: 'register', component: RegisterComponent, canActivate: [NoAuthGuard]},
-  {path: 'inicioCurso', component: InicioCursoComponent, canActivate: [AuthGuard]},
+  {path: 'inicioCurso', component: InicioCursoComponent},
   {path: 'aprenderContabilidad', component: AprenderContabilidadComponent},
   {path: 'estado', component: EstadoComponent},
   {path: 'contenido-curso', component: ContenidoCursoComponent},
