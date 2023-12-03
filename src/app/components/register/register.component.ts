@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../services/login.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {HttpErrorResponse} from "@angular/common/http";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -7,29 +10,37 @@ import { AuthService } from "../../services/login.service";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  username = '';
-  email = '';
-  password = '';
+  registerForm: FormGroup;
+  errorMessage: string = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) {
+    this.registerForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
+  }
 
   ngOnInit() { }
 
   registerUser() {
-    const userData = {
-      username: this.username,
-      email: this.email,
-      password: this.password
-    };
-
-    if (!this.username || !this.email || !this.password) {
-      console.error('All fields are required!');
-      return;
+    if (this.registerForm.valid) {
+      this.authService.registerUser(this.registerForm.value).subscribe(
+        response => {
+          this.errorMessage = 'Registro existoso';
+          setTimeout(() => {
+            this.router.navigate(['/login']); // Asegúrate de que '/login' sea la ruta correcta a tu página de inicio de sesión
+          }, 3000); // Aquí, 3000 significa 3000ms o 3 segundos. Puedes ajustar este valor a tu gusto
+        },
+        (error: HttpErrorResponse) => {
+          console.error(error);
+          if (error.status === 409) {
+            this.errorMessage = 'Usuario o email ya existe';
+          } else {
+            this.errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+          }
+        }
+      );
     }
-    this.authService.registerUser(userData).subscribe(response => {
-      console.log(response); // Aquí puedes manejar la respuesta de la API
-    }, error => {
-      console.error(error);
-    });
-  };
+  }
 }

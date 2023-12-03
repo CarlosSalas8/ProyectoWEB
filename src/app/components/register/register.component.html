@@ -13,7 +13,7 @@
       <div class="mx-auto max-w-lg">
 
 
-        <form (ngSubmit)="registerUser()" action="" class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8 bg-white">
+        <form [formGroup]="registerForm" (ngSubmit)="registerUser()" action="" class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8 bg-white">
     <h1 class="text-center text-2xl font-bold text-[#123d5d] sm:text-3xl">
       Registrate
     </h1>
@@ -27,8 +27,12 @@
             <label for="email" class="sr-only">Email</label>
 
             <div class="relative">
-              <input [(ngModel)]="email" name="email" type="email" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" placeholder="Email" />
-
+              <input formControlName="email" type="email"
+                     class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                     placeholder="Email" />
+              <div *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">
+                Email es inválido.
+              </div>
               <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -52,9 +56,13 @@
             <label for="Usuario" class="sr-only">Usuario</label>
 
             <div class="relative">
-              <input [(ngModel)]="username" name="username" type="username" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" placeholder="Usuario" />
+              <input formControlName="username" type="username"
+                     class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                     placeholder="Usuario"/>
+              <div *ngIf="registerForm.controls['username'].invalid && registerForm.controls['username'].touched">
+                Usuario es requerido.
+              </div>
               <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
-
           </span>
             </div>
           </div>
@@ -63,7 +71,16 @@
             <label for="password" class="sr-only">Password</label>
 
             <div class="relative">
-              <input [(ngModel)]="password" name="password" type="password" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" placeholder="Contraseña" />
+              <input formControlName="password" type="password"
+                     class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                     placeholder="Contraseña"
+              />
+              <div  *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched">
+                Contraseña es requerida.
+              </div>
+              <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+                {{errorMessage}}
+              </div>
               <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
