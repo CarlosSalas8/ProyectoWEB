@@ -1,20 +1,27 @@
-import { Component } from '@angular/core';
+import { Component,OnInit, AfterViewInit  } from '@angular/core';
+import { Stepper, initTE,} from 'tw-elements';
 
 @Component({
   selector: 'app-contenido-curso',
   templateUrl: './contenido-curso.component.html',
   styleUrls: ['./contenido-curso.component.css']
 })
-export class ContenidoCursoComponent {
+export class ContenidoCursoComponent implements OnInit,AfterViewInit{
+  constructor() { }
 
-  isPopoverVisible: boolean = false;
-
-  togglePopover() {
-    this.isPopoverVisible = !this.isPopoverVisible;
+  ngOnInit() {
+    // Llamando a initTE solo cuando el componente está inicializado
   }
 
+  ngAfterViewInit() {
+    // Llamando a initTE después de que la vista del componente ha sido inicializada
+    initTE({ Stepper });
+  }
+
+
+
   slides = [
-    { title: 'Slide 1', content: 'Contenido del Slide 1' },
+    { title: 'Concetos Básicos', content: 'Contenido del Slide 1' },
     { title: 'Slide 2', content: 'Contenido del Slide 2' },
     { title: 'Slide 3', content: 'Contenido del Slide 3' },
   ];
