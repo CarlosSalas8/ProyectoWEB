@@ -1,36 +1,142 @@
+<!-- Contenedor principal del carousel -->
 <div *ngIf="currentSlideIndex < slides.length" class="carousel">
+
+  <!-- Contenido del slide actual -->
   <div class="slide">
     <h2>{{ slides[currentSlideIndex].title }}</h2>
     <p>{{ slides[currentSlideIndex].content }}</p>
-    <!-- Agrega aquí tu contenido adicional para la tarjeta -->
-  </div>
+    <!-- Puedes agregar aquí más contenido específico del slide -->
+    <section>
+
+      <!-- Contenedor principal con padding y máxima anchura -->
+      <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-24">
+
+        <!-- Contenedor flex con envoltura de elementos -->
+        <div class="flex flex-wrap items-center mx-auto max-w-7xl">
+
+          <!-- Contenedor de imagen -->
+          <div class="w-full lg:max-w-lg lg:w-1/2 rounded-xl">
+            <div>
+
+              <!-- Contenedor relativo para la imagen con elementos absolutos superpuestos -->
+              <div class="relative w-full max-w-lg">
+
+                <!-- Elemento absoluto con fondo redondeado y animación blob -->
+                <div class="absolute top-0 rounded-full bg-azul-marino -left-4 w-72 h-72 mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+
+                <!-- Otro elemento absoluto con fondo redondeado y animación blob con retraso en la animación -->
+                <div class="absolute rounded-full bg-cyan-700 -bottom-24 right-20 w-72 h-72 mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+
+                <div
+                    class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                    <div
+                      class="relative overflow-hidden bg-cover bg-no-repeat"
+                      data-te-ripple-init
+                      data-te-ripple-color="light">
+                      <img
+                        class="rounded-t-lg"
+                        src="https://tecdn.b-cdn.net/img/new/standard/nature/186.jpg"
+                        alt="" />
+                      <a href="#!">
+                        <div
+                          class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-[hsla(0,0%,98%,0.15)] bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-100"></div>
+                      </a>
+                    </div>
+                    <div class="p-6">
+                      <h5
+                        class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                        ¿Qué es contabilidad?
+                      </h5>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
 
 
-<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-  <a href="#">
-      <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
-  </a>
-  <div class="p-5">
-      <a href="#">
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><h2>{{ slides[currentSlideIndex].title }}</h2></h5>
+          <!-- Contenedor de texto y formulario -->
+          <div class="flex flex-col items-start mt-12 mb-16 text-left lg:flex-grow lg:w-1/2 lg:pl-6 xl:pl-24 md:mb-0 xl:mt-0">
+            <div class="flex items-center mb-2">
+              <button class="button" (click)="togglePopover()">
+                <div class="button-box"></div>
+              </button>
+              <span class="ml-2">Texto 1</span>
+            </div>
+
+            <div class="flex items-center mb-2">
+              <button class="button">
+                <div class="button-box"></div>
+              </button>
+              <span class="ml-2">Texto 2</span>
+            </div>
+
+            <div class="flex items-center">
+              <button class="button">
+                <div class="button-box"></div>
+              </button>
+              <span class="ml-2">Texto 3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- mi-componente.component.html -->
+      <button (click)="togglePopover()"
+      class="select-none rounded-lg bg-gray-900 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+      More Info
+      </button>
+
+      <div *ngIf="isPopoverVisible"
+      class="absolute z-[999] grid w-[28rem] grid-cols-2 overflow-hidden whitespace-normal break-words rounded-lg border border-blue-gray-50 bg-white p-0 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none"
+      aria-labelledby=":r3a:-label" aria-describedby="popover-with-image" id="popover-with-image"
+      data-popover="popover-with-image" role="dialog">
+      <div class="p-4">
+      <p class="block mb-2 font-sans text-lg antialiased font-bold text-blue-gray-900">
+      Material Tailwind
+      </p>
+      <p class="block font-sans text-sm antialiased font-normal leading-normal mb-14 text-blue-gray-500">
+      Material Tailwind is an easy to use components library for Tailwind
+      CSS and Material Design. It features multiple React and HTML
+      components, all written with Tailwind CSS classes and Material
+      Design guidelines.
+      </p>
+      <a href="#" class="inline-block -ml-3">
+      <button
+      class="flex items-center px-4 py-2 font-sans text-xs font-bold text-center text-gray-900 capitalize align-middle transition-all rounded-lg select-none gap-x-2 hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+      type="button">
+      Read More
+      <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.25 1.91669L5.33333 6.00002L1.25 10.0834" stroke="#212121" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+      </button>
       </a>
-     <img src="../../assets/img/4.jpg" alt="">
+      </div>
+      <div class="min-h-full !w-full p-3">
+      <img
+      src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dGVhbSUyMGJ1aWxkaW5nfGVufDB8fDB8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60"
+      alt="image" class="object-cover w-full h-full rounded-lg" />
+      </div>
+      </div>
 
+    </section>
   </div>
-  <button class="button">
-    <div class="button-box"></div>
 
-  </button>
-</div>
+  <!-- Ejemplo de tarjeta utilizando Tailwind CSS -->
 
+  <!-- Botones de navegación del carousel -->
   <div class="buttons">
+    <!-- Botón "Anterior" -->
     <button (click)="prevSlide()" [disabled]="currentSlideIndex === 0">Anterior</button>
+    <!-- Botón "Siguiente" -->
     <button (click)="nextSlide()" [disabled]="currentSlideIndex === slides.length - 1">Siguiente</button>
   </div>
 </div>
+
+<!-- Botón de navegación "Anterior" con icono SVG -->
 <button (click)="prevSlide()" [disabled]="currentSlideIndex === 0">
   <div class="svg-wrapper-1">
     <div class="svg-wrapper">
+      <!-- Icono SVG "Anterior" -->
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -45,5 +151,6 @@
       </svg>
     </div>
   </div>
+  <!-- Texto "Anterior" -->
   <span>Anterior</span>
 </button>

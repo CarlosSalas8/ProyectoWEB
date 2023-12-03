@@ -6,6 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./contenido-curso.component.css']
 })
 export class ContenidoCursoComponent {
+
+  isPopoverVisible: boolean = false;
+
+  togglePopover() {
+    this.isPopoverVisible = !this.isPopoverVisible;
+  }
+
   slides = [
     { title: 'Slide 1', content: 'Contenido del Slide 1' },
     { title: 'Slide 2', content: 'Contenido del Slide 2' },
