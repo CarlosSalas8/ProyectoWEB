@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import axios, {AxiosError, AxiosResponse} from 'axios';
 import { Router } from '@angular/router';
+import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class AuthService {
   private _token: string | null = null;
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient) { }
 
   get token(): string | null {
     return this._token;
@@ -31,7 +32,6 @@ export class AuthService {
     const token = this._token;
     this._token = null;
     localStorage.removeItem('authToken');
-    // Aquí hacemos una petición al servidor para invalidar el token
     axios.post('http://localhost:8000/api-logout/', {}, {
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -48,5 +48,33 @@ export class AuthService {
     const token = localStorage.getItem('authToken');
     return !!token;
   }
-
+  register(username: string, email: string, password: string): void {
+    axios.post('http://localhost:8000/api/users/ ', {
+      username: username,
+      password: password,
+      email: email,
+    })
+      .then((response: AxiosResponse) => {
+        console.log('Register successful');
+        this.router.navigate(['login']);
+      })
+      .catch((error: any) => {
+        if (error.response) {
+          // The request was made and the server responded with a status code that falls out of the range of 2xx
+          console.error('Error Data', error.response.data);
+          console.error('Error Status', error.response.status);
+          console.error('Error Headers', error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.error('Error Request', error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.error('Error', error.message);
+        }
+        console.error('Error Config', error.config);
+      });
+  }
+  registerUser(userData: any) {
+    return this.http.post('http://localhost:8000/api/users/', userData);
+  }
 }

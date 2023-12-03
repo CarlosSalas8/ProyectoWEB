@@ -21,6 +21,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ContenidoCursoComponent } from './components/contenido-curso/contenido-curso.component';
 import {AuthGuard} from "./guards/auth.guard";
 import {NoAuthGuard} from "./guards/no-auth.guard";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {NoAuthGuard} from "./guards/no-auth.guard";
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [AuthService,
     AuthGuard, NoAuthGuard],

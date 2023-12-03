@@ -13,10 +13,7 @@
       <div class="mx-auto max-w-lg">
 
 
-    <form
-      action=""
-      class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8 bg-white"
-    >
+        <form (ngSubmit)="registerUser()" action="" class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8 bg-white">
     <h1 class="text-center text-2xl font-bold text-[#123d5d] sm:text-3xl">
       Registrate
     </h1>
@@ -30,11 +27,7 @@
             <label for="email" class="sr-only">Email</label>
 
             <div class="relative">
-              <input
-                type="email"
-                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                placeholder="Email"
-              />
+              <input [(ngModel)]="email" name="email" type="email" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" placeholder="Email" />
 
               <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
             <svg
@@ -56,15 +49,10 @@
           </div>
 
           <div>
-            <label for="email" class="sr-only">Email</label>
+            <label for="Usuario" class="sr-only">Usuario</label>
 
             <div class="relative">
-              <input
-                type="email"
-                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                placeholder="Usuario"
-              />
-
+              <input [(ngModel)]="username" name="username" type="username" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" placeholder="Usuario" />
               <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
 
           </span>
@@ -75,12 +63,7 @@
             <label for="password" class="sr-only">Password</label>
 
             <div class="relative">
-              <input
-                type="password"
-                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                placeholder="Contraseña"
-              />
-
+              <input [(ngModel)]="password" name="password" type="password" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" placeholder="Contraseña" />
               <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +88,12 @@
           </span>
             </div>
           </div>
-
+      <button
+        type="submit"
+        class="block w-full rounded-lg bg-[#1fa5d3] px-5 py-3 text-sm font-medium text-white"
+      >
+        Registrarse
+      </button>
       <button
         type="submit"
         class="block w-full rounded-lg bg-[#1fa5d3] px-5 py-3 text-sm font-medium text-white"
