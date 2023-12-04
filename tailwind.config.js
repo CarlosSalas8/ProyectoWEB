@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-
 module.exports = {
   content: [
     "./src/**/*.{html,ts}",
@@ -12,9 +11,10 @@ module.exports = {
       }
     },
   },
-  plugins: [],
   // Agrega la configuración adicional
   darkMode: "class",
-  plugins: [require("tw-elements/dist/plugin.cjs")]
-}
-
+  plugins: [
+    require("tw-elements/dist/plugin.cjs")
+    // Puedes agregar otros plugins aquí si es necesario
+  ]
+};

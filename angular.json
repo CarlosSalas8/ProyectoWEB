@@ -28,7 +28,7 @@
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/tw-elements/dist/js/tw-elements.js"
+              "node_modules/tw-elements/dist/js/tw-elements.umd.min.js"
             ]
           },
           "configurations": {
