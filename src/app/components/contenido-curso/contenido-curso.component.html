@@ -4,9 +4,8 @@
 
   <!-- Contenido del slide actual -->
   <div class="slide">
-    <div class="flex justify-center">
+    <div class="flex justify-center font-mono font-extrabold text-[#102a4b] text-3xl pt-9">
       <h2>{{ slides[currentSlideIndex].title }}</h2>
-      <p>{{ slides[currentSlideIndex].content }}</p>
     </div>
     <!-- Puedes agregar aquí más contenido específico del slide -->
     <section>
@@ -32,14 +31,14 @@
 
                 <!-- Card -->
                 <div
-                    class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                    class=" block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                     <div
                       class="relative overflow-hidden bg-cover bg-no-repeat"
                       data-te-ripple-init
                       data-te-ripple-color="light">
                       <img
                         class="rounded-t-lg"
-                        src="https://tecdn.b-cdn.net/img/new/standard/nature/186.jpg"
+                        src="../../../assets/img/3.png"
                         alt="" />
                       <a href="#!">
                         <div
@@ -48,7 +47,7 @@
                     </div>
                     <div class="p-6">
                       <h5
-                        class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                        class=" mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
                         ¿Qué es contabilidad?
                       </h5>
                     </div>
@@ -144,45 +143,38 @@
         </div>
       </div>
     </section>
+    <section *ngIf="currentSlideIndex === 1">
+      <!-- Contenido del Slide 2 -->
+      <!-- ... tu contenido del Slide 2 ... -->
+      <div class="card">Contenido de la Card 1</div>
+      <div class="card">Contenido de la Card 2</div>
+      <div class="card">Contenido de la Card 3</div>
+    </section>
   </div>
 
 
   <!-- Botones de navegación del carousel -->
-  <div class="flex justify-between items-center">
+  <div class="flex justify-between items-center p-7 ">
     <!-- Botón "Anterior" -->
-    <button (click)="prevSlide()" [disabled]="currentSlideIndex === 0"
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+
+    <button (click)="prevSlide()" [disabled]="currentSlideIndex === 0" class="cursor-pointer transition-all
+    bg-[#102a4b] text-white px-6 py-2 rounded-lg
+    border-[#00e5b8]
+      border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
+      active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-green-300 shadow-green-300 active:shadow-none">
       Anterior
     </button>
 
+
     <!-- Botón "Siguiente" -->
-    <button (click)="nextSlide()" [disabled]="currentSlideIndex === slides.length - 1"
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+
+    <button (click)="nextSlide()" [disabled]="currentSlideIndex === slides.length - 1" class="cursor-pointer transition-all
+    bg-[#102a4b] text-white px-6 py-2 rounded-lg
+    border-[#00e5b8]
+      border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
+      active:border-b-[2px] active:brightness-90 active:translate-y-[2px] hover:shadow-xl hover:shadow-green-300 shadow-green-300 active:shadow-none">
       Siguiente
     </button>
   </div>
 
 </div>
-
-<!-- Botón de navegación "Anterior" con icono SVG -->
-<button (click)="prevSlide()" [disabled]="currentSlideIndex === 0">
-  <div class="svg-wrapper-1">
-    <div class="svg-wrapper">
-      <!-- Icono SVG "Anterior" -->
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        width="24"
-        height="24"
-      >
-        <path fill="none" d="M0 0h24v24H0z"></path>
-        <path
-          fill="currentColor"
-          d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
-        ></path>
-      </svg>
-    </div>
-  </div>
-  <!-- Texto "Anterior" -->
-  <span>Anterior</span>
-</button>

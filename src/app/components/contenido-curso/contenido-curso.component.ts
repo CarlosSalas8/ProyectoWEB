@@ -21,7 +21,7 @@ export class ContenidoCursoComponent implements OnInit,AfterViewInit{
 
 
   slides = [
-    { title: 'Concetos Básicos', content: 'Contenido del Slide 1' },
+    { title: 'Conceptos Básicos', content: 'Contenido del Slide 1' },
     { title: 'Slide 2', content: 'Contenido del Slide 2' },
     { title: 'Slide 3', content: 'Contenido del Slide 3' },
   ];
