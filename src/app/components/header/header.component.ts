@@ -9,9 +9,13 @@ import {AuthService} from "../../services/login.service";
 })
 export class HeaderComponent {
   currentPage: string;
+  username: string;
+  email: string;
 
-  constructor(private location: Location, private authService: AuthService) { // Inyesctas el servicio aquí
+  constructor(private location: Location, private authService: AuthService) {
     this.currentPage = this.location.path();
+    this.username = localStorage.getItem('username') || '';
+    this.email = localStorage.getItem('email') || '';
   }
 
   isDropdownVisible = false;

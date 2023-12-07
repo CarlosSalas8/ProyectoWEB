@@ -25,6 +25,8 @@ export class AuthService {
         this._token = response.data.token;
         if (typeof this._token === "string") {
           localStorage.setItem('authToken', this._token);
+          localStorage.setItem('username', response.data.username);
+          localStorage.setItem('email', response.data.email);
         }
         return response.data;
       });
@@ -33,6 +35,8 @@ export class AuthService {
     const token = this._token;
     this._token = null;
     localStorage.removeItem('authToken');
+    localStorage.removeItem('username');
+    localStorage.removeItem('email');
     axios.post('http://localhost:8000/api-logout/', {}, {
       headers: { Authorization: `Bearer ${token}` }
     })
