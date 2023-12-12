@@ -1,44 +1,281 @@
 <app-header></app-header>
 <form [formGroup]="miFormulario">
-    <div class="flex items-center justify-center">
-        <p class="text-5xl text-[#00327B] font-bold pb-9 p-4 m-0">ESTADO DE NEGOCIO</p>
-    </div>
-    <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
-        <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">INVERSION
-            INICIAL</label>
-        <input type="number" id="inversionInicial" formControlName="inversionInicial"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Ingrese un valor" required>
-    </div>
-    <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
-        <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">INVERSION
-            PROGRESIVA</label>
-        <input type="number" id="inversionProgresiva" formControlName="inversionProgresiva"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Ingrese un valor" required>
-    </div>
-    <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
-        <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PRESUPUESTO</label>
-        <input type="number" id="presupuesto" formControlName="presupuesto"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Ingrese un valor" required>
-    </div>
-    <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
-        <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">GANANCIAS</label>
-        <input type="number" id="ganancias" formControlName="ganancias"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Valor Automático" required>
-    </div>
-    <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
-        <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PERDIDAS</label>
-        <input type="number" id="perdidas" formControlName="perdidas"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Valor Automático" required >
-    </div>    
-    <div class="flex items-center mx-auto pt-16 justify-center">
-        <button (click)="actualizarEstado()"
-            class="cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg border-blue-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] justify-center mt-auto">
-            ACTUALIZAR
-        </button>
+    <div class="flex">
+        <div class="w-1/4 bg-white mr-8">
+
+            <div class="flex items-center justify-center">
+                <p class="text-5xl text-[#00327B]  font-bold pb-10 p-4 m-2">Información</p>
+            </div>
+            <div class="wrapper w-full">
+                <div class="tab mb-3 bg-white px-5 py-3 shadow-lg rounded-md relative mr-4">
+                    <input type="radio" name="faq" id="faq1" class="apperance-none peer">
+                    <label for="faq1"
+                        class="flex items-center text-lg font-semibold cursor-pointer
+                    after:absolute after:content-['+'] after:right-5 after:text-2x1
+                    after:text-gray-400 hover:after:text-gray-400 peer-checked:after:transform peer-checked:after:rotate-45">
+                        <h2 class="mr-2 h-8 w-8 bg-[#00327B] grid place-items-center text-white rounded-full">01</h2>
+                        <h3>Precio Venta Por Unidad</h3>
+                    </label>
+
+                    <div
+                        class="answer mt-5 h-0 overflow-hidden transition ease-in-out duration-500 peer-checked:h-full">
+                        <p>Este campo se refiere al precio al que planeas vender cada unidad de tu producto o servicio.
+                            <strong>Por ejemplo, si tienes un artículo que planeas vender a $10 cada uno, deberías ingresar "10".</strong>
+                        </p>
+                    </div>
+                </div>
+                <div class="tab mb-3 bg-white px-5 py-3 shadow-lg rounded-md relative mr-4">
+                    <input type="radio" name="faq" id="faq2" class="apperance-none peer">
+                    <label for="faq2"
+                        class="flex items-center text-lg font-semibold cursor-pointer
+                    after:absolute after:content-['+'] after:right-5 after:text-2x1
+                    after:text-gray-400 hover:after:text-gray-400 peer-checked:after:transform peer-checked:after:rotate-45">
+                        <h2 class="mr-2 h-8 w-8 bg-[#00327B] grid place-items-center text-white rounded-full">02</h2>
+                        <h3>Cantidad Proyectada</h3>
+                    </label>
+
+                    <div
+                        class="answer mt-5 h-0 overflow-hidden transition ease-in-out duration-500 peer-checked:h-full">
+                        <p>Aquí debes ingresar la cantidad estimada de unidades que esperas vender en un período
+                            determinado.<strong>Si,por ejemplo, estimas vender 100 unidades de tu producto, ingresa "100".</strong></p>
+                    </div>
+                </div>
+                <div class="tab mb-3 bg-white px-5 py-3 shadow-lg rounded-md relative mr-4">
+                    <input type="radio" name="faq" id="faq3" class="apperance-none peer">
+                    <label for="faq3"
+                        class="flex items-center text-lg font-semibold cursor-pointer
+                    after:absolute after:content-['+'] after:right-5 after:text-2x1
+                    after:text-gray-400 hover:after:text-gray-400 peer-checked:after:transform peer-checked:after:rotate-45">
+                        <h2 class="mr-2 h-8 w-8 bg-[#00327B] grid place-items-center text-white rounded-full">03</h2>
+                        <h3>Ingresos Adicionales</h3>
+                    </label>
+
+                    <div
+                        class="answer mt-5 h-0 overflow-hidden transition ease-in-out duration-500 peer-checked:h-full">
+                        <p> En este campo, puedes ingresar cualquier ingreso adicional esperado que no esté cubierto por
+                            las ventas directas.<strong> Puedes dejarlo en blanco si no tienes ingresos adicionales previstos.</strong> 
+                        </p>
+                    </div>
+                </div>
+                <div class="tab mb-3 bg-white px-5 py-3 shadow-lg rounded-md relative mr-4">
+                    <input type="radio" name="faq" id="faq4" class="apperance-none peer">
+                    <label for="faq4"
+                        class="flex items-center text-lg font-semibold cursor-pointer
+                    after:absolute after:content-['+'] after:right-5 after:text-2x1
+                    after:text-gray-400 hover:after:text-gray-400 peer-checked:after:transform peer-checked:after:rotate-45">
+                        <h2 class="mr-2 h-8 w-8 bg-[#00327B] grid place-items-center text-white rounded-full">04</h2>
+                        <h3>Costo Por Unidad</h3>
+                    </label>
+
+                    <div
+                        class="answer mt-5 h-0 overflow-hidden transition ease-in-out duration-500 peer-checked:h-full">
+                        <p>Este campo se refiere al costo estimado de producción por cada unidad de tu producto o
+                            servicio.<strong> Si el costo de producir una unidad es de $5, deberías ingresar "5".</strong></p>
+                    </div>
+                </div>
+                <div class="tab mb-3 bg-white px-5 py-3 shadow-lg rounded-md relative mr-4">
+                    <input type="radio" name="faq" id="faq5" class="apperance-none peer">
+                    <label for="faq5"
+                        class="flex items-center text-lg font-semibold cursor-pointer
+                    after:absolute after:content-['+'] after:right-5 after:text-2x1
+                    after:text-gray-400 hover:after:text-gray-400 peer-checked:after:transform peer-checked:after:rotate-45">
+                        <h2 class="mr-2 h-8 w-8 bg-[#00327B] grid place-items-center text-white rounded-full">05</h2>
+                        <h3>Gastos Operativos</h3>
+                    </label>
+
+                    <div
+                        class="answer mt-5 h-0 overflow-hidden transition ease-in-out duration-500 peer-checked:h-full">
+                        <p>Son los costos esenciales para mantener tu negocio en funcionamiento diario, como salarios,
+                            alquiler, suministros, entre otros.<strong>Ingresa el total estimado.Por ejemplo, si estimas que
+                            estos costos sumarán $1000, ingresa "1000".</strong> </p>
+                    </div>
+                </div>
+                <div class="tab mb-3 bg-white px-5 py-3 shadow-lg rounded-md relative mr-4">
+                    <input type="radio" name="faq" id="faq6" class="apperance-none peer">
+                    <label for="faq6"
+                        class="flex items-center text-lg font-semibold cursor-pointer
+                    after:absolute after:content-['+'] after:right-5 after:text-2x1
+                    after:text-gray-400 hover:after:text-gray-400 peer-checked:after:transform peer-checked:after:rotate-45">
+                        <h2 class="mr-2 h-8 w-8 bg-[#00327B] grid place-items-center text-white rounded-full">06</h2>
+                        <h3>Gastos Marketing</h3>
+                    </label>
+
+                    <div
+                        class="answer mt-5 h-0 overflow-hidden transition ease-in-out duration-500 peer-checked:h-full">
+                        <p> Ingresa aquí los gastos que prevés para actividades de marketing y publicidad.<strong> Si, por
+                            ejemplo, planeas destinar $500 a estas actividades, ingresa "500".</strong></p>
+                    </div>
+                </div>
+                <div class="tab mb-3 bg-white px-5 py-3 shadow-lg rounded-md relative mr-4">
+                    <input type="radio" name="faq" id="faq7" class="apperance-none peer">
+                    <label for="faq7"
+                        class="flex items-center text-lg font-semibold cursor-pointer
+                    after:absolute after:content-['+'] after:right-5 after:text-2x1
+                    after:text-gray-400 hover:after:text-gray-400 peer-checked:after:transform peer-checked:after:rotate-45">
+                        <h2 class="mr-2 h-8 w-8 bg-[#00327B] grid place-items-center text-white rounded-full">07</h2>
+                        <h3>Gastos Desarrollo</h3>
+                    </label>
+
+                    <div
+                        class="answer mt-5 h-0 overflow-hidden transition ease-in-out duration-500 peer-checked:h-full">
+                        <p>Este campo se refiere a los gastos estimados asociados con el desarrollo de tu producto o
+                            servicio.<strong> Si anticipas $800 en gastos de desarrollo, ingresa "800".</strong></p>
+                    </div>
+                </div>
+                <div class="tab mb-3 bg-white px-5 py-3 shadow-lg rounded-md relative mr-4">
+                    <input type="radio" name="faq" id="faq8" class="apperance-none peer">
+                    <label for="faq8"
+                        class="flex items-center text-lg font-semibold cursor-pointer
+                    after:absolute after:content-['+'] after:right-5 after:text-2x1
+                    after:text-gray-400 hover:after:text-gray-400 peer-checked:after:transform peer-checked:after:rotate-45">
+                        <h2 class="mr-2 h-8 w-8 bg-[#00327B] grid place-items-center text-white rounded-full">08</h2>
+                        <h3>Gastos Adicionales</h3>
+                    </label>
+
+                    <div
+                        class="answer mt-5 h-0 overflow-hidden transition ease-in-out duration-500 peer-checked:h-full">
+                        <p>Aquí puedes ingresar cualquier gasto adicional que no esté cubierto por las categorías
+                            anteriores. <strong> Puedes dejarlo en blanco si no tienes gastos adicionales previstos.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-3/4 container mx-auto mr-8">
+            <div class="flex items-center justify-center">
+                <p class="text-5xl text-[#00327B] font-bold pb-10 p-4 m-2">ESTADO DE NEGOCIO</p>
+            </div>
+
+            <div class="flex flex-wrap -mx-4 -mb-10 text-center">
+                <div class="sm:w-1/4 mb-10 px-4">
+                    <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
+                        <label for="visitors"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio Venta Por
+                            Unidad</label>
+                        <input type="number" id="precioVentaPorUnidad" formControlName="precioVentaPorUnidad"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Ingrese un valor" required>
+                    </div>
+                </div>
+                <div class="sm:w-1/4 mb-10 px-4">
+                    <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
+                        <label for="visitors"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cantidad Proyectada
+                        </label>
+                        <input type="number" id="cantidadProyectada" formControlName="cantidadProyectada"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Ingrese un valor" required>
+                    </div>
+                </div>
+                <div class="sm:w-1/4 mb-10 px-4">
+                    <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
+                        <label for="visitors"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ingresos Adicionales
+                        </label>
+                        <input type="number" id="ingresosAdicionales" formControlName="ingresosAdicionales"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Ingrese un valor" required>
+                    </div>
+                </div>
+                <div class="sm:w-1/4 mb-10 px-4">
+                    <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
+                        <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Costo
+                            Por Unidad</label>
+                        <input type="number" id="costoPorUnidad" formControlName="costoPorUnidad"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Ingrese un valor" required>
+                    </div>
+                </div>
+                <div class="sm:w-1/4 mb-10 px-4">
+                    <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
+                        <label for="visitors"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gastos
+                            Operativos</label>
+                        <input type="number" id="gastosOperativos" formControlName="gastosOperativos"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Ingrese un valor" required>
+                    </div>
+                </div>
+                <div class="sm:w-1/4 mb-10 px-4">
+                    <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
+                        <label for="visitors"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gastos
+                            Marketing</label>
+                        <input type="number" id="gastosMarketing" formControlName="gastosMarketing"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Ingrese un valor" required>
+                    </div>
+                </div>
+                <div class="sm:w-1/4 mb-10 px-4">
+                    <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
+                        <label for="visitors"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gastos
+                            Desarrollo</label>
+                        <input type="number" id="gastosDesarrollo" formControlName="gastosDesarrollo"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Ingrese un valor" required>
+                    </div>
+                </div>
+                <div class="sm:w-1/4 mb-10 px-4">
+                    <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
+                        <label for="visitors"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gastos
+                            Adicionales</label>
+                        <input type="number" id="gastosAdicionales" formControlName="gastosAdicionales"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Ingrese un valor" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center mx-auto pt-16 justify-center">
+                <button (click)="actualizarEstado()"
+                    class="cursor-pointer transition-all bg-[#00327B] text-white px-6 py-2 rounded-lg border-[#00327B] border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] justify-center mt-auto">
+                    ACTUALIZAR
+                </button>
+            </div>
+
+            <div class="flex flex-wrap -mx-4 -mb-10 text-center">
+                <div class="sm:w-1/3 mb-10 px-4">
+                    <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
+                        <label for="visitors"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">INGRESOS</label>
+                        <input type="number" id="ingresos" formControlName="ingresos"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Valor Automático" readonly>
+                    </div>
+                </div>
+
+                <div class="sm:w-1/3 mb-10 px-4">
+                    <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
+                        <label for="visitors"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">GASTOS</label>
+                        <input type="number" id="gastos" formControlName="gastos"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Valor Automático" readonly>
+                    </div>
+                </div>
+                <div class="sm:w-1/3 mb-10 px-4">
+                    <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
+                        <label for="visitors"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">BENEFICIOS</label>
+                        <input type="number" id="beneficios" formControlName="beneficios"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Valor Automático" readonly>
+                    </div>
+                </div>
+                <div class="flex items-center mx-auto pt-16 justify-center">
+                    <a routerLink="/ruta-del-nuevo-componente">
+                        <button
+                            class="cursor-pointer transition-all bg-[#00327B] text-white px-6 py-2 rounded-lg border-[#00327B] border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] justify-center mt-auto">
+                            Visualizar Resultados
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <br><br><br><br>
+            <app-footer></app-footer>
+        </div>
+
     </div>
 </form>
