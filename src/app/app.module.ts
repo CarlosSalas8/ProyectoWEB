@@ -17,8 +17,11 @@ import {RegisterComponent} from "./components/register/register.component";
 import { InicioCursoComponent } from './components/inicio-curso/inicio-curso.component';
 import { AprenderContabilidadComponent } from './components/aprender-contabilidad/aprender-contabilidad.component';
 import { EstadoComponent } from './components/estado/estado.component';
-import { FooterComponent } from './footer/footer.component';
-import { ContenidoCursoComponent } from './contenido-curso/contenido-curso.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ContenidoCursoComponent } from './components/contenido-curso/contenido-curso.component';
+import {AuthGuard} from "./guards/auth.guard";
+import {NoAuthGuard} from "./guards/no-auth.guard";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -39,9 +42,11 @@ import { ContenidoCursoComponent } from './contenido-curso/contenido-curso.compo
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [AuthService],
+  providers: [AuthService,
+    AuthGuard, NoAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

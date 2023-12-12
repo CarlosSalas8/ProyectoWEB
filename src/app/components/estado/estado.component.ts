@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-estado',
   templateUrl: './estado.component.html',
@@ -34,33 +35,22 @@ export class EstadoComponent implements OnInit {
 
   // Función para actualizar automáticamente ingresos, gastos, proyecciones, beneficios
   actualizarEstado(): void {
-    const emprendimiento = this.miFormulario.value;
+    const inversionInicial = this.miFormulario.value.inversionInicial;
+    const inversionProgresiva = this.miFormulario.value.inversionProgresiva;
+    const presupuesto = this.miFormulario.value.presupuesto;
 
-    const calcularTotalIngresos = () => {
-      return (
-        (emprendimiento.ingresosAdicionales || 0) +
-        emprendimiento.precioVentaPorUnidad * emprendimiento.cantidadProyectada
-      );
-    };
-    
-    const calcularTotalGastos = () => {
-      return (
-        (emprendimiento.costoPorUnidad * emprendimiento.cantidadProyectada) +
-        emprendimiento.gastosOperativos +
-        emprendimiento.gastosMarketing +
-        emprendimiento.gastosDesarrollo +
-        (emprendimiento.gastosAdicionales || 0)
-      );
-    };
+    const inversionTotal = inversionInicial + inversionProgresiva;
 
-    
-    
-    const calcularBeneficios = () => {
-      return calcularTotalIngresos() - calcularTotalGastos();
-    };
-
-    this.miFormulario.get('ingresos')?.setValue(calcularTotalIngresos());
-    this.miFormulario.get('gastos')?.setValue(calcularTotalGastos());
-    this.miFormulario.get('beneficios')?.setValue(calcularBeneficios());
+    if (inversionTotal <= presupuesto) {
+      this.miFormulario.patchValue({
+        ganancias: presupuesto - inversionTotal,
+        perdidas: 0
+      });
+    } else {
+      this.miFormulario.patchValue({
+        ganancias: 0,
+        perdidas: inversionTotal - presupuesto
+      });
+    }
   }
 }

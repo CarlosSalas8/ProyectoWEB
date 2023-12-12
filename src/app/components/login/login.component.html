@@ -13,7 +13,7 @@
   <div class="mx-auto max-w-lg">
 
 
-    <form (submit)="login($event, email, password)">
+    <form (submit)="login($event)">
 
     <h1 class="text-center text-2xl font-bold text-[#123d5d] sm:text-3xl">
       Iniciar Sesión
@@ -93,11 +93,12 @@
       <button
         type="submit"
         class="block w-full rounded-lg bg-[#1fa5d3] px-5 py-3 text-sm font-medium text-white"
-        routerLink="/inicioCurso"
       >
         Iniciar sesión
       </button>
-
+      <p class="text-center text-sm text-red-500" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </p>
       <p class="text-center text-sm text-gray-500">
         No account?
         <a class="underline" href="">Sign up</a>
@@ -115,4 +116,5 @@
     />
   </div>
 </section>
+
 <app-footer></app-footer>
