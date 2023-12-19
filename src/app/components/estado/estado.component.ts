@@ -25,6 +25,9 @@ export class EstadoComponent implements OnInit {
       gastosOperativos: ['', Validators.required],
       gastosMarketing: ['', Validators.required],
       gastosDesarrollo: ['', Validators.required],
+      tasaCrecimiento: ['', Validators.required],
+      duracionProyeccion: ['', Validators.required],
+
       gastosAdicionales: [''],
       ingresos: [{ value: 0, disabled: true }],
       gastos: [{ value: 0, disabled: true }],
@@ -35,22 +38,47 @@ export class EstadoComponent implements OnInit {
 
   // Función para actualizar automáticamente ingresos, gastos, proyecciones, beneficios
   actualizarEstado(): void {
-    const inversionInicial = this.miFormulario.value.inversionInicial;
-    const inversionProgresiva = this.miFormulario.value.inversionProgresiva;
-    const presupuesto = this.miFormulario.value.presupuesto;
+    const emprendimiento = this.miFormulario.value;
 
-    const inversionTotal = inversionInicial + inversionProgresiva;
+    const calcularTotalIngresos = () => {
+      return (
+        (emprendimiento.ingresosAdicionales || 0) +
+        emprendimiento.precioVentaPorUnidad * emprendimiento.cantidadProyectada
+      );
+    };
 
-    if (inversionTotal <= presupuesto) {
-      this.miFormulario.patchValue({
-        ganancias: presupuesto - inversionTotal,
-        perdidas: 0
-      });
-    } else {
-      this.miFormulario.patchValue({
-        ganancias: 0,
-        perdidas: inversionTotal - presupuesto
-      });
-    }
+    const calcularTotalGastos = () => {
+      return (
+        emprendimiento.costoPorUnidad * emprendimiento.cantidadProyectada +
+        emprendimiento.gastosOperativos +
+        emprendimiento.gastosMarketing +
+        emprendimiento.gastosDesarrollo +
+        (emprendimiento.gastosAdicionales || 0)
+      );
+    };
+
+    const calcularProyecciones = () => {
+      let ingresosProyectados = this.miFormulario.get('ingresos')?.value || 0;
+      let gastosProyectados = this.miFormulario.get('gastos')?.value || 0;
+    
+      for (let i = 0; i < emprendimiento.duracionProyeccion; i++) {
+        ingresosProyectados *= 1 + emprendimiento.tasaCrecimiento;
+        gastosProyectados *= 1 + emprendimiento.tasaCrecimiento;
+      }
+    
+      // Limitar a 7 dígitos decimales y convertir a cadena de texto
+      return (ingresosProyectados - gastosProyectados).toFixed(7);
+    };
+    
+
+    const calcularBeneficios = () => {
+      return calcularTotalIngresos() - calcularTotalGastos();
+    };
+
+    // Actualiza los resultados en el formulario
+    this.miFormulario.get('ingresos')?.setValue(calcularTotalIngresos());
+    this.miFormulario.get('gastos')?.setValue(calcularTotalGastos());
+    this.miFormulario.get('proyecciones')?.setValue(calcularProyecciones());
+    this.miFormulario.get('beneficios')?.setValue(calcularBeneficios());
   }
 }
