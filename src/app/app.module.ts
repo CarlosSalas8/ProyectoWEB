@@ -22,6 +22,7 @@ import { ContenidoCursoComponent } from './components/contenido-curso/contenido-
 import {AuthGuard} from "./guards/auth.guard";
 import {NoAuthGuard} from "./guards/no-auth.guard";
 import {HttpClientModule} from "@angular/common/http";
+import { AjustesComponent } from './components/ajustes/ajustes.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {HttpClientModule} from "@angular/common/http";
     AprenderContabilidadComponent,
     EstadoComponent,
     FooterComponent,
-    ContenidoCursoComponent
+    ContenidoCursoComponent,
+    AjustesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,72 @@
+<app-header></app-header>
+
+<form class="space-y-8">
+  <!-- Profile Section -->
+  <div class="border-b border-gray-200 pb-8">
+    <h2 class="text-lg font-semibold text-gray-900 mb-4">Profile</h2>
+    <p class="text-sm text-gray-600">This information will be displayed publicly so be careful what you share.</p>
+
+    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-6">
+      <!-- Username -->
+      <div class="sm:col-span-4">
+        <label for="username" class="block text-sm font-medium leading-6 text-gray-700">Username</label>
+        <div class="mt-2 flex rounded-md shadow-sm">
+          <span class="flex items-center px-3 text-gray-500 bg-gray-100 text-sm rounded-l-md">workcation.com/</span>
+          <input type="text" name="username" id="username" autocomplete="username" class="block w-full border-gray-300 rounded-r-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+      </div>
+
+      <!-- About -->
+      <div class="col-span-full">
+        <label for="about" class="block text-sm font-medium leading-6 text-gray-700">About</label>
+        <div class="mt-2">
+          <textarea id="about" name="about" rows="3" class="block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm text-sm"></textarea>
+        </div>
+        <p class="mt-2 text-sm text-gray-600">Write a few sentences about yourself.</p>
+      </div>
+
+      <!-- Photo -->
+      <div class="col-span-full flex items-center justify-between">
+        <label for="photo" class="block text-sm font-medium leading-6 text-gray-700">Photo</label>
+        <div class="flex items-center">
+          <svg class="h-10 w-10 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <!-- SVG Path -->
+          </svg>
+          <button type="button" class="ml-3 inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-semibold text-gray-700 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Change</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Personal Information Section -->
+  <div class="border-b border-gray-200 pb-8">
+    <h2 class="text-lg font-semibold text-gray-900 mb-4">Personal Information</h2>
+    <p class="text-sm text-gray-600">Use a permanent address where you can receive mail.</p>
+
+    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-6">
+      <!-- First Name -->
+      <div class="sm:col-span-3">
+        <label for="first-name" class="block text-sm font-medium leading-6 text-gray-700">First name</label>
+        <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm text-sm mt-2">
+      </div>
+
+      <!-- Last Name -->
+      <div class="sm:col-span-3">
+        <label for="last-name" class="block text-sm font-medium leading-6 text-gray-700">Last name</label>
+        <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm text-sm mt-2">
+      </div>
+
+      <!-- Email -->
+      <div class="sm:col-span-4">
+        <label for="email" class="block text-sm font-medium leading-6 text-gray-700">Email address</label>
+        <input id="email" name="email" type="email" autocomplete="email" class="block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm text-sm mt-2">
+      </div>
+    </div>
+  </div>
+
+  <!-- Buttons Section -->
+  <div class="flex items-center justify-end gap-4">
+    <button type="button" class="text-sm font-semibold text-gray-700 hover:text-indigo-600">Cancel</button>
+    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-semibold shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+  </div>
+</form>
