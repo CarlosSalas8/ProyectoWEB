@@ -18,7 +18,7 @@ const routes: Routes = [
   {path: 'inicioCurso', component: InicioCursoComponent},
   {path: 'aprenderContabilidad', component: AprenderContabilidadComponent},
   {path: 'estado', component: EstadoComponent},
-  {path: 'contenido-curso', component: ContenidoCursoComponent},
+  {path: 'contenido-curso/:id', component: ContenidoCursoComponent},
   {path: '**', redirectTo: 'inicio', pathMatch:'full' }
 ];
 

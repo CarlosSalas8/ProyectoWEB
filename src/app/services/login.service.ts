@@ -86,6 +86,11 @@ export class AuthService {
   getTodosLosCursos(): Observable<any> {
     const token = localStorage.getItem('authToken');
     const headers = { 'Authorization': `Token ${token}` };
-    return this.http.get('http://localhost:8000/api/curso/', { headers: headers });
+    return this.http.get('http://localhost:8000/api-curso/curso/', { headers: headers });
+  }
+  getContenidoCurso(idCurso: string): Promise<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = { 'Authorization': `Token ${token}` };
+    return this.http.get(`http://localhost:8000/api-curso/curso/${idCurso}/contenidoCurso/`, { headers: headers }).toPromise();
   }
 }
