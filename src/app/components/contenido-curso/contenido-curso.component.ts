@@ -1,21 +1,38 @@
-import { Component,OnInit, AfterViewInit  } from '@angular/core';
+import {Component, OnInit, AfterViewInit, ElementRef} from '@angular/core';
 import { Stepper, Carousel,initTE,} from 'tw-elements';
+import { ActivatedRoute } from '@angular/router';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {map, Observable, switchMap} from "rxjs";
+import {AuthService} from "../../services/login.service";
 
 @Component({
   selector: 'app-contenido-curso',
   templateUrl: './contenido-curso.component.html',
   styleUrls: ['./contenido-curso.component.css']
+
 })
 export class ContenidoCursoComponent implements OnInit,AfterViewInit{
-  constructor() { }
-
+  id: number | undefined;
+  slides = []; // <-- Agregue esta línea
+  contenidoCurso: Array<any> = [];
+  constructor(private route: ActivatedRoute,
+              private http: HttpClient,
+              private authService: AuthService,
+              private elRef: ElementRef) {}
   ngOnInit() {
-    // Llamando a initTE solo cuando el componente está inicializado
+    const idCurso = this.route.snapshot.params['id'];
+    this.authService.getContenidoCurso(idCurso)
+      .then(contenidoCurso => {
+        this.contenidoCurso = contenidoCurso;
+        (this.slides as number[]) = this.contenidoCurso.map((_x, i) => i); // <-- Además de esta línea
+      })
+      .catch(error => console.error(error));
   }
+
 
   ngAfterViewInit() {
     // Llamando a initTE después de que la vista del componente ha sido inicializada
-    initTE({ Stepper,Carousel });
+    Carousel.init({ element: this.elRef.nativeElement });
   }
 
 
