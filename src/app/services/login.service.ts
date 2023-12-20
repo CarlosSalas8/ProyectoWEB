@@ -93,4 +93,9 @@ export class AuthService {
     const headers = { 'Authorization': `Token ${token}` };
     return this.http.get(`http://localhost:8000/api-curso/curso/${idCurso}/contenidoCurso/`, { headers: headers }).toPromise();
   }
+  updateUser(userData:any): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = { 'Authorization': `Token ${token}` };
+    return this.http.patch<any>('http://localhost:8000/apid-edit-users/', userData,{ headers: headers });
+  }
 }
