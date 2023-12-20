@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios, {AxiosError, AxiosResponse} from 'axios';
 import { Router } from '@angular/router';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 
 @Injectable()
@@ -93,4 +93,18 @@ export class AuthService {
     const headers = { 'Authorization': `Token ${token}` };
     return this.http.get(`http://localhost:8000/api-curso/curso/${idCurso}/contenidoCurso/`, { headers: headers }).toPromise();
   }
+
+  obtenerDatosDeMongo(): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = { 'Authorization': `Token ${token}` };
+    return this.http.get('http://localhost:8000/api-estado/estado/', { headers: headers });
+  }
+
+  guardarDatosEnMongo(datos: any): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = { 'Authorization': `Token ${token}` };
+    return this.http.post('http://localhost:8000/api-estado/estado/', datos, { headers: headers });
+  }
+
+ 
 }

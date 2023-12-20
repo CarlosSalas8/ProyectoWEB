@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { AuthService } from "../../services/login.service";
 
 @Component({
   selector: 'app-estado',
@@ -14,7 +14,7 @@ export class EstadoComponent implements OnInit {
   proyecciones: number = 0;
   beneficios: number = 0;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authService: AuthService) { }
 
   ngOnInit() {
     this.miFormulario = this.fb.group({
@@ -25,51 +25,38 @@ export class EstadoComponent implements OnInit {
       gastosOperativos: ['', Validators.required],
       gastosMarketing: ['', Validators.required],
       gastosDesarrollo: ['', Validators.required],
-      tasaCrecimiento: ['', Validators.required],
-      duracionProyeccion: ['', Validators.required],
-
       gastosAdicionales: [''],
+      fecha: ['', Validators.required],
       ingresos: [{ value: 0, disabled: true }],
       gastos: [{ value: 0, disabled: true }],
-      proyecciones: [{ value: 0, disabled: true }],
       beneficios: [{ value: 0, disabled: true }],
     });
   }
 
-  // Función para actualizar automáticamente ingresos, gastos, proyecciones, beneficios
-  actualizarEstado(): void {
-    const emprendimiento = this.miFormulario.value;
+  enviarDatos(): void {
+    // Obtén los datos del formulario
+    const datosFormulario = this.miFormulario.value;
 
+    // Asigna la fecha actual al campo 'fecha'
+    datosFormulario.fecha = datosFormulario.fecha;
+
+    // Calcula los valores de ingresos, gastos y beneficios
     const calcularTotalIngresos = () => {
       return (
-        (emprendimiento.ingresosAdicionales || 0) +
-        emprendimiento.precioVentaPorUnidad * emprendimiento.cantidadProyectada
+        (datosFormulario.ingresosAdicionales || 0) +
+        datosFormulario.precioVentaPorUnidad * datosFormulario.cantidadProyectada
       );
     };
 
     const calcularTotalGastos = () => {
       return (
-        emprendimiento.costoPorUnidad * emprendimiento.cantidadProyectada +
-        emprendimiento.gastosOperativos +
-        emprendimiento.gastosMarketing +
-        emprendimiento.gastosDesarrollo +
-        (emprendimiento.gastosAdicionales || 0)
+        datosFormulario.costoPorUnidad * datosFormulario.cantidadProyectada +
+        datosFormulario.gastosOperativos +
+        datosFormulario.gastosMarketing +
+        datosFormulario.gastosDesarrollo +
+        (datosFormulario.gastosAdicionales || 0)
       );
     };
-
-    const calcularProyecciones = () => {
-      let ingresosProyectados = this.miFormulario.get('ingresos')?.value || 0;
-      let gastosProyectados = this.miFormulario.get('gastos')?.value || 0;
-    
-      for (let i = 0; i < emprendimiento.duracionProyeccion; i++) {
-        ingresosProyectados *= 1 + emprendimiento.tasaCrecimiento;
-        gastosProyectados *= 1 + emprendimiento.tasaCrecimiento;
-      }
-    
-      // Limitar a 7 dígitos decimales y convertir a cadena de texto
-      return (ingresosProyectados - gastosProyectados).toFixed(7);
-    };
-    
 
     const calcularBeneficios = () => {
       return calcularTotalIngresos() - calcularTotalGastos();
@@ -78,7 +65,38 @@ export class EstadoComponent implements OnInit {
     // Actualiza los resultados en el formulario
     this.miFormulario.get('ingresos')?.setValue(calcularTotalIngresos());
     this.miFormulario.get('gastos')?.setValue(calcularTotalGastos());
-    this.miFormulario.get('proyecciones')?.setValue(calcularProyecciones());
     this.miFormulario.get('beneficios')?.setValue(calcularBeneficios());
+
+    // Agrega los valores calculados al objeto 'datosFormulario'
+    datosFormulario.ingresos = calcularTotalIngresos();
+    datosFormulario.gastos = calcularTotalGastos();
+    datosFormulario.beneficios = calcularBeneficios();
+
+    // Muestra los datos del formulario en la consola
+    console.log('Datos del formulario:', datosFormulario);
+
+    // Realiza la solicitud HTTP para guardar los datos
+    this.authService.obtenerDatosDeMongo().subscribe(
+      (respuesta) => {
+        console.log('Datos obtenidos de MongoDB:', respuesta);
+        // Maneja la respuesta según tus necesidades
+      },
+      (error) => {
+        console.error('Error al obtener datos de MongoDB:', error);
+        // Maneja el error según tus necesidades
+      }
+    );
+
+    this.authService.guardarDatosEnMongo(datosFormulario).subscribe(
+      (respuesta) => {
+        console.log('Datos guardados en MongoDB:', respuesta);
+        // Maneja la respuesta según tus necesidades
+      },
+      (error) => {
+        console.error('Error al guardar datos en MongoDB:', error);
+        
+        // Maneja el error según tus necesidades
+      }
+    );
   }
-}
+}  
