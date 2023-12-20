@@ -81,10 +81,10 @@
     <div class="sm:hidden" id="mobile-menu">
       <div class="space-y-1 px-2 pb-3 pt-2">
         <!-- Estilos para enlaces del menú móvil -->
-        <a href="#" class="text-gray-300 hover:bg-azul-marino hover:text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Dashboard</a>
-        <a href="#" class="text-gray-300 hover:bg-azul-marino hover:text-white block rounded-md px-3 py-2 text-base font-medium">Team</a>
-        <a href="#" class="text-gray-300 hover:bg-azul-marino hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a>
-        <a href="#" class="text-gray-300 hover:bg-azul-marino hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
+        <a href="/inicioCurso" class="text-gray-300 hover:bg-azul-marino hover:text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page" [ngClass]="{'text-white bg-azul-marino': currentPage === '/inicio'}">Inicio</a>
+        <a href="/estado" class="text-gray-300 hover:bg-azul-marino hover:text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page" [ngClass]="{'text-white bg-azul-marino': currentPage === '/estado'}">Estago</a>
+        <a href="/registro" class="text-gray-300 hover:bg-azul-marino hover:text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page" [ngClass]="{'text-white bg-azul-marino': currentPage === '/registro'}">Registro</a>
+        <a href="/resultado" class="text-gray-300 hover:bg-azul-marino hover:text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page" [ngClass]="{'text-white bg-azul-marino': currentPage === '/resultado'}">Resultado</a>
       </div>
     </div>
 
