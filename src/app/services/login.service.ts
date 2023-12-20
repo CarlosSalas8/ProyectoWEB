@@ -98,4 +98,15 @@ export class AuthService {
     const headers = { 'Authorization': `Token ${token}` };
     return this.http.patch<any>('http://localhost:8000/apid-edit-users/', userData,{ headers: headers });
   }
+  obtenerDatosDeMongo(): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = { 'Authorization': `Token ${token}` };
+    return this.http.get('http://localhost:8000/api-estado/estado/', { headers: headers });
+  }
+
+  guardarDatosEnMongo(datos: any): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = {'Authorization': `Token ${token}` };
+    return this.http.post('http://localhost:8000/api-estado/estado/', datos, { headers: headers });
+  }
 }
