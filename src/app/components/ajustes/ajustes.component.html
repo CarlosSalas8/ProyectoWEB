@@ -1,72 +1,101 @@
 <app-header></app-header>
 
-<form class="space-y-8">
-  <!-- Profile Section -->
-  <div class="border-b border-gray-200 pb-8">
-    <h2 class="text-lg font-semibold text-gray-900 mb-4">Profile</h2>
-    <p class="text-sm text-gray-600">This information will be displayed publicly so be careful what you share.</p>
 
-    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-6">
-      <!-- Username -->
-      <div class="sm:col-span-4">
-        <label for="username" class="block text-sm font-medium leading-6 text-gray-700">Username</label>
-        <div class="mt-2 flex rounded-md shadow-sm">
-          <span class="flex items-center px-3 text-gray-500 bg-gray-100 text-sm rounded-l-md">workcation.com/</span>
-          <input type="text" name="username" id="username" autocomplete="username" class="block w-full border-gray-300 rounded-r-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+
+<div class="bg-white w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-[#161931]">
+    <aside class="hidden py-4 md:w-1/3 lg:w-1/4 md:block">
+        <div class="sticky flex flex-col gap-2 p-4 text-sm border-r border-indigo-100 top-12">
+
+            <h2 class="pl-3 mb-4 text-2xl font-semibold">Configuración</h2>
+
+            <a href="#" class="flex items-center px-3 py-2.5 font-bold bg-white  text-indigo-900 border rounded-full">
+                Perfil de Usuario
+            </a>
+            <a href="#"
+                class="flex items-center px-3 py-2.5 font-semibold  hover:text-indigo-900 hover:border hover:rounded-full">
+                Estado de cuenta
+            </a>
+
         </div>
-      </div>
+    </aside>
+    <main class="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4">
+        <div class="p-2 md:p-4">
+            <div class="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
+                <h2 class="pl-6 text-2xl font-bold sm:text-xl">Perfil de Usuario</h2>
 
-      <!-- About -->
-      <div class="col-span-full">
-        <label for="about" class="block text-sm font-medium leading-6 text-gray-700">About</label>
-        <div class="mt-2">
-          <textarea id="about" name="about" rows="3" class="block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm text-sm"></textarea>
+                <div class="grid max-w-2xl mx-auto mt-8">
+                    <div class="flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0">
+
+                        <img class="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
+                            src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+                            alt="Bordered avatar">
+
+                        <div class="flex flex-col space-y-5 sm:ml-8">
+                            <button type="button"
+                                class="py-3.5 px-7 text-base font-medium text-indigo-100 focus:outline-none bg-[#202142] rounded-lg border border-indigo-200 hover:bg-indigo-900 focus:z-10 focus:ring-4 focus:ring-indigo-200 ">
+                                Cambiar imagen
+                            </button>
+
+                        </div>
+                    </div>
+
+                    <div class="items-center mt-8 sm:mt-14 text-[#202142]">
+
+                        <div
+                            class="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
+                            <div class="w-full">
+                                <label for="first_name"
+                                    class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">
+                                    Nombre</label>
+                                <input type="text" id="first_name"
+                                    class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
+                                    placeholder="Tu nombre" value="Jane" required>
+                            </div>
+
+                            <div class="w-full">
+                                <label for="last_name"
+                                    class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">
+                                    Apellido</label>
+                                <input type="text" id="last_name"
+                                    class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
+                                    placeholder="Tu apellido" value="Ferguson" required>
+                            </div>
+
+                        </div>
+
+                        <div class="mb-2 sm:mb-6">
+                            <label for="email"
+                                class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">
+                                Email</label>
+                            <input type="email" id="email"
+                                class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
+                                placeholder="Tu.email@mail.com" required>
+                        </div>
+
+                        <div class="mb-2 sm:mb-6">
+                            <label for="profession"
+                                class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Nombre del emprendimiento</label>
+                            <input type="text" id="profession"
+                                class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
+                                placeholder="Tu emprendimiento" required>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="message"
+                                class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Biografía</label>
+                            <textarea id="message" rows="4"
+                                class="block p-2.5 w-full text-sm text-indigo-900 bg-indigo-50 rounded-lg border border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500 "
+                                placeholder="Escribe tu biografía aquí..."></textarea>
+                        </div>
+
+                        <div class="flex justify-end">
+                            <button type="submit"
+                                class="text-white bg-[#202142] hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Guardar</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
-        <p class="mt-2 text-sm text-gray-600">Write a few sentences about yourself.</p>
-      </div>
-
-      <!-- Photo -->
-      <div class="col-span-full flex items-center justify-between">
-        <label for="photo" class="block text-sm font-medium leading-6 text-gray-700">Photo</label>
-        <div class="flex items-center">
-          <svg class="h-10 w-10 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <!-- SVG Path -->
-          </svg>
-          <button type="button" class="ml-3 inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-semibold text-gray-700 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Change</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Personal Information Section -->
-  <div class="border-b border-gray-200 pb-8">
-    <h2 class="text-lg font-semibold text-gray-900 mb-4">Personal Information</h2>
-    <p class="text-sm text-gray-600">Use a permanent address where you can receive mail.</p>
-
-    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-6">
-      <!-- First Name -->
-      <div class="sm:col-span-3">
-        <label for="first-name" class="block text-sm font-medium leading-6 text-gray-700">First name</label>
-        <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm text-sm mt-2">
-      </div>
-
-      <!-- Last Name -->
-      <div class="sm:col-span-3">
-        <label for="last-name" class="block text-sm font-medium leading-6 text-gray-700">Last name</label>
-        <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm text-sm mt-2">
-      </div>
-
-      <!-- Email -->
-      <div class="sm:col-span-4">
-        <label for="email" class="block text-sm font-medium leading-6 text-gray-700">Email address</label>
-        <input id="email" name="email" type="email" autocomplete="email" class="block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm text-sm mt-2">
-      </div>
-    </div>
-  </div>
-
-  <!-- Buttons Section -->
-  <div class="flex items-center justify-end gap-4">
-    <button type="button" class="text-sm font-semibold text-gray-700 hover:text-indigo-600">Cancel</button>
-    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-semibold shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
-  </div>
-</form>
+    </main>
+</div>
