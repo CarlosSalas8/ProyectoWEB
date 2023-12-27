@@ -20,6 +20,7 @@
     "@angular/router": "^16.2.0",
     "@preline/dropdown": "^2.0.1",
     "axios": "^1.6.2",
+    "flowbite": "^2.2.1",
     "material-ripple-effect": "^1.1.0",
     "rxjs": "~7.8.0",
     "stream-http": "^3.2.0",
