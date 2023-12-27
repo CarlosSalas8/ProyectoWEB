@@ -25,6 +25,7 @@ export class AuthService {
         this._token = response.data.token;
         if (typeof this._token === "string") {
           localStorage.setItem('authToken', this._token);
+          localStorage.setItem('userId', response.data.id );
           localStorage.setItem('username', response.data.username);
           localStorage.setItem('email', response.data.email);
         }
@@ -97,6 +98,9 @@ export class AuthService {
     const token = localStorage.getItem('authToken');
     const headers = { 'Authorization': `Token ${token}` };
     return this.http.patch<any>('http://localhost:8000/apid-edit-users/', userData,{ headers: headers });
+  }
+  obtenerIdUsuario(): string | null {
+    return localStorage.getItem('userId');
   }
   obtenerDatosDeMongo(): Observable<any> {
     const token = localStorage.getItem('authToken');

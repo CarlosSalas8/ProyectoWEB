@@ -36,6 +36,7 @@ export class EstadoComponent implements OnInit {
   enviarDatos(): void {
     // Obtén los datos del formulario
     const datosFormulario = this.miFormulario.value;
+    const idUsuario = this.authService.obtenerIdUsuario();
 
     // Asigna la fecha actual al campo 'fecha'
     datosFormulario.fecha = datosFormulario.fecha;
@@ -71,10 +72,14 @@ export class EstadoComponent implements OnInit {
     datosFormulario.ingresos = calcularTotalIngresos();
     datosFormulario.gastos = calcularTotalGastos();
     datosFormulario.beneficios = calcularBeneficios();
-
+    if(idUsuario) {
+      datosFormulario.usuario = [parseInt(idUsuario)];
+    } else {
+      datosFormulario.usuario = 1;
+    }
     // Muestra los datos del formulario en la consola
     console.log('Datos del formulario:', datosFormulario);
-
+    console.log('Datos del usuario:', idUsuario);
     // Realiza la solicitud HTTP para guardar los datos
 
 
