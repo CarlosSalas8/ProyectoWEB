@@ -8,9 +8,9 @@
           <img alt="content" class="object-cover object-center h-full w-full" [src]="curso.imagen">
         </div>
         <h2 class="title-font text-2xl font-medium text-gray-900 mt-6 mb-3">{{curso.titulo}}</h2>
-        <p class="leading-relaxed text-base " [innerHTML]="curso.contenido"></p>
+        <p class="leading-relaxed text-base text-justify" [innerHTML]="curso.contenido"></p>
         <button class="flex mx-auto mt-6 text-white bg-[#1fa5d3] border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded"
-                [routerLink]="['/contenido-curso', curso.id]">Button</button>      </div>
+                [routerLink]="['/contenido-curso', curso.id]">Aprender</button>      </div>
     </div>
   </div>
 </section>
