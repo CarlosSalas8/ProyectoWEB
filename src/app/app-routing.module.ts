@@ -8,6 +8,7 @@ import {AprenderContabilidadComponent} from "./components/aprender-contabilidad/
 import { EstadoComponent } from './components/estado/estado.component';
 import { ContenidoCursoComponent } from './components/contenido-curso/contenido-curso.component';
 import {AjustesComponent} from "./components/ajustes/ajustes.component";
+import {RegistroDatosComponent} from "./components/registro-datos/registro-datos.component";
 import { AuthGuard } from './guards/auth.guard';
 import {NoAuthGuard} from "./guards/no-auth.guard";
 
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'estado', component: EstadoComponent},
   {path: 'contenido-curso/:id', component: ContenidoCursoComponent},
   {path: 'ajustes',component:AjustesComponent},
+  {path: 'registro',component:RegistroDatosComponent},
   {path: '**', redirectTo: 'inicio', pathMatch:'full' }
 ];
 

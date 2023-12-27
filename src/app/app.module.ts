@@ -23,6 +23,7 @@ import {AuthGuard} from "./guards/auth.guard";
 import {NoAuthGuard} from "./guards/no-auth.guard";
 import {HttpClientModule} from "@angular/common/http";
 import { AjustesComponent } from './components/ajustes/ajustes.component';
+import { RegistroDatosComponent } from './components/registro-datos/registro-datos.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
     EstadoComponent,
     FooterComponent,
     ContenidoCursoComponent,
-    AjustesComponent
+    AjustesComponent,
+    RegistroDatosComponent
   ],
   imports: [
     BrowserModule,

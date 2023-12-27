@@ -30,10 +30,16 @@ export class ContenidoCursoComponent implements OnInit,AfterViewInit{
   }
 
 
-  ngAfterViewInit() {
-    // Llamando a initTE después de que la vista del componente ha sido inicializada
-    Carousel.init({ element: this.elRef.nativeElement });
+  ngAfterViewInit(): void {
+  }
+  activeSlideIndex = 0;
+
+  nextSlide() {
+    this.activeSlideIndex = (this.activeSlideIndex + 1) % this.contenidoCurso.length;
   }
 
+  prevSlide() {
+    this.activeSlideIndex = (this.activeSlideIndex - 1 + this.contenidoCurso.length) % this.contenidoCurso.length;
+  }
 
 }
