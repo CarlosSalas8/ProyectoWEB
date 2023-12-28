@@ -1,125 +1,119 @@
 <app-header></app-header>
-<div id="carouselExampleCaptions" class="relative carousel" data-te-carousel-init data-te-ride="carousel">
+
+<div id="carouselExampleCaptions" class="relative carousel sm:h-[500px] md:h-[600px] lg:h-[700px]" data-te-carousel-init data-te-ride="carousel">
     <!-- Carousel indicators -->
     <div class="absolute bottom-0 left-0 right-0 z-[2] mx-[15%] mb-4 flex list-none justify-center p-0" data-te-carousel-indicators>
     </div>
 
- <!--Carousel items-->
-    <div
-      class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
+    <!-- Carousel items -->
+    <div class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
         <ng-container *ngFor="let item of contenidoCurso; let i = index">
-        <div *ngIf="i === activeSlideIndex">
+            <div *ngIf="i === activeSlideIndex">
+                <div class="slide">
+                    <div class="flex justify-center font-mono font-extrabold text-[#102a4b] text-3xl pt-9">
+                        <h2>{{ contenidoCurso[i]?.titulo }}</h2>
+                    </div>
+
+                        <!-- Contenedor principal con padding y máxima anchura -->
+                        <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-24">
+                            <!-- Contenedor flex con envoltura de elementos -->
+                            <div class="flex flex-wrap items-center mx-auto max-w-7xl">
+                                <!-- Contenedor de la card-->
+                                <div class="w-full lg:max-w-lg lg:w-1/2 rounded-xl">
+                                    <div>
+                                        <!-- Contenedor relativo para la card con elementos absolutos superpuestos -->
+                                        <div class="relative w-full max-w-lg">
+                                            <!-- Elemento absoluto con fondo redondeado y animación blob -->
+                                            <div class="absolute top-0 rounded-full bg-azul-marino -left-4 w-72 h-72 mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+                                            <!-- Otro elemento absoluto con fondo redondeado y animación blob con retraso en la animación -->
+                                            <div class="absolute rounded-full -z-10 bg-cyan-700 -bottom-24 right-20 w-72 h-72 mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+                                            <!-- Card -->
+                                            <div class=" block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                                                <div class="relative overflow-hidden bg-cover bg-no-repeat" data-te-ripple-init data-te-ripple-color="light">
+                                                    <img class="rounded-t-lg w-[100%]" [src]="contenidoCurso[i]?.imagen" alt="" />
+                                                    <a href="#!">
+                                                        <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-[hsla(0,0%,98%,0.15)] bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-100"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="p-6">
+                                                    <h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                                                        {{ contenidoCurso[i]?.pieImagen }}
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Contenedor de la strepper -->
+                                <div class="flex flex-col items-start mt-12 mb-16 text-left lg:flex-grow lg:w-1/2 lg:pl-6 xl:pl-24 md:mb-0 xl:mt-0">
+                                  <ol class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 pl-2">
+                                      <li class="mb-10 ms-6">
+                                          <span class="absolute flex items-center justify-center w-8 h-8 bg-green-200 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-green-900">
+                                              <svg class="w-3.5 h-3.5 text-green-500 dark:text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                              </svg>
+                                          </span>
+                                          <h3 class="font-medium leading-tight">Concepto </h3>
+                                          <p class="text-sm text-justify" [innerHTML]="contenidoCurso[i]?.concepto "></p>
+                                      </li>
+                                      <li class="mb-10 ms-6">
+                                          <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
+                                              <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+                                                  <path d="M18 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM6.5 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3.014 13.021l.157-.625A3.427 3.427 0 0 1 6.5 9.571a3.426 3.426 0 0 1 3.322 2.805l.159.622-6.967.023ZM16 12h-3a1 1 0 0 1 0-2h3a1 1 0 0 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Z"/>
+                                              </svg>
+                                          </span>
+                                          <h3 class="font-medium leading-tight">Ejemplo 1</h3>
+                                          <p class="text-sm text-justify" [innerHTML]= "contenidoCurso[i]?.ejemplo1 "></p>
+                                      </li>
+                                      <li class="mb-10 ms-6">
+                                          <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
+                                              <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                                                  <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                                              </svg>
+                                          </span>
+                                          <h3 class="font-medium leading-tight">Ejemplo2</h3>
+                                          <p class="text-sm text-justify" [innerHTML]= "contenidoCurso[i]?.ejemplo2"></p>
+                                      </li>
+                                      <li class="ms-6">
+                                          <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
+                                              <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                                                  <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2ZM7 2h4v3H7V2Zm5.7 8.289-3.975 3.857a1 1 0 0 1-1.393 0L5.3 12.182a1.002 1.002 0 1 1 1.4-1.436l1.328 1.289 3.28-3.181a1 1 0 1 1 1.392 1.435Z"/>
+                                              </svg>
+                                          </span>
+                                          <h3 class="font-medium leading-tight">Ejemplo3</h3>
+                                          <p class="text-sm text-justify" [innerHTML]= "contenidoCurso[i]?.ejemplo3"></p>
+                                      </li>
+                                  </ol>
+
+                                  <!-- Slider controls -->
+                                  <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" (click)="prevSlide()" data-carousel-prev>
+                                      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                          <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                                          </svg>
+                                          <span class="sr-only">Previous</span>
+                                      </span>
+                                  </button>
+                                  <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" (click)="nextSlide()" data-carousel-next>
+                                      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                          <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                          </svg>
+                                          <span class="sr-only">Next</span>
+                                      </span>
+                                  </button>
+                                </div>
 
 
-          <div class="slide">
-            <div class="flex justify-center font-mono font-extrabold text-[#102a4b] text-3xl pt-9">
-              <h2>{{ contenidoCurso[i]?.titulo }}</h2>
-        </div>
-        <!-- Puedes agregar aquí más contenido específico del slide -->
-        <section>
+                            </div>
 
-          <!-- Contenedor principal con padding y máxima anchura -->
-          <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-24">
-
-            <!-- Contenedor flex con envoltura de elementos -->
-            <div class="flex flex-wrap items-center mx-auto max-w-7xl">
-
-              <!-- Contenedor de la card-->
-              <div class="w-full lg:max-w-lg lg:w-1/2 rounded-xl">
-                <div>
-
-                  <!-- Contenedor relativo para la card con elementos absolutos superpuestos -->
-                  <div class="relative w-full max-w-lg">
-
-                    <!-- Elemento absoluto con fondo redondeado y animación blob -->
-                    <div class="absolute top-0 rounded-full bg-azul-marino -left-4 w-72 h-72 mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-
-                    <!-- Otro elemento absoluto con fondo redondeado y animación blob con retraso en la animación -->
-                    <div class="absolute rounded-full -z-10 bg-cyan-700 -bottom-24 right-20 w-72 h-72 mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-
-                    <!-- Card -->
-                    <div
-                        class=" block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
-                        <div
-                          class="relative overflow-hidden bg-cover bg-no-repeat"
-                          data-te-ripple-init
-                          data-te-ripple-color="light">
-                          <img class="rounded-t-lg w-[100%]" [src]="contenidoCurso[i]?.imagen" alt="" />
-                          <a href="#!">
-                            <div
-                              class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-[hsla(0,0%,98%,0.15)] bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-100"></div>
-                          </a>
                         </div>
-                        <div class="p-6">
-                          <h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                            {{ contenidoCurso[i]?.pieImagen }}
-                          </h5>
-                        </div>
-                      </div>
-                  </div>
+
                 </div>
-              </div>
-
-
-
-              <!-- Contenedor de la strepper -->
-
-<ol class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 pl-2">
-    <li class="mb-10 ms-6">
-        <span class="absolute flex items-center justify-center w-8 h-8 bg-green-200 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-green-900">
-            <svg class="w-3.5 h-3.5 text-green-500 dark:text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-            </svg>
-        </span>
-        <h3 class="font-medium leading-tight">Concepto </h3>
-        <p class="text-sm" [innerHTML]="contenidoCurso[i]?.concepto "></p>
-    </li>
-    <li class="mb-10 ms-6">
-        <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
-            <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
-                <path d="M18 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM6.5 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3.014 13.021l.157-.625A3.427 3.427 0 0 1 6.5 9.571a3.426 3.426 0 0 1 3.322 2.805l.159.622-6.967.023ZM16 12h-3a1 1 0 0 1 0-2h3a1 1 0 0 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Z"/>
-            </svg>
-        </span>
-        <h3 class="font-medium leading-tight">Ejemplo 1</h3>
-        <p class="text-sm" [innerHTML]= "contenidoCurso[i]?.ejemplo1 "></p>
-    </li>
-    <li class="mb-10 ms-6">
-        <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
-            <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
-            </svg>
-        </span>
-        <h3 class="font-medium leading-tight">Ejemplo2</h3>
-        <p class="text-sm" [innerHTML]= "contenidoCurso[i]?.ejemplo2"></p>
-    </li>
-    <li class="ms-6">
-        <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
-            <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2ZM7 2h4v3H7V2Zm5.7 8.289-3.975 3.857a1 1 0 0 1-1.393 0L5.3 12.182a1.002 1.002 0 1 1 1.4-1.436l1.328 1.289 3.28-3.181a1 1 0 1 1 1.392 1.435Z"/>
-            </svg>
-        </span>
-        <h3 class="font-medium leading-tight">Ejemplo3</h3>
-        <p class="text-sm" [innerHTML]= "contenidoCurso[i]?.ejemplo3"></p>
-    </li>
-</ol>
-
-
-                    <!-- Slider controls -->
-    <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" (click)="prevSlide()" data-carousel-prev>
-        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-            </svg>
-            <span class="sr-only">Previous</span>
-        </span>
-    </button>
-    <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" (click)="nextSlide()" data-carousel-next>
-        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-            </svg>
-            <span class="sr-only">Next</span>
-        </span>
-    </button>
-   </div>
+            </div>
+        </ng-container>
+    </div>
 </div>
+
+<app-footer></app-footer>
+
