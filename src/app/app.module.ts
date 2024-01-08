@@ -24,7 +24,10 @@ import {NoAuthGuard} from "./guards/no-auth.guard";
 import {HttpClientModule} from "@angular/common/http";
 import { AjustesComponent } from './components/ajustes/ajustes.component';
 import { RegistroDatosComponent } from './components/registro-datos/registro-datos.component';
-
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { ResultadosComponent } from './components/resultados/resultados.component';
+import { NgApexchartsModule } from "ng-apexcharts";
+import { TabbarComponent } from './components/tabbar/tabbar.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,11 @@ import { RegistroDatosComponent } from './components/registro-datos/registro-dat
     FooterComponent,
     ContenidoCursoComponent,
     AjustesComponent,
-    RegistroDatosComponent
+    RegistroDatosComponent,
+    SidebarComponent,
+    ResultadosComponent,
+    TabbarComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -47,10 +54,11 @@ import { RegistroDatosComponent } from './components/registro-datos/registro-dat
     FormsModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgApexchartsModule,
+
   ],
-  providers: [AuthService,
-    AuthGuard, NoAuthGuard],
+  providers: [AuthService, AuthGuard, NoAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
