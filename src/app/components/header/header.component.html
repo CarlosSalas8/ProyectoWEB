@@ -34,11 +34,10 @@
           <div class="flex space-x-4">
             <!-- Enlaces de navegación -->
             <!-- "aria-current" indica la página actual -->
-            <a href="/inicioCurso" class="text-black hover:bg-azul-marino hover:text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page" [ngClass]="{'text-white bg-azul-marino': currentPage === '/inicio'}">Inicio</a>
-            <a href="/estado" class="text-black hover:bg-azul-marino hover:text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page" [ngClass]="{'text-white bg-azul-marino': currentPage === '/estado'}">Estado</a>
-            <a href="/herramienta/registro" class="text-black hover:bg-azul-marino hover:text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page" [ngClass]="{'text-white bg-azul-marino': currentPage === '/registro'}">Registro</a>
-            <a href="/herramienta/resultados" class="text-black hover:bg-azul-marino hover:text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page" [ngClass]="{'text-white bg-azul-marino': currentPage === '/resultado'}">Resultado</a>
-          </div>
+            <a href="/inicioCurso" class="text-black hover:bg-azul-marino hover:text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page" [ngClass]="{'text-white bg-azul-marino': currentPage.startsWith('/inicio')}">Inicio</a>
+            <a href="/cursos/aprenderContabilidad" class="text-black hover:bg-azul-marino hover:text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page" [ngClass]="{'text-white bg-azul-marino': currentPage.startsWith('/cursos')}">Cursos</a>
+            <a href="/herramienta/datos/registro" class="text-black hover:bg-azul-marino hover:text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page" [ngClass]="{'text-white bg-azul-marino': currentPage.startsWith('/herramienta')}">Herramienta</a>
+        </div>
         </div>
       </div>
 

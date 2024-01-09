@@ -5,13 +5,13 @@
 <div class="md:flex">
   <ul class="flex-column space-y space-y-4 w-60 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0">
       <li>
-        <a [routerLink]="['/estado-negocio']" 
+        <a [routerLink]="['/herramienta/datos/estado']" 
         routerLinkActive="text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500" 
         class="inline-flex items-center justify-center p-4 border-transparent rounded-t-lg group">
          Registrar el Estado Negocio
      </a>
      
-     <a [routerLink]="['/inventario-negocio']" 
+     <a [routerLink]="['/herramienta/datos/registrar']" 
         routerLinkActive="text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500" 
         class="inline-flex items-center justify-center p-4 border-transparent rounded-t-lg group">
          Administrar el Estado Negocio
@@ -19,162 +19,9 @@
       </li>
   </ul>
   <div class="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
-
-    
-    <form [formGroup]="miFormulario" (ngSubmit)="enviarDatos()">
-      <div class="flex">    
-        <div class=" container mx-auto mr-8">
-          <div class="flex items-center justify-center">
-            <p class="text-5xl text-[#00327B] font-bold pb-10 p-4 m-2">ESTADO DE NEGOCIO</p>
-          </div>
-          <div class="flex flex-wrap -mx-4 -mb-10 text-center">
-            <div class="sm:w-1/3 mb-10 px-4">
-              <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
-                <label for="visitors"
-                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio Venta Por
-                  Unidad</label>
-                <input type="number" id="precioVentaPorUnidad" formControlName="precioVentaPorUnidad"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="Ingrese un valor" required>
-              </div>
-            </div>
-            <div class="sm:w-1/3 mb-10 px-4">
-              <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
-                <label for="visitors"
-                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cantidad Proyectada
-                </label>
-                <input type="number" id="cantidadProyectada" formControlName="cantidadProyectada"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="Ingrese un valor" required>
-              </div>
-            </div>
-            <div class="sm:w-1/3 mb-10 px-4">
-              <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
-                <label for="visitors"
-                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ingresos Adicionales
-                </label>
-                <input type="number" id="ingresosAdicionales" formControlName="ingresosAdicionales"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="Ingrese un valor" required>
-              </div>
-            </div>
-            <div class="sm:w-1/3 mb-10 px-4">
-              <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
-                <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Costo
-                  Por Unidad</label>
-                <input type="number" id="costoPorUnidad" formControlName="costoPorUnidad"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="Ingrese un valor" required>
-              </div>
-            </div>
-            <div class="sm:w-1/3 mb-10 px-4">
-              <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
-                <label for="visitors"
-                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gastos
-                  Operativos</label>
-                <input type="number" id="gastosOperativos" formControlName="gastosOperativos"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="Ingrese un valor" required>
-              </div>
-            </div>
-            <div class="sm:w-1/3 mb-10 px-4">
-              <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
-                <label for="visitors"
-                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gastos
-                  Marketing</label>
-                <input type="number" id="gastosMarketing" formControlName="gastosMarketing"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="Ingrese un valor" required>
-              </div>
-            </div>
-            <div class="sm:w-1/3 mb-10 px-4">
-              <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
-                <label for="visitors"
-                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gastos
-                  Desarrollo</label>
-                <input type="number" id="gastosDesarrollo" formControlName="gastosDesarrollo"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="Ingrese un valor" required>
-              </div>
-            </div>
-            <div class="sm:w-1/3 mb-10 px-4">
-              <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
-                <label for="visitors"
-                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gastos
-                  Adicionales</label>
-                <input type="number" id="gastosAdicionales" formControlName="gastosAdicionales"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="Ingrese un valor" required>
-              </div>
-            </div>
-    
-            <div class="sm:w-1/3 mb-10 px-4">
-              <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
-                <label for="visitors"
-                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">FECHA</label>
-                <input id="fecha" formControlName="fecha"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="Ingrese la fecha: AA MMM DD" required>
-              </div>
-            </div>
-          </div>
-    
-          <div class="flex items-center mx-auto pt-16 justify-center">
-            <button type="submit"
-                    class="cursor-pointer transition-all bg-[#00327B] text-white px-6 py-2 rounded-lg border-[#00327B] border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] justify-center mt-auto">
-              ACTUALIZAR
-            </button>
-          </div>
-    
-          <div class="flex flex-wrap -mx-4 -mb-10 text-center">
-            <div class="sm:w-1/3 mb-10 px-4">
-              <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
-                <label for="visitors"
-                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">INGRESOS</label>
-                <input type="number" id="ingresos" formControlName="ingresos"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="Valor Automático" readonly>
-              </div>
-            </div>
-    
-            <div class="sm:w-1/3 mb-10 px-4">
-              <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
-                <label for="visitors"
-                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">GASTOS</label>
-                <input type="number" id="gastos" formControlName="gastos"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="Valor Automático" readonly>
-              </div>
-            </div>
-            <div class="sm:w-1/3 mb-10 px-4">
-              <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
-                <label for="visitors"
-                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">BENEFICIOS</label>
-                <input type="number" id="beneficios" formControlName="beneficios"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="Valor Automático" readonly>
-              </div>
-            </div>
-            <div class="flex items-center mx-auto pt-16 justify-center">
-              <a routerLink="#">
-                <button
-                  class="cursor-pointer transition-all bg-[#00327B] text-white px-6 py-2 rounded-lg border-[#00327B] border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] justify-center mt-auto">
-                  Visualizar Resultados
-                </button>
-              </a>
-            </div>
-          </div>
-          <br><br><br><br>
-        </div>
-      </div>
-    </form>
    
-
-
-  </div>
-</div>
-
-
+   
+   
     <div class="">
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-4">
         <div class="flex justify-between">
@@ -299,6 +146,12 @@
         </table>
       </div>
     </div>
+    
+  </div>
+</div>
+
+
+
 
 
 

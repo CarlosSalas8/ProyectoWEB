@@ -28,6 +28,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ResultadosComponent } from './components/resultados/resultados.component';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { TabbarComponent } from './components/tabbar/tabbar.component';
+import { InicioRegistroComponent } from './components/inicio-registro/inicio-registro.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { TabbarComponent } from './components/tabbar/tabbar.component';
     SidebarComponent,
     ResultadosComponent,
     TabbarComponent,
+    InicioRegistroComponent,
     
   ],
   imports: [

@@ -11,6 +11,7 @@ import {AjustesComponent} from "./components/ajustes/ajustes.component";
 import {RegistroDatosComponent} from "./components/registro-datos/registro-datos.component";
 import {SidebarComponent} from "./components/sidebar/sidebar.component";
 import {ResultadosComponent} from "./components/resultados/resultados.component";
+import { InicioRegistroComponent } from './components/inicio-registro/inicio-registro.component';
 import { AuthGuard } from './guards/auth.guard';
 import {NoAuthGuard} from "./guards/no-auth.guard";
 
@@ -21,13 +22,14 @@ const routes: Routes = [
   {path: 'inicio', component: InicioComponent},
   {path: 'register', component: RegisterComponent, canActivate: [NoAuthGuard] },
   {path: 'inicioCurso', component: InicioCursoComponent, canActivate: [AuthGuard]},
-  {path: 'aprenderContabilidad', component: AprenderContabilidadComponent,canActivate: [AuthGuard]},
-  {path: 'estado', component: EstadoComponent,canActivate: [AuthGuard]},
-  {path: 'contenido-curso/:id', component: ContenidoCursoComponent,canActivate: [AuthGuard]},
+  {path: 'cursos/aprenderContabilidad', component: AprenderContabilidadComponent,canActivate: [AuthGuard]},
+  {path: 'herramienta/datos/estado', component: EstadoComponent,canActivate: [AuthGuard]},
+  {path: 'cursos/aprenderContabilidad/contenido-curso/:id', component: ContenidoCursoComponent,canActivate: [AuthGuard]},
   {path: 'ajustes',component:AjustesComponent,canActivate: [AuthGuard]},
-  {path: 'herramienta/registro',component:RegistroDatosComponent,canActivate: [AuthGuard]},
+  {path: 'herramienta/datos/registrar',component:RegistroDatosComponent,canActivate: [AuthGuard]},
   {path: 'sidebar',component:SidebarComponent,canActivate: [AuthGuard]},
   {path: 'herramienta/resultados',component:ResultadosComponent,canActivate: [AuthGuard]},
+  {path: 'herramienta/datos/registro',component:InicioRegistroComponent,canActivate: [AuthGuard]},
   {path: '**', redirectTo: 'inicio', pathMatch:'full' }
 ];
 

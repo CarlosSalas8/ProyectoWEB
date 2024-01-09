@@ -18,25 +18,66 @@ export class EstadoComponent implements OnInit {
 
   ngOnInit() {
     this.miFormulario = this.fb.group({
-      precioVentaPorUnidad: ['', Validators.required],
-      cantidadProyectada: ['', Validators.required],
-      ingresosAdicionales: [''],
-      costoPorUnidad: ['', Validators.required],
-      gastosOperativos: ['', Validators.required],
-      gastosMarketing: ['', Validators.required],
-      gastosDesarrollo: ['', Validators.required],
-      gastosAdicionales: [''],
+      tipoCampo: ['', Validators.required],
+
+      camposIngreso: this.fb.group({
+        precioVentaPorUnidad: ['', Validators.required],
+        cantidadProyectada: ['', Validators.required],
+        ingresosAdicionales: [''],
+        costoPorUnidad: ['', Validators.required],
+        // ... (otros campos de ingreso)
+      }),
+      camposGasto: this.fb.group({
+        gastosOperativos: ['', Validators.required],
+        gastosMarketing: ['', Validators.required],
+        gastosDesarrollo: ['', Validators.required],
+        gastosAdicionales: [''],
+        // ... (otros campos de gasto)
+      }),
       fecha: ['', Validators.required],
       ingresos: [{ value: 0, disabled: true }],
       gastos: [{ value: 0, disabled: true }],
       beneficios: [{ value: 0, disabled: true }],
     });
+    this.miFormulario.get('tipoCampo')?.valueChanges.subscribe((tipoCampo) => {
+      this.onTipoCampoChange(tipoCampo);
+    });
   }
+
+  onTipoCampoChange(event: any) {
+    const tipoCampo = event.target.value;
+    // Oculta o muestra campos según el tipo seleccionado
+    const camposIngreso = this.miFormulario.get('camposIngreso');
+    const camposGasto = this.miFormulario.get('camposGasto');
+  
+    // Mostrar u ocultar campos de ingreso
+    const camposIngresoElement = document.getElementById('camposIngreso');
+    if (camposIngresoElement) {
+      camposIngresoElement.style.display = tipoCampo === 'ingreso' ? 'block' : 'none';
+    }
+  
+    // Mostrar u ocultar campos de gasto
+    const camposGastoElement = document.getElementById('camposGasto');
+    if (camposGastoElement) {
+      camposGastoElement.style.display = tipoCampo === 'gasto' ? 'block' : 'none';
+    }
+  
+    if (tipoCampo === 'ingreso') {
+      camposIngreso?.enable();
+      camposGasto?.disable();
+    } else if (tipoCampo === 'gasto') {
+      camposIngreso?.disable();
+      camposGasto?.enable();
+    } else {
+      camposIngreso?.disable();
+      camposGasto?.disable();
+    }
+  }
+  
 
   enviarDatos(): void {
     // Obtén los datos del formulario
     const datosFormulario = this.miFormulario.value;
-    const idUsuario = this.authService.obtenerIdUsuario();
 
     // Asigna la fecha actual al campo 'fecha'
     datosFormulario.fecha = datosFormulario.fecha;
@@ -72,16 +113,21 @@ export class EstadoComponent implements OnInit {
     datosFormulario.ingresos = calcularTotalIngresos();
     datosFormulario.gastos = calcularTotalGastos();
     datosFormulario.beneficios = calcularBeneficios();
-    if(idUsuario) {
-      datosFormulario.usuario = [parseInt(idUsuario)];
-    } else {
-      datosFormulario.usuario = 1;
-    }
+
     // Muestra los datos del formulario en la consola
     console.log('Datos del formulario:', datosFormulario);
-    console.log('Datos del usuario:', idUsuario);
-    // Realiza la solicitud HTTP para guardar los datos
 
+    // Realiza la solicitud HTTP para guardar los datos
+    this.authService.obtenerDatosDeMongo().subscribe(
+      (respuesta) => {
+        console.log('Datos obtenidos de MongoDB:', respuesta);
+        // Maneja la respuesta según tus necesidades
+      },
+      (error) => {
+        console.error('Error al obtener datos de MongoDB:', error);
+        // Maneja el error según tus necesidades
+      }
+    );
 
     this.authService.guardarDatosEnMongo(datosFormulario).subscribe(
       (respuesta) => {
@@ -90,7 +136,7 @@ export class EstadoComponent implements OnInit {
       },
       (error) => {
         console.error('Error al guardar datos en MongoDB:', error);
-
+        
         // Maneja el error según tus necesidades
       }
     );

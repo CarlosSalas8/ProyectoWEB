@@ -19,7 +19,7 @@ export class TabbarComponent {
     });
   }
 
-  isActive(link: string): boolean {
-    return this.activeLink === link;
-  }
+  isActive(route: string): boolean {
+    return this.router.url.startsWith(route);
+}
 }
