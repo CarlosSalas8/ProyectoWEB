@@ -5,34 +5,34 @@
 <div class="md:flex">
   <ul class="flex-column space-y space-y-4 w-60 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0">
       <li>
-        <a [routerLink]="['/herramienta/datos/estado']" 
-        routerLinkActive="text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500" 
+        <a [routerLink]="['/herramienta/datos/registrar']"
+        routerLinkActive="text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500"
         class="inline-flex items-center justify-center p-4 border-transparent rounded-t-lg group">
          Registrar el Estado Negocio
      </a>
-     
-     <a [routerLink]="['/herramienta/datos/registrar']" 
-        routerLinkActive="text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500" 
+
+     <a [routerLink]="['/herramienta/datos/estado']"
+        routerLinkActive="text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500"
         class="inline-flex items-center justify-center p-4 border-transparent rounded-t-lg group">
          Administrar el Estado Negocio
-     </a> 
+     </a>
       </li>
   </ul>
   <div class="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
 
 
-    
+
     <form [formGroup]="miFormulario" (ngSubmit)="enviarDatos()">
       <div class="flex">
         <div class=" bg-white mr-8">
-    
-    
+
+
         <div class="w-3/4 container mx-auto mr-8">
-    
+
           <div class="flex items-center justify-center">
             <p class="text-5xl text-[#00327B] font-bold pb-10 p-4 m-2">ESTADO DE NEGOCIO</p>
           </div>
-    
+
           <div class="flex">
             <div class="sm:w-1/2 mb-10 px-4">
               <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
@@ -51,7 +51,7 @@
                 </select>
               </div>
             </div>
-    
+
             <div class="sm:w-1/2 mb-10 px-4">
               <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
                 <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">FECHA</label>
@@ -61,11 +61,11 @@
               </div>
             </div>
           </div>
-    
+
           <div class="flex -mx-4 -mb-10 text-center">
-    
+
             <div id="camposIngreso" class="sm:w-1/3 mb-10 px-4" formGroupName="camposIngreso" style="display: none;">
-    
+
                 <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
                   <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio Venta
                     Por
@@ -74,7 +74,7 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Ingrese un valor" required>
                 </div>
-    
+
                 <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
                   <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cantidad
                     Proyectada
@@ -83,7 +83,7 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Ingrese un valor" required>
                 </div>
-    
+
                 <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
                   <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ingresos
                     Adicionales
@@ -92,7 +92,7 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Ingrese un valor" required>
                 </div>
-    
+
                 <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
                   <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Costo
                     Por Unidad</label>
@@ -101,9 +101,9 @@
                     placeholder="Ingrese un valor" required>
                 </div>
             </div>
-    
+
             <div id="camposGasto" class="sm:w-1/3 mb-10 px-4" formGroupName="camposGasto" style="display: none;">
-    
+
               <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
                 <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gastos
                   Operativos</label>
@@ -111,7 +111,7 @@
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Ingrese un valor" required>
               </div>
-    
+
               <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
                 <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gastos
                   Marketing</label>
@@ -119,7 +119,7 @@
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Ingrese un valor" required>
               </div>
-    
+
               <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
                 <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gastos
                   Desarrollo</label>
@@ -127,7 +127,7 @@
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Ingrese un valor" required>
               </div>
-    
+
               <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
                 <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gastos
                   Adicionales</label>
@@ -137,8 +137,8 @@
               </div>
             </div>
           </div>
-    
-    
+
+
           <br>
           <div class="flex items-center mx-auto pt-16 justify-center">
             <button type="submit"
@@ -146,7 +146,7 @@
               ACTUALIZAR
             </button>
           </div>
-    
+
           <div class="flex flex-wrap -mx-4 -mb-10 text-center">
             <div class="sm:w-1/3 mb-10 px-4">
               <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
@@ -156,7 +156,7 @@
                   placeholder="Valor Automático" readonly>
               </div>
             </div>
-    
+
             <div class="sm:w-1/3 mb-10 px-4">
               <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
                 <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">GASTOS</label>
@@ -187,7 +187,7 @@
       </div>
     </div>
     </form>
-   
+
 
 
   </div>

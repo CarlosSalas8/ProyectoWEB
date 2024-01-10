@@ -60,14 +60,12 @@
           </div>
           <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
             <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+              <a href="/herramienta/resultados" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
             </li>
             <li>
-              <a href="/ajustes" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+              <a href="/ajustes" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Configuración</a>
             </li>
-            <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-            </li>
+
           </ul>
           <div class="py-1">
             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" (click)="logout()">Sign out</a>
@@ -81,9 +79,9 @@
       <div class="space-y-1 px-2 pb-3 pt-2">
         <!-- Estilos para enlaces del menú móvil -->
         <a href="/inicioCurso" class="text-gray-300 hover:bg-azul-marino hover:text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page" [ngClass]="{'text-white bg-azul-marino': currentPage === '/inicio'}">Inicio</a>
-        <a href="/estado" class="text-gray-300 hover:bg-azul-marino hover:text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page" [ngClass]="{'text-white bg-azul-marino': currentPage === '/estado'}">Estago</a>
-        <a href="/registro" class="text-gray-300 hover:bg-azul-marino hover:text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page" [ngClass]="{'text-white bg-azul-marino': currentPage === '/registro'}">Registro</a>
-        <a href="/resultado" class="text-gray-300 hover:bg-azul-marino hover:text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page" [ngClass]="{'text-white bg-azul-marino': currentPage === '/resultado'}">Resultado</a>
+        <a href="/cursos/aprenderContabilidad" class="text-gray-300 hover:bg-azul-marino hover:text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page" [ngClass]="{'text-white bg-azul-marino': currentPage === '/estado'}">Curso</a>
+        <a href="/herramienta/datos/registro" class="text-gray-300 hover:bg-azul-marino hover:text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page" [ngClass]="{'text-white bg-azul-marino': currentPage === '/registro'}">Herramienta</a>
+
       </div>
     </div>
 

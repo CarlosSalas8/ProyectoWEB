@@ -5,23 +5,23 @@
 <div class="md:flex">
   <ul class="flex-column space-y space-y-4 w-60 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0">
       <li>
-        <a [routerLink]="['/herramienta/datos/estado']" 
-        routerLinkActive="text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500" 
+        <a [routerLink]="['/herramienta/datos/registrar']"
+        routerLinkActive="text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500"
         class="inline-flex items-center justify-center p-4 border-transparent rounded-t-lg group">
          Registrar el Estado Negocio
      </a>
-     
-     <a [routerLink]="['/herramienta/datos/registrar']" 
-        routerLinkActive="text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500" 
+
+     <a [routerLink]="['/herramienta/datos/estado']"
+        routerLinkActive="text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500"
         class="inline-flex items-center justify-center p-4 border-transparent rounded-t-lg group">
          Administrar el Estado Negocio
-     </a> 
+     </a>
       </li>
   </ul>
   <div class="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
-   
-   
-   
+
+
+
     <div class="">
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-4">
         <div class="flex justify-between">
@@ -72,7 +72,7 @@
               </ul>
             </div>
           </div>
-    
+
         </div >
         <label for="table-search" class="sr-only">Buscar por fecha</label>
           <div class="relative flex">
@@ -82,7 +82,7 @@
             <input type="text" id="table-search" class="block h-10 p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items">
           </div>
         </div>
-    
+
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -113,8 +113,8 @@
           </tr>
           </thead>
           <tbody>
-         
-          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" 
+
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
         *ngFor="let item of datosDeMongo">
       <td class="px-6 py-4">
         {{ item.fecha }}
@@ -141,12 +141,12 @@
         <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
       </td>
     </tr>
-    
+
           </tbody>
         </table>
       </div>
     </div>
-    
+
   </div>
 </div>
 
