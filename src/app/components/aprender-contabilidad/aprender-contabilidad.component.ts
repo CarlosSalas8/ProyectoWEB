@@ -35,4 +35,12 @@ export class AprenderContabilidadComponent {
       return truncated + (words.length > wordCount ? '...' : '');
     }
   }
+  scrollTo(section: string): void {
+    const element = document.querySelector('#' + section);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      console.warn('Elemento no encontrado:', section);
+    }
+  }
 }
