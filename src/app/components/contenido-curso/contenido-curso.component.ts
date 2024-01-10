@@ -12,6 +12,7 @@ import {AuthService} from "../../services/login.service";
 
 })
 export class ContenidoCursoComponent implements OnInit,AfterViewInit{
+  openStepIndex: number | null = null;
   id: number | undefined;
   slides = []; // <-- Agregue esta línea
   contenidoCurso: Array<any> = [];
@@ -27,6 +28,8 @@ export class ContenidoCursoComponent implements OnInit,AfterViewInit{
         (this.slides as number[]) = this.contenidoCurso.map((_x, i) => i); // <-- Además de esta línea
       })
       .catch(error => console.error(error));
+      this.openStepIndex = 0;
+
   }
 
 
@@ -35,11 +38,25 @@ export class ContenidoCursoComponent implements OnInit,AfterViewInit{
   activeSlideIndex = 0;
 
   nextSlide() {
-    this.activeSlideIndex = (this.activeSlideIndex + 1) % this.contenidoCurso.length;
+    const nextIndex = (this.activeSlideIndex + 1) % this.contenidoCurso.length;
+
+    this.activeSlideIndex = nextIndex;
   }
 
+  // Actualiza la función prevSlide para abrir el paso anterior y cerrar los demás
   prevSlide() {
-    this.activeSlideIndex = (this.activeSlideIndex - 1 + this.contenidoCurso.length) % this.contenidoCurso.length;
+    const prevIndex = (this.activeSlideIndex - 1 + this.contenidoCurso.length) % this.contenidoCurso.length;
+
+    this.activeSlideIndex = prevIndex;
+  }
+  toggleStep(index: number) {
+    if (this.openStepIndex === index) {
+      // Si el paso ya está abierto, lo cerramos
+      this.openStepIndex = null;
+    } else {
+      // Abrimos el paso clickeado y cerramos los otros
+      this.openStepIndex = index;
+    }
   }
 
 }
