@@ -82,38 +82,84 @@
                         <div class="mt-10 sm:mt-0">
                             <div class="md:grid md:grid-cols-3 md:gap-6">
                                 <div class="mt-5 md:mt-0 md:col-span-3">
-                                    <form action="#" method="POST">
+                                    <form (ngSubmit)="onSubmit(f)" #f="ngForm" method="POST">
                                         <div class="shadow overflow-hidden sm:rounded-md">
                                             <div class="px-4 py-5 bg-white sm:p-6">
                                                 <div class="grid grid-cols-6 gap-6">
+                                                    <!-- Input para el nombre del emprendimiento -->
                                                     <div class="col-span-6 sm:col-span-3">
-                                                        <label for="tipo_registro" class="block text-sm font-medium text-gray-700">Tipo de Emprendimiento</label>
-                                                        <select id="tipo_registro" name="tipo_registro" autocomplete="tipo_registro" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                                            <option>Ingreso</option>
-                                                            <option>Gasto</option>
+                                                        <label for="nombre-emprendimiento" class="block text-sm font-medium text-gray-700">Nombre del Emprendimiento</label>
+                                                        <input type="text" id="nombre-emprendimiento" [(ngModel)]="emprendimiento.nombre" name="nombre" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" disabled>
+                                                    </div>
+                                                    
+                                                    <!-- Input para el tipo de emprendimiento -->
+                                                    <div class="col-span-6 sm:col-span-3">
+                                                        <label for="tipo-emprendimiento" class="block text-sm font-medium text-gray-700">Tipo de Emprendimiento</label>
+                                                        <input type="text" id="tipo-emprendimiento" [(ngModel)]="emprendimiento.tipoEmprendimiento" name="tipoEmprendimiento" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" disabled>
+                                                    </div>
+                                                    <div  *ngIf="emprendimiento.tipoEmprendimiento === 'servicio'" class="col-span-6 sm:col-span-3">
+                                                        <label for="clase_registro_servicio" class="block text-sm font-medium text-gray-700">Clase de Emprendimiento</label>
+                                                        <select id="clase_registro_servicio" name="clase_registro_servicio" [(ngModel)]="datosInventario.claseEmprendimiento" autocomplete="clase_registro_servicio" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                            <option>Servicios de Diseño Gráfico</option>
+                                                            <option>Consultoría de Marketing Digital</option>
+                                                            <option>Desarrollo y Diseño Web</option>
+                                                            <option>Servicios de Fotografía Profesional</option>
+                                                            <option>Coaching Personal o de Negocios</option>
+                                                            <option>Servicios de Contabilidad y Finanzas</option>
+                                                            <option>Clases y Talleres Online</option>
+                                                            <option>Servicios de Catering y Eventos</option>
+                                                            <option>Reparación y Mantenimiento de Tecnología</option>
+                                                            <option>Servicios de Belleza y Estética</option>
+                                                            <option>Clases de Fitness y Entrenamiento Personal</option>
+                                                            <option>Asesoría Jurídica</option>
+                                                            <option>Servicios de Limpieza y Mantenimiento del Hogar</option>    
+                                                            <option>Otro</option>                                                                                                                    
+                                                        </select>
+                                                    </div>
+                                                    <div *ngIf="emprendimiento.tipoEmprendimiento === 'negocio'">
+                                                        <label for="clase_registro_negocio" class="block text-sm font-medium text-gray-700">Clase de Emprendimiento</label>
+                                                        <select (change)="actualizarOpcionesDeProductos($event)" id="clase_registro_negocio" name="clase_registro_negocio"[(ngModel)]="datosInventario.claseEmprendimiento" autocomplete="clase_registro_negocio"  class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                            <option value="" disabled selected hidden>Seleccione un tipo</option>
+                                                            <option>Tienda de Ropa</option>
+                                                            <option>Joyería Artesanal</option>
+                                                            <option>Productos de Belleza y Cuidado Personal</option>
+                                                            <option>Decoración para el Hogar</option>
+                                                            <option>Alimentos Artesanales</option>
+                                                            <option>Tienda de Tecnología y Accesorios Electrónicos</option>
+                                                            <option>Publicación de Libros y Revistas</option>
+                                                            <option>Servicios de Diseño y Desarrollo Web</option>
+                                                            <option>Arte y Manualidades</option>
+                                                            <option>Productos Ecológicos y Sostenibles</option>
+                                                            <option>Tienda de Juguetes y Productos para Niños</option>
+                                                            <option>Productos de Fitness y Salud</option>
+                                                            <option>Plataforma de Cursos y Talleres Online</option>   
+                                                            <option>Otro</option>                                                                                                                                                                                                                                       
                                                         </select>
                                                     </div>
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="tipo_registro" class="block text-sm font-medium text-gray-700">Tipo de producto</label>
-                                                        <select id="tipo_registro" name="tipo_registro" autocomplete="tipo_registro" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                                            <option>Ingreso</option>
-                                                            <option>Gasto</option>
-                                                        </select>
+                                                        <select *ngIf="opcionesActualesDeProductos.length > 0" [(ngModel)]="datosInventario.tipoProducto"  id="tipo_producto" name="tipo_producto" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                            <option *ngFor="let opcion of opcionesActualesDeProductos" [value]="opcion">{{ opcion }}</option>
+                                                          </select>
                                                     </div>
 
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="cantidad" class="block text-sm font-medium text-gray-700">Cantidad</label>
-                                                        <input type="text" name="cantidad" id="cantidad" autocomplete="cantidad" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                        <input type="number" name="cantidad" [(ngModel)]="datosInventario.cantidad" id="cantidad" autocomplete="cantidad" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                    </div>
+                                                    <div class="col-span-6 sm:col-span-3">
+                                                        <label for="cantidad" class="block text-sm font-medium text-gray-700">Precio</label>
+                                                        <input type="number" name="precio" [(ngModel)]="datosInventario.precio" id="precio" autocomplete="precio" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                     </div>
 
                                                     <div class="col-span-6">
                                                         <label for="comentario" class="block text-sm font-medium text-gray-700">Comentario</label>
-                                                        <textarea id="comentario" name="comentario" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+                                                        <textarea id="comentario" name="comentario" [(ngModel)]="datosInventario.comentario" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                                                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                                <button type="submit" [disabled]="!f.valid" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                                     Submit
                                                 </button>
                                             </div>

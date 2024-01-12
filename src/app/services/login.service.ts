@@ -124,4 +124,10 @@ export class AuthService {
     const headers = { 'Authorization': `Token ${token}` };
     return this.http.get(`http://localhost:8000/api-emp/emprendimiento/?usuario=${userId}`, { headers: headers });
   }
+  registrarInventario(datosInventario: any): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = { 'Authorization': `Token ${token}` };
+    return this.http.post(`http://localhost:8000/api-inv/inventario/`, datosInventario, { headers: headers });
+  }
+
 }
