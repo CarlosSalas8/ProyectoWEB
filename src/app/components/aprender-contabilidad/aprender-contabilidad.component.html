@@ -40,8 +40,7 @@
         ¡Te damos la bienvenida a nuestra plataforma educativa de contabilidad!
       </p>
       <a
-      (click)="scrollTo('cursos')"
-
+      (click)="scrollTo('cursos'); aplicarAnimacion(textoAnimado)"
         aria-label="Scroll down"
         class="flex items-center justify-center w-10 h-10 mx-auto text-white duration-300 transform border border-gray-400 rounded-full hover:text-teal-accent-400 hover:border-teal-accent-400 hover:shadow hover:scale-110"
       >
@@ -57,8 +56,9 @@
   <img src="assets/img/caracterInicioCurso.png" alt="Descripción de la imagen" class="bounce-in-top w-full md:w-[50%] mx-auto lg:w-1/3 mb-4 mr-4 lg:absolute lg:bottom-14 lg:right-5">
 </div>
 
-
 <section class="text-gray-600 body-font"  id="cursos">
+  <h1 class="text-center font-sans text-5xl font-bold tracking-tight text-[#111827] pt-5" #textoAnimado>¡Comienza tu aprendizaje!</h1>
+
   <div class="container px-5 py-4 mx-auto">
     <div class="flex flex-wrap -mx-4 -mb-10 text-center">
       <div class="sm:w-1/3 mb-10 px-4 p-3" *ngFor="let curso of cursos">
@@ -73,7 +73,7 @@
           </button>
 
           <button class=" flex mx-auto mt-6 text-white bg-[#1fa5d3] border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded"
-                [routerLink]="['/cursos/aprenderContabilidad/contenido-curso', curso.id]">Button</button>
+                [routerLink]="['/cursos/aprenderContabilidad/contenido-curso', curso.id]">Ingresar</button>
         </div>
       </div>
     </div>

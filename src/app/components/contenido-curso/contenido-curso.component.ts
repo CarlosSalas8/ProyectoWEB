@@ -1,62 +1,48 @@
-import {Component, OnInit, AfterViewInit, ElementRef} from '@angular/core';
-import { Stepper, Carousel,initTE,} from 'tw-elements';
+import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {map, Observable, switchMap} from "rxjs";
-import {AuthService} from "../../services/login.service";
+import { AuthService } from "../../services/login.service";
 
 @Component({
   selector: 'app-contenido-curso',
   templateUrl: './contenido-curso.component.html',
   styleUrls: ['./contenido-curso.component.css']
-
 })
-export class ContenidoCursoComponent implements OnInit,AfterViewInit{
-  openStepIndex: number | null = null;
-  id: number | undefined;
-  slides = []; // <-- Agregue esta línea
+export class ContenidoCursoComponent implements OnInit, AfterViewInit {
+  openStepIndex: number | null = 0; // Iniciar con el primer paso abierto
   contenidoCurso: Array<any> = [];
-  constructor(private route: ActivatedRoute,
-              private http: HttpClient,
-              private authService: AuthService,
-              private elRef: ElementRef) {}
+  activeSlideIndex = 0;
+
+  constructor(
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private elRef: ElementRef
+  ) {}
+
   ngOnInit() {
     const idCurso = this.route.snapshot.params['id'];
     this.authService.getContenidoCurso(idCurso)
       .then(contenidoCurso => {
         this.contenidoCurso = contenidoCurso;
-        (this.slides as number[]) = this.contenidoCurso.map((_x, i) => i); // <-- Además de esta línea
+        // Inicializar el carrusel con los pasos del curso
+        // Si estás usando un carrusel o cualquier otro componente de tw-elements, asegúrate de inicializarlo aquí si es necesario.
       })
       .catch(error => console.error(error));
-      this.openStepIndex = 0;
-
   }
-
 
   ngAfterViewInit(): void {
+    // Si tw-elements requiere inicialización, hazlo aquí.
+    // initTE(); // Descomenta esta línea si necesitas inicializar tw-elements manualmente.
   }
-  activeSlideIndex = 0;
 
   nextSlide() {
-    const nextIndex = (this.activeSlideIndex + 1) % this.contenidoCurso.length;
-
-    this.activeSlideIndex = nextIndex;
+    this.activeSlideIndex = (this.activeSlideIndex + 1) % this.contenidoCurso.length;
   }
 
-  // Actualiza la función prevSlide para abrir el paso anterior y cerrar los demás
   prevSlide() {
-    const prevIndex = (this.activeSlideIndex - 1 + this.contenidoCurso.length) % this.contenidoCurso.length;
-
-    this.activeSlideIndex = prevIndex;
+    this.activeSlideIndex = (this.activeSlideIndex - 1 + this.contenidoCurso.length) % this.contenidoCurso.length;
   }
+
   toggleStep(index: number) {
-    if (this.openStepIndex === index) {
-      // Si el paso ya está abierto, lo cerramos
-      this.openStepIndex = null;
-    } else {
-      // Abrimos el paso clickeado y cerramos los otros
-      this.openStepIndex = index;
-    }
+    this.openStepIndex = this.openStepIndex === index ? null : index;
   }
-
 }

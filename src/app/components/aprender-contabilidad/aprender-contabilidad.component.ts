@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { AuthService } from '../../services/login.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { AuthService } from '../../services/login.service';
 export class AprenderContabilidadComponent {
   cursos: any[] = [];
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private renderer: Renderer2) { }
 
   ngOnInit() {
     this.authService.getTodosLosCursos().subscribe(
@@ -42,5 +42,12 @@ export class AprenderContabilidadComponent {
     } else {
       console.warn('Elemento no encontrado:', section);
     }
+  }
+
+  aplicarAnimacion(elementoTexto: HTMLElement): void {
+    this.renderer.addClass(elementoTexto, 'focus-in-expand');
+    setTimeout(() => {
+      this.renderer.removeClass(elementoTexto, 'focus-in-expand');
+    }, 950);
   }
 }
