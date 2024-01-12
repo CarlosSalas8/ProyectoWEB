@@ -38,6 +38,7 @@ export class AuthService {
     localStorage.removeItem('authToken');
     localStorage.removeItem('username');
     localStorage.removeItem('email');
+    localStorage.removeItem('emprendimientoId')
     axios.post('http://localhost:8000/api-logout/', {}, {
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -129,5 +130,9 @@ export class AuthService {
     const headers = { 'Authorization': `Token ${token}` };
     return this.http.post(`http://localhost:8000/api-inv/inventario/`, datosInventario, { headers: headers });
   }
-
+  obtenerEmprendimiento(emprendimientoId: string): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = { 'Authorization': `Token ${token}` };
+    return this.http.get(`http://localhost:8000/api-inv/inventario/?emprendimiento=${emprendimientoId}`, { headers: headers });
+  }
 }

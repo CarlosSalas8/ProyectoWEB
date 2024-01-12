@@ -48,35 +48,39 @@
                                                         ID
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Gasto/Ingreso
+                                                        Clase de Emprendimiento
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Tipo
+                                                        Tipo de Producto
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Paid Date
+                                                        cantidad
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Cantidad
+                                                        Precio
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Comentario
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody class="bg-white divide-y divide-gray-200">
-                                                <!-- More rows... -->
-                                                <tr>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#INV-0001</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Ingreso</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Ingresos por Ventas</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">8 Feb 2022</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$500</td>
+                                                <tr *ngFor="let item of datosInventarioApi">
+                                                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ item.id }}</td>
+                                                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.claseEmprendimiento }}</td>
+                                                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.tipoProducto }}</td>
+                                                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.cantidad }}</td>
+                                                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.precio }}</td>
+                                                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.comentario }}</td>
                                                 </tr>
-                                                <!-- Repeat for each row -->
-                                            </tbody>
+                                              </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
                         <!-- End Table -->
                         <!-- Form -->
                         <div class="mt-10 sm:mt-0">

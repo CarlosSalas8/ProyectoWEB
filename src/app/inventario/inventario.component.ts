@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
 })
 export class InventarioComponent implements OnInit {
   opcionesActualesDeProductos: string[] = [];
+  datosInventarioApi: any[] = []; 
   opcionesDeEmprendimiento: { [key: string]: string[] } = {
 
   'Tienda de Ropa' : [
@@ -114,6 +115,7 @@ export class InventarioComponent implements OnInit {
     "Formación en Tecnología y Programación",
     "Clases de Idiomas y Cultura"
   ]};
+
   tipoEmprendimiento: string | null = null;
   emprendimiento: any = {};
   datosInventario = {
@@ -122,72 +124,68 @@ export class InventarioComponent implements OnInit {
     cantidad: null,
     precio: null,
     comentario: '',
-    emprendimiento: [] // Aquí iría el ID de emprendimiento si es necesario
+    emprendimiento: null, 
   };
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.cargarEmprendimiento();
-    this.obtenerEmprendimiento();
+    this.cargarDatosInventario();
   }
-  obtenerEmprendimiento() {
-    const userId = this.authService.obtenerIdUsuario() || ''; // Set a default empty string if userId is null
-    
-    this.authService.tieneEmprendimientoRegistrado(userId).subscribe(
-      emprendimiento => {
-        if (emprendimiento && emprendimiento.length > 0) {
-          this.datosInventario.emprendimiento = emprendimiento[0].id;
-        }
-      },
-      error => {
-        console.error('Error al obtener el emprendimiento:', error);
-      }
-    );
-  }
-  
-  onSubmit(form: NgForm) {
+onSubmit(form: NgForm) {
     if (form.valid) {
-      console.log('Enviando datos:', this.datosInventario);
-      this.authService.registrarInventario(this.datosInventario).subscribe(
+      const datosParaEnviar = {
+        claseEmprendimiento: this.datosInventario.claseEmprendimiento,
+        tipoProducto: this.datosInventario.tipoProducto,
+        cantidad: Number(this.datosInventario.cantidad),
+        precio: Number(this.datosInventario.precio),
+        comentario: this.datosInventario.comentario,
+        emprendimiento: [this.datosInventario.emprendimiento] 
+      };
+      this.authService.registrarInventario(datosParaEnviar).subscribe(
         (respuesta) => {
           console.log('Datos enviados con éxito:', respuesta);
-          // Aquí puedes manejar la respuesta exitosa, como cerrar el modal o mostrar un mensaje
+          this.cargarDatosInventario();
         },
         (error) => {
           console.error('Ocurrió un error al enviar los datos:', error);
-          if (error.error && error.error.detail) {
-            console.error('Detalle del error:', error.error.detail);
-          }
         }
       );
     }
   }
-
   cargarEmprendimiento(): void {
     const userId = this.authService.obtenerIdUsuario();
     if (userId) {
       this.authService.tieneEmprendimientoRegistrado(userId).subscribe(
-        data => {
-          // Asumiendo que la API devuelve un array y tomamos el primer elemento
-          this.emprendimiento = data[0];
-          this.tipoEmprendimiento = this.emprendimiento.tipoEmprendimiento; // esto determinará qué select se muestra
+        emprendimientos => {
+          if (emprendimientos && emprendimientos.length > 0) {
+            const emprendimiento = emprendimientos[0];
+            this.emprendimiento = emprendimiento;
+            this.tipoEmprendimiento = emprendimiento.tipoEmprendimiento;
+            this.datosInventario.emprendimiento = emprendimiento.id;
+            localStorage.setItem('emprendimientoId', emprendimiento.id.toString());
 
+          }
         },
-        error => {
-          console.error('Error al obtener el emprendimiento', error);
-        }
+        error => console.error('Error al obtener el emprendimiento:', error)
       );
     }
   }
   actualizarOpcionesDeProductos(event: Event): void {
     const selectElement = event.target as HTMLSelectElement; // Cast del EventTarget a HTMLSelectElement
     const valor = selectElement.value; // Obtén el valor seleccionado
-  
-    // Actualiza las opciones del segundo select basado en el valor del primero
-    this.opcionesActualesDeProductos = this.opcionesDeEmprendimiento[valor] || [];
-  
-    // Si el valor no coincide con ninguna clave, puedes manejar un caso por defecto o dejar el array vacío
+    this.opcionesActualesDeProductos = this.opcionesDeEmprendimiento[valor] || []; 
   }
-
+  cargarDatosInventario(): void {
+    const emprendimientoId = localStorage.getItem('emprendimientoId'); // Reemplaza esto con el ID real
+    if (emprendimientoId) {
+      this.authService.obtenerEmprendimiento(emprendimientoId).subscribe(
+        (datos) => {
+          this.datosInventarioApi = datos;
+        },
+        (error) => console.error('Error al obtener datos del inventario:', error)
+      );
+    }
+  }
 }
