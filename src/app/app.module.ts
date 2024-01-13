@@ -51,6 +51,7 @@ import { InventarioComponent } from './inventario/inventario.component';
     InicioRegistroComponent,
     InventarioComponent,
     
+    
   ],
   imports: [
     BrowserModule,

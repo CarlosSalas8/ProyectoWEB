@@ -135,4 +135,15 @@ export class AuthService {
     const headers = { 'Authorization': `Token ${token}` };
     return this.http.get(`http://localhost:8000/api-inv/inventario/?emprendimiento=${emprendimientoId}`, { headers: headers });
   }
+
+  deleteInventario(id: number): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = { 'Authorization': `Token ${token}` };
+    return this.http.delete(`http://localhost:8000/api-inv/inventario/${id}/`, { headers: headers });
+  }
+  actualizarInventario(id: number, datos: any): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = { 'Authorization': `Token ${token}` };
+    return this.http.patch(`http://localhost:8000/api-inv/inventario/${id}/`, datos, { headers: headers });
+  }
 }

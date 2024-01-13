@@ -13,6 +13,7 @@ import {SidebarComponent} from "./components/sidebar/sidebar.component";
 import {ResultadosComponent} from "./components/resultados/resultados.component";
 import { InicioRegistroComponent } from './components/inicio-registro/inicio-registro.component';
 import { InventarioComponent } from './inventario/inventario.component';
+
 import { AuthGuard } from './guards/auth.guard';
 import {NoAuthGuard} from "./guards/no-auth.guard";
 

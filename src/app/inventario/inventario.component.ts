@@ -126,12 +126,14 @@ export class InventarioComponent implements OnInit {
     comentario: '',
     emprendimiento: null, 
   };
+  itemToEdit: any = null;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.cargarEmprendimiento();
     this.cargarDatosInventario();
+
   }
 onSubmit(form: NgForm) {
     if (form.valid) {
@@ -143,16 +145,52 @@ onSubmit(form: NgForm) {
         comentario: this.datosInventario.comentario,
         emprendimiento: [this.datosInventario.emprendimiento] 
       };
-      this.authService.registrarInventario(datosParaEnviar).subscribe(
-        (respuesta) => {
-          console.log('Datos enviados con éxito:', respuesta);
-          this.cargarDatosInventario();
-        },
-        (error) => {
-          console.error('Ocurrió un error al enviar los datos:', error);
-        }
-      );
+      if (this.itemToEdit) { // Suponiendo que 'editing' es una propiedad que indica si estás editando un elemento existente
+        this.authService.actualizarInventario(this.itemToEdit.id, this.datosInventario).subscribe(
+          (respuesta) => {
+            console.log('Datos actualizados con éxito:', respuesta);
+            this.itemToEdit  = null; // Resetea la condición de edición
+            this.cargarDatosInventario(); 
+            this.resetForm(form);// Recargar los datos
+            this.cargarEmprendimiento();
+
+          },
+          (error) => {
+            console.error('Ocurrió un error al actualizar los datos:', error);
+          }
+        );
+      } else {
+        this.authService.registrarInventario(datosParaEnviar).subscribe(
+          (respuesta) => {
+            console.log('Datos enviados con éxito:', respuesta);
+            this.cargarDatosInventario();
+            this.resetForm(form);// Recargar los datos
+            this.cargarEmprendimiento();
+
+          },
+          (error) => {
+            console.error('Ocurrió un error al enviar los datos:', error);
+          }
+        );
+      }
     }
+  }
+  resetForm(form?: NgForm): void {
+
+
+    this.itemToEdit = null;
+    this.datosInventario = {
+      claseEmprendimiento: '',
+      tipoProducto: '',
+      cantidad: null,
+      precio: null,
+      comentario: '',
+      emprendimiento: null, 
+    };
+    if (form) {
+      form.resetForm();
+    }
+    
   }
   cargarEmprendimiento(): void {
     const userId = this.authService.obtenerIdUsuario();
@@ -176,6 +214,8 @@ onSubmit(form: NgForm) {
     const selectElement = event.target as HTMLSelectElement; // Cast del EventTarget a HTMLSelectElement
     const valor = selectElement.value; // Obtén el valor seleccionado
     this.opcionesActualesDeProductos = this.opcionesDeEmprendimiento[valor] || []; 
+    this.datosInventario.tipoProducto = '';
+
   }
   cargarDatosInventario(): void {
     const emprendimientoId = localStorage.getItem('emprendimientoId'); // Reemplaza esto con el ID real
@@ -188,4 +228,28 @@ onSubmit(form: NgForm) {
       );
     }
   }
+  deleteItem(id: number): void {
+    if(confirm('Estas seguro que quieres eliminar este producto?')) {
+      this.authService.deleteInventario(id).subscribe(
+        () => {
+          console.log('Producto eliminado con éxito');
+          this.cargarDatosInventario(); // Reload the data
+        },
+        (error) => {
+          console.error('Error borrando item:', error);
+        }
+      );
+    }
+  }
+  editItem(item: any,section: string): void {
+    this.itemToEdit = { ...item }; 
+    this.datosInventario = { ...this.itemToEdit };
+    const element = document.querySelector('#' + section);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      console.warn('Elemento no encontrado:', section);
+    }
+  }
+
 }
