@@ -4,6 +4,8 @@
   <div class="container mx-auto px-4">
     <div class="flex flex-col lg:flex-row mt-6 gap-4">
       <!-- Contenido del curso -->
+      <ng-container *ngFor="let item of contenidoCurso; let i = index">
+        <h2>{{ contenidoCurso[i]?.titulo }}</h2></ng-container>
       <main class="bg-white p-6 shadow-md w-full lg:w-3/4">
         <h1 class="text-3xl font-bold mb-4">Introducción a la unidad 1</h1>
         <p class="text-gray-700 mb-4 ">¿Sabías que Python facilita la creación y el uso de "módulos" o bibliotecas que puedes compartir con otros programadores? ¿Te gustaría aprender más de ello?</p>
@@ -49,3 +51,4 @@
 </body>
 
 <app-footer></app-footer>
+
