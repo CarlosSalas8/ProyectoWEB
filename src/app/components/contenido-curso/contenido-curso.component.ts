@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map, Observable, switchMap} from "rxjs";
 import {AuthService} from "../../services/login.service";
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-contenido-curso',
@@ -11,52 +12,35 @@ import {AuthService} from "../../services/login.service";
   styleUrls: ['./contenido-curso.component.css']
 
 })
-export class ContenidoCursoComponent implements OnInit,AfterViewInit{
-  openStepIndex: number | null = null;
-  id: number | undefined;
-  slides = []; // <-- Agregue esta línea
-  contenidoCurso: Array<any> = [];
-  constructor(private route: ActivatedRoute,
-              private http: HttpClient,
-              private authService: AuthService,
-              private elRef: ElementRef) {}
+export class ContenidoCursoComponent implements OnInit{
+ contenidoCurso: any[] = [];
+  safeConcepto: any; // Esto contendrá el contenido HTML saneado para 'concepto'
+  contenidoSeleccionado: any; // Contenido del curso seleccionado
+
+  constructor(
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private sanitizer: DomSanitizer,
+    private authService: AuthService,
+  ) {}
+
   ngOnInit() {
     const idCurso = this.route.snapshot.params['id'];
-    this.authService.getContenidoCurso(idCurso)
-      .then(contenidoCurso => {
-        this.contenidoCurso = contenidoCurso;
-        (this.slides as number[]) = this.contenidoCurso.map((_x, i) => i); // <-- Además de esta línea
-      })
-      .catch(error => console.error(error));
-      this.openStepIndex = 0;
-
+    this.authService.getContenidoCurso(idCurso).then((data) => {
+      this.contenidoCurso = data;
+      if (this.contenidoCurso.length > 0) {
+        // Establecer el primer curso como seleccionado por defecto
+        this.contenidoSeleccionado = this.contenidoCurso[0];
+        this.safeConcepto = this.sanitizer.bypassSecurityTrustHtml(this.contenidoSeleccionado.concepto);
+      }
+    });
+  }
+  seleccionarCurso(idCurso: number) {
+    // Encuentra el curso por su ID y actualiza el contenidoSeleccionado
+    this.contenidoSeleccionado = this.contenidoCurso.find(curso => curso.id === idCurso);
+    this.safeConcepto = this.sanitizer.bypassSecurityTrustHtml(this.contenidoSeleccionado.concepto);
   }
 
 
-  ngAfterViewInit(): void {
-  }
-  activeSlideIndex = 0;
-
-  nextSlide() {
-    const nextIndex = (this.activeSlideIndex + 1) % this.contenidoCurso.length;
-
-    this.activeSlideIndex = nextIndex;
-  }
-
-  // Actualiza la función prevSlide para abrir el paso anterior y cerrar los demás
-  prevSlide() {
-    const prevIndex = (this.activeSlideIndex - 1 + this.contenidoCurso.length) % this.contenidoCurso.length;
-
-    this.activeSlideIndex = prevIndex;
-  }
-  toggleStep(index: number) {
-    if (this.openStepIndex === index) {
-      // Si el paso ya está abierto, lo cerramos
-      this.openStepIndex = null;
-    } else {
-      // Abrimos el paso clickeado y cerramos los otros
-      this.openStepIndex = index;
-    }
-  }
 
 }

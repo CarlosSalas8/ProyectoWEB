@@ -1,54 +1,51 @@
-<app-header></app-header>
+<body class="bg-gray-100 font-inter">
 
-<body class="bg-gray-200 font-inter">
+  <app-header></app-header>
+
   <div class="container mx-auto px-4">
-    <div class="flex flex-col lg:flex-row mt-6 gap-4">
-      <!-- Contenido del curso -->
-      <ng-container *ngFor="let item of contenidoCurso; let i = index">
-        <h2>{{ contenidoCurso[i]?.titulo }}</h2></ng-container>
-      <main class="bg-white p-6 shadow-md w-full lg:w-3/4">
-        <h1 class="text-3xl font-bold mb-4">Introducción a la unidad 1</h1>
-        <p class="text-gray-700 mb-4 ">¿Sabías que Python facilita la creación y el uso de "módulos" o bibliotecas que puedes compartir con otros programadores? ¿Te gustaría aprender más de ello?</p>
+      <div class="flex flex-col lg:flex-row mt-6 gap-4">
 
-        <button class="btn btn-primary mt-4">Siguiente clase</button>
+        <main class="bg-white p-6 shadow-md w-full lg:w-3/4 rounded-lg">
+          <!-- Contenido del curso -->
+          <div *ngIf="contenidoSeleccionado" class="space-y-4">
+              <h2 class="text-xl font-semibold text-gray-800">{{ contenidoSeleccionado.titulo }}</h2>
+              <div class="flex flex-col lg:flex-row gap-4">
+                  <img [src]="contenidoSeleccionado.imagen" alt="Descripción detallada de la imagen" class="lg:w-1/2 rounded-lg shadow-lg" *ngIf="contenidoSeleccionado.imagen">
+                  <div class="prose lg:w-1/2 text-justify" [innerHTML]="safeConcepto"></div>
+              </div>
+              <ng-container *ngFor="let recurso of contenidoSeleccionado.recursos">
+                  <h3 class="text-lg font-semibold text-gray-800">{{ recurso.nombre }}</h3>
+                  <div class="prose text-justify" *ngIf="recurso.detalle_recurso.texto" [innerHTML]="recurso.detalle_recurso.texto"></div>
+                  <img [src]="recurso.detalle_recurso.imagen" alt="Descripción detallada de la imagen" class="rounded-lg shadow-lg" *ngIf="recurso.detalle_recurso.imagen">
+                  <video *ngIf="recurso.detalle_recurso.video" [src]="recurso.detalle_recurso.video" controls class="rounded-lg shadow-lg"></video>
+                  <a *ngIf="recurso.detalle_recurso.url_video" [href]="recurso.detalle_recurso.url_video" target="_blank" class="text-blue-600 hover:underline">Ver Video</a>
+              </ng-container>
+          </div>
+          <button class="btn btn-primary mt-4">Siguiente clase</button>
       </main>
 
-      <aside class="w-full lg:w-1/4">
-        <div class="bg-white p-4 shadow-md">
-          <aside class="w-full ">
-            <div class="bg-white shadow-md">
-              <h2 class="text-lg font-semibold mb-4">Contenido</h2>
-              <div class="flow-root">
-                <ul class="space-y-2">
-                  <li>
-                    <a href="#" class="flex items-center p-2 rounded-lg hover:bg-gray-100">
-                      <span class="text-blue-500">
-                        <i class="fas fa-check-circle"></i>
-                      </span>
-                      <span class="ml-3 flex-1 ">Introducción al curso de programación avanzada</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" class="flex items-center p-2 rounded-lg bg-blue-100">
-                      <span class="text-blue-500">
-                        <i class="fas fa-play-circle"></i>
-                      </span>
-                      <span class="ml-3 flex-1 whitespace-nowrap">Introducción a la unidad 1</span>
-                    </a>
-                  </li>
-                  <!-- Repite los elementos para cada paso o sección del curso -->
-                  <!-- ... otros pasos ... -->
-                </ul>
+          <aside class="w-full lg:w-1/4">
+              <!-- Barra lateral para mostrar títulos y navegación del curso -->
+              <div class="bg-white p-4 shadow-md rounded-lg">
+                  <h2 class="text-lg font-semibold mb-4">Contenido</h2>
+                  <div class="flow-root">
+                      <ul class="divide-y divide-gray-200">
+                          <li *ngFor="let curso of contenidoCurso">
+                              <a class="flex items-center p-2 rounded-lg hover:bg-gray-100" (click)="seleccionarCurso(curso.id)">
+                                  <span class="text-blue-500">
+                                      <i class="fas fa-play-circle"></i>
+                                  </span>
+                                  <span class="ml-3 flex-1 whitespace-nowrap">{{ curso.titulo }}</span>
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
               </div>
-            </div>
           </aside>
-        </div>
-      </aside>
-    </div>
+      </div>
   </div>
+
+  <app-footer></app-footer>
 
   <script src="https://cdn.jsdelivr.net/npm/flowbite/dist/flowbite.min.js"></script>
 </body>
-
-<app-footer></app-footer>
-
