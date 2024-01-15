@@ -19,12 +19,12 @@
 
           <div>
             <label for="email" class="sr-only">Email</label>
-
             <div class="relative">
               <input formControlName="email" type="email"
                      class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                      placeholder="Email" />
-              <div *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">
+              <div *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched"
+              class="text-[14px] text-red-600">
                 Email es inválido.
               </div>
               <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -48,12 +48,12 @@
 
           <div>
             <label for="Usuario" class="sr-only">Usuario</label>
-
             <div class="relative">
               <input formControlName="username" type="username"
-                     class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                     class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm "
                      placeholder="Usuario"/>
-              <div *ngIf="registerForm.controls['username'].invalid && registerForm.controls['username'].touched">
+              <div *ngIf="registerForm.controls['username'].invalid && registerForm.controls['username'].touched"
+              class="text-[14px] text-red-600">
                 Usuario es requerido.
               </div>
               <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -66,10 +66,11 @@
 
             <div class="relative">
               <input formControlName="password" type="password"
-                     class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                     class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm "
                      placeholder="Contraseña"
               />
-              <div  *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched">
+              <div  *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched"
+              class="text-[14px] text-red-600">
                 Contraseña es requerida.
               </div>
               <div *ngIf="errorMessage" class="alert alert-danger" role="alert">

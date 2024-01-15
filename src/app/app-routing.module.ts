@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import {RegisterComponent} from "./components/register/register.component";
-import {InicioCursoComponent} from "./components/inicio-curso/inicio-curso.component";
 import {AprenderContabilidadComponent} from "./components/aprender-contabilidad/aprender-contabilidad.component";
 import { EstadoComponent } from './components/estado/estado.component';
 import { ContenidoCursoComponent } from './components/contenido-curso/contenido-curso.component';
@@ -23,7 +22,6 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [NoAuthGuard]},
   {path: 'inicio', component: InicioComponent},
   {path: 'register', component: RegisterComponent, canActivate: [NoAuthGuard] },
-  {path: 'inicioCurso', component: InicioCursoComponent, canActivate: [AuthGuard]},
   {path: 'cursos/aprenderContabilidad', component: AprenderContabilidadComponent,canActivate: [AuthGuard]},
   {path: 'herramienta/datos/registrar', component: EstadoComponent,canActivate: [AuthGuard]},
   {path: 'cursos/aprenderContabilidad/contenido-curso/:id', component: ContenidoCursoComponent,canActivate: [AuthGuard]},
