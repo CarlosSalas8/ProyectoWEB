@@ -14,7 +14,6 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { LoginComponent } from './components/login/login.component';
 import {HeaderComponent} from "./components/header/header.component";
 import {RegisterComponent} from "./components/register/register.component";
-import { InicioCursoComponent } from './components/inicio-curso/inicio-curso.component';
 import { AprenderContabilidadComponent } from './components/aprender-contabilidad/aprender-contabilidad.component';
 import { EstadoComponent } from './components/estado/estado.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -38,7 +37,6 @@ import { InventarioComponent } from './inventario/inventario.component';
     InicioComponent,
     LoginComponent,
     HeaderComponent,
-    InicioCursoComponent,
     AprenderContabilidadComponent,
     EstadoComponent,
     FooterComponent,
@@ -50,8 +48,8 @@ import { InventarioComponent } from './inventario/inventario.component';
     TabbarComponent,
     InicioRegistroComponent,
     InventarioComponent,
-    
-    
+
+
   ],
   imports: [
     BrowserModule,
