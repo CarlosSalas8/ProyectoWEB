@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { AuthService } from '../services/login.service';
 import { NgForm } from '@angular/forms';
-
+import { initFlowbite } from 'flowbite';
 @Component({
   selector: 'app-inventario',
   templateUrl: './inventario.component.html',
@@ -10,6 +10,16 @@ import { NgForm } from '@angular/forms';
 export class InventarioComponent implements OnInit {
   opcionesActualesDeProductos: string[] = [];
   datosInventarioApi: any[] = []; 
+  datosInvetarioCon: any[] = [];
+  paginaActual: number = 1;
+  totalDeProductos: number = 1; 
+  productosPorPagina: number = 10;
+  datosInventarioApiPaginados: any[] = [];
+  filtrosActivos: Set<string> = new Set();
+  categoriasUnicas: string[] = [];
+  datosFiltrados: any[] = [];
+  itemToEdit: any = null;
+  i: any;
   opcionesDeEmprendimiento: { [key: string]: string[] } = {
 
   'Tienda de Ropa' : [
@@ -126,14 +136,15 @@ export class InventarioComponent implements OnInit {
     comentario: '',
     emprendimiento: null, 
   };
-  itemToEdit: any = null;
+
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.cargarEmprendimiento();
     this.cargarDatosInventario();
-
+  
+    initFlowbite();
   }
 onSubmit(form: NgForm) {
     if (form.valid) {
@@ -220,12 +231,18 @@ onSubmit(form: NgForm) {
   cargarDatosInventario(): void {
     const emprendimientoId = localStorage.getItem('emprendimientoId'); // Reemplaza esto con el ID real
     if (emprendimientoId) {
-      this.authService.obtenerEmprendimiento(emprendimientoId).subscribe(
-        (datos) => {
-          this.datosInventarioApi = datos;
-        },
-        (error) => console.error('Error al obtener datos del inventario:', error)
-      );
+    this.authService.obtenerEmprendimiento(emprendimientoId).subscribe(
+    (datos) => {
+    this.datosInventarioApi = datos;
+    this.datosInvetarioCon =datos;
+    this.totalDeProductos = datos.length; 
+    const categorias: string[] = Array.from(new Set(datos.map((item: { tipoProducto: string; }) => item.tipoProducto)));
+    this.opcionesActualesDeProductos = categorias;
+    console.log('Categorías únicas:', categorias);
+    this.cargarDatosDePagina(1);
+    },
+    (error) => console.error('Error al obtener datos del inventario:', error)
+    );
     }
   }
   deleteItem(id: number): void {
@@ -251,5 +268,72 @@ onSubmit(form: NgForm) {
       console.warn('Elemento no encontrado:', section);
     }
   }
+  cargarDatosDePagina(pagina: number): void {
+    this.paginaActual = pagina;
+    const inicio = (this.paginaActual - 1) * this.productosPorPagina;
+    const fin = inicio + this.productosPorPagina;
+    this.datosInventarioApiPaginados = this.datosInventarioApi.slice(inicio, fin);
+    console.log('Datos de la página actual:', this.datosInventarioApi);
+  }
+  // Método para ir a la página anterior
+  paginaAnterior(): void {
+    if (this.paginaActual > 1) {
+      this.cargarDatosDePagina(this.paginaActual - 1);
+    }
+  }
+  // Método para ir a la página siguiente
+  paginaSiguiente(): void {
+    if (this.paginaActual < this.totalDeProductos / this.productosPorPagina) {
+      this.cargarDatosDePagina(this.paginaActual + 1);
+    }
+  }
+  cambiarPagina(nuevaPagina: number) {
+    if (nuevaPagina >= 1 && nuevaPagina <= this.totalPaginas()) {
+      this.cargarDatosDePagina(nuevaPagina);
+    }
+  }
+  // Función para calcular el número total de páginas
+  totalPaginas(): number {
+    return Math.ceil(this.totalDeProductos / this.productosPorPagina);
+  }
+  getArrayFromNumber(length: number): number[] {
+    return Array.from({ length }, (_, index) => index + 1);
+  }
+  getCategorias(): string[] {
+    return Object.keys(this.opcionesDeEmprendimiento);
+  }
+  mostrarCategoriasEnConsola(): void {
+    const categorias = this.getCategorias();
+    console.log('Opciones de Emprendimientos:', categorias);
+}
+// Métoo para filtrar los productos cuando se selecciona una categoría
+filtrarPorCategoria(categoria: string): void {
+  if (this.filtrosActivos.has(categoria)) {
+    this.filtrosActivos.delete(categoria);
+  } else {
+    this.filtrosActivos.add(categoria);
+  }
+  console.log('Filtros activos:', this.filtrosActivos);
+  this.aplicarFiltros();
+}
+contarProductosPorCategoria(categoria: string): number {
+    return this.datosInventarioApi.filter((producto) => producto.tipoProducto  === categoria).length;
+}
+aplicarFiltros(): void {
+  if (this.filtrosActivos.size > 0) {
+    this.datosFiltrados = this.datosInvetarioCon.filter((producto) => 
+      this.filtrosActivos.has(producto.tipoProducto),
+
+    );
+    console.log('Datos filtrados:', this.datosFiltrados);
+  } else {
+    this.cargarDatosInventario();
+    this.datosFiltrados = [...this.datosInventarioApi];
+  }
+  this.datosInventarioApi = [...this.datosFiltrados.slice(0, this.productosPorPagina)]
+
+  this.paginaActual = 1;
+  this.cargarDatosDePagina(this.paginaActual);
+}
 
 }

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   ChartComponent,
   ApexAxisChartSeries,
@@ -6,7 +6,7 @@ import {
   ApexXAxis,
   ApexTitleSubtitle
 } from "ng-apexcharts";
-
+import { initFlowbite } from 'flowbite';
 export type ChartOptions = {
   series?: ApexAxisChartSeries[];
   chart?: ApexChart;
@@ -19,7 +19,7 @@ export type ChartOptions = {
   templateUrl: './resultados.component.html',
   styleUrls: ['./resultados.component.css']
 })
-export class ResultadosComponent {
+export class ResultadosComponent implements OnInit{
   @ViewChild("chart1")
   chart1!: ChartComponent;
   @ViewChild("chart2")
@@ -135,7 +135,7 @@ export class ResultadosComponent {
         width: [1, 1, 4]
       },
       title: {
-        text: "XYZ - Stock Analysis (2009 - 2016)",
+        text: "Grafica de analisis de resultados - Gastos e ingresos",
         align: "left",
         offsetX: 110
       },
@@ -224,5 +224,8 @@ export class ResultadosComponent {
         offsetX: 40
       }
     };
+  }
+  ngOnInit(): void {
+    initFlowbite();
   }
 }

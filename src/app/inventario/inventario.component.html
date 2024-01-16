@@ -38,7 +38,7 @@
                         <div class=" px-4 py-6 sm:px-0">
                             <div class="  border-4 border-dashed border-gray-200 rounded-lg ">
                                 <!-- Content goes here -->
-
+                                
                                 <!-- Form -->
                                 <div class="w-full mt-10 sm:mt-0 overflow-x-auto" >
                                     <div class="md:grid md:grid-cols-3 md:gap-6">
@@ -205,12 +205,41 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                                                    <div class="flex flex-column justify-between px-4 py-3 bg-gray-50 text-right sm:px-6">
+                                                        <!-- Dropdown menu -->
+                                                        <button id="dropdownDefault" data-dropdown-toggle="dropdown"
+                                                        class="text-white bg-azul-marino hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
+                                                        type="button">
+                                                        Filtre por Producto
+                                                        <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                        </svg>
+                                                        </button>
+
+                                                        <!-- Dropdown menu -->
+                                                        <div id="dropdown" class="z-10 hidden w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
+                                                            <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+                                                                Category
+                                                              </h6>
+                                                              <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                                                                <li *ngFor="let category of opcionesActualesDeProductos" class="flex items-center">
+                                                                  <input type="checkbox" [id]="category" (change)="filtrarPorCategoria(category)"
+                                                                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                                                  <label [for]="category" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                                                    {{ category }}
+                                                                  </label>
+                                                                </li>
+                                                              </ul>
+                                                        </div>
+
+                                                          
                                                         <button  type="submit" [disabled]="!f.valid"
-                                                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                                            class="h-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                                             Guardar Datos
                                                         </button>
                                                     </div>
+                                                    
                                                 </div>
                                             </form>
                                         </div>
@@ -247,7 +276,7 @@
                                         </thead>
                                         <tbody>
                                             <!-- Comienza la repetición de filas aquí -->
-                                            <tr *ngFor="let item of datosInventarioApi" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <tr *ngFor="let item of datosInventarioApiPaginados; let i = index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                                 <td class="w-4 p-4">
                                                     {{ item.id }}
                                                 </td>
@@ -266,16 +295,49 @@
                                                 <td class="truncate px-6 py-4" title="{{ item.comentario }}">
                                                     {{ item.comentario }}
                                                 </td>
-                                                <td class="px-6 py-4 text-right">
-                                                    <button (click)="editItem(item,'INICIO')" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</button>
-                                                    <button (click)="deleteItem(item.id)" class="font-medium text-red-600 dark:text-red-500 hover:underline">Eliminar</button>
+                                                <td class="px-6 py-4 flex flex-col justify-between">
+                                                    <button (click)="editItem(item,'INICIO')" class="flex font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</button>
+                                                    <button (click)="deleteItem(item.id)" class="flex font-medium text-red-600 dark:text-red-500 hover:underline">Eliminar</button>
                                                 </td>
                                             </tr>
                                             <!-- Finaliza la repetición de filas -->
                                         </tbody>
                                     </table>
+                                    <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
+                                        <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+                                            Mostrando
+                                            <span class="font-semibold text-gray-900 dark:text-white">1-10</span>
+                                        </span>
+                                        <ul class="inline-flex items-stretch -space-x-px">
+                                            <li>
+                                                <a (click)="paginaAnterior()" class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                                    <span class="sr-only">Anterior</span>
+                                                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </a>
+                                                  <li *ngFor="let num of getArrayFromNumber(totalPaginas()); let i = index">
+                                                    <a href="javascript:void(0)" 
+                                                       class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                                                       [class.text-primary-600]="paginaActual === i + 1"
+                                                       [class.bg-primary-50]="paginaActual === i + 1"
+                                                       (click)="cambiarPagina(i + 1)">
+                                                      {{ i + 1 }}
+                                                    </a>
+                                                  </li>
+                                                 <li>
+                                                <a (click)="paginaSiguiente()" class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                                    <span class="sr-only">Siguiente</span>
+                                                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
                                     <!-- Aquí va la paginación, si es necesaria -->
                                 </div>
+
                                 
                                 <!-- End Table -->
                             </div>

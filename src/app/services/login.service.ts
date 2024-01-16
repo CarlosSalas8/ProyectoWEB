@@ -146,4 +146,5 @@ export class AuthService {
     const headers = { 'Authorization': `Token ${token}` };
     return this.http.patch(`http://localhost:8000/api-inv/inventario/${id}/`, datos, { headers: headers });
   }
+
 }

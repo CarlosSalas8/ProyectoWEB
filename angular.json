@@ -29,7 +29,9 @@
             ],
             "scripts": [
               "node_modules/tw-elements/dist/js/tw-elements.umd.min.js",
-              "node_modules/apexcharts/dist/apexcharts.min.js"
+              "node_modules/apexcharts/dist/apexcharts.min.js",
+              "node_modules/flowbite/dist/datepicker.min.js"
+
 
             ]
           },
