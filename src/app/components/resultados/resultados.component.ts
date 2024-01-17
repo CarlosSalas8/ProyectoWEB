@@ -1,4 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit,Input, ViewChild } from '@angular/core';
+import { startOfDay, subMonths, isSameMonth } from 'date-fns';
+import { AuthService } from "../../services/login.service";
+
 import {
   ChartComponent,
   ApexAxisChartSeries,
@@ -13,13 +16,27 @@ export type ChartOptions = {
   xaxis?: ApexXAxis;
   title?: ApexTitleSubtitle;
 };
-
+interface AcumuladoPorFecha {
+  ingresoTotal: number;
+  gastoTotal: number;
+  beneficiosTotal: number;
+}
 @Component({
   selector: 'app-resultados',
   templateUrl: './resultados.component.html',
   styleUrls: ['./resultados.component.css']
 })
 export class ResultadosComponent implements OnInit{
+  totalIngresosMesActual = 0;
+  totalGastosMesActual = 0;
+  beneficiosMesActual = 0;
+  comparacionIngresos = { aumento: false, porcentaje: 0 };
+  comparacionGastos = { aumento: false, porcentaje: 0 };
+  comparacionBeneficios = { aumento: false, porcentaje: 0 };
+  datosDeMongo: any[] = [];
+  datosPaginados: any[] = [];
+  datosFiltrados: any[] = [];
+
   @ViewChild("chart1")
   chart1!: ChartComponent;
   @ViewChild("chart2")
@@ -30,7 +47,7 @@ export class ResultadosComponent implements OnInit{
   public chartOptions4: Partial<ChartOptions> | any;
 
 
-  constructor() {
+  constructor(private authService: AuthService) {
     this.chartOptions1 = {
       series: [
         {
@@ -84,43 +101,131 @@ export class ResultadosComponent implements OnInit{
         ]
       }
     };
-    this.chartOptions3 = {
-      series: [44, 55, 13, 43, 22],
-      chart: {
-        width: 380,
-        type: "pie"
-      },
-      labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend: {
-              position: "bottom"
-            }
-          }
-        }
-      ]
-    };
+
+   
+  }
+  ngOnInit(): void {
+    this.obtenerTodosLosDatos();
+    initFlowbite();
+  }
+  obtenerTodosLosDatos() {
+    this.authService.obtenerDatosDeMongo().subscribe(data => {
+      console.log('Datos obtenidos:', data);
+      this.datosDeMongo = data;
+      this.calculoDeTotales();
+      this.procesarDatosParaGrafica(data); // Llama al nuevo método aquí
+
+    });
+  }
+  calculoDeTotales() {
+    const hoy = startOfDay(new Date());
+    const mesAnterior = subMonths(hoy, 1);
+  
+    let totalIngresosMesAnterior = 0;
+    let totalGastosMesAnterior = 0;
+  
+    this.datosDeMongo.forEach(dato => {
+      const fechaDato = new Date(dato.fecha);
+  
+      if (isSameMonth(fechaDato, hoy)) {
+        // Convertir a número antes de sumar
+        this.totalIngresosMesActual += Number(dato.ingresoTotal);
+        this.totalGastosMesActual += Number(dato.gastoTotal);
+        console.log('totalIngresosMesActual', this.totalIngresosMesActual);
+        console.log('totalGastosMesActual', this.totalGastosMesActual);
+      } else if (isSameMonth(fechaDato, mesAnterior)) {
+        // Convertir a número antes de sumar
+        totalIngresosMesAnterior += Number(dato.ingresoTotal);
+        totalGastosMesAnterior += Number(dato.gastoTotal);
+        console.log('totalIngresosMesAnterior', totalIngresosMesAnterior);
+        console.log('totalGastosMesAnterior', totalGastosMesAnterior);
+      }
+    });
+  
+    this.beneficiosMesActual = this.totalIngresosMesActual - this.totalGastosMesActual;
+    console.log('BENEDICIOSMESACTUAL',this.beneficiosMesActual);
+    // Calcula la comparación con el mes anterior
+    this.comparacionIngresos = this.calcularComparacion(this.totalIngresosMesActual, totalIngresosMesAnterior);
+    this.comparacionGastos = this.calcularComparacion(this.totalGastosMesActual, totalGastosMesAnterior);
+    this.comparacionBeneficios = this.calcularComparacion(this.beneficiosMesActual, totalIngresosMesAnterior - totalGastosMesAnterior);
+    console.log('BENEDICIOSCOMPA',this.comparacionBeneficios);
+
+  }
+
+  calcularComparacion(valorActual: number, valorAnterior: number) {
+    const aumento = valorActual > valorAnterior;
+    const cambio = aumento ? (valorActual - valorAnterior) : (valorAnterior - valorActual);
+    const porcentaje = (cambio / valorAnterior) * 100;
+    console.log('aumente',aumento)
+    console.log('cambio',cambio)
+    console.log('porcentaje',porcentaje)
+
+    return { aumento, porcentaje: isNaN(porcentaje) ? 0 : porcentaje };
+  }
+procesarDatosParaGrafica(datos: any[]) {
+  // Objeto para acumular los totales por mes y año.
+  const acumuladosPorFecha: { [fecha: string]: AcumuladoPorFecha } = {};
+
+  datos.forEach(dato => {
+    const fecha = new Date(dato.fecha);
+    const mes = fecha.getMonth() + 1;
+    const anio = fecha.getFullYear();
+    const claveFecha = `${mes}-${anio}`;
+
+    if (!acumuladosPorFecha[claveFecha]) {
+      acumuladosPorFecha[claveFecha] = {
+        ingresoTotal: 0,
+        gastoTotal: 0,
+        beneficiosTotal: 0
+      };
+    }
+
+    acumuladosPorFecha[claveFecha].ingresoTotal += Number(dato.ingresoTotal);
+    acumuladosPorFecha[claveFecha].gastoTotal += Number(dato.gastoTotal);
+    acumuladosPorFecha[claveFecha].beneficiosTotal += Number(dato.beneficiosTotal);
+  });
+
+  const fechasOrdenadas = Object.keys(acumuladosPorFecha).sort((a, b) => {
+    const [mesA, anioA] = a.split('-').map(Number);
+    const [mesB, anioB] = b.split('-').map(Number);
+    return new Date(anioA, mesA - 1).getTime() - new Date(anioB, mesB - 1).getTime();
+  });
+
+  const ingresosData: number[] = [];
+  const gastosData: number[] = [];
+  const beneficiosData: number[] = [];
+  const categorias: string[] = [];
+
+  fechasOrdenadas.forEach(claveFecha => {
+    categorias.push(claveFecha);
+    ingresosData.push(acumuladosPorFecha[claveFecha].ingresoTotal);
+    gastosData.push(acumuladosPorFecha[claveFecha].gastoTotal);
+    beneficiosData.push(acumuladosPorFecha[claveFecha].beneficiosTotal);
+  });
+    
+    
     this.chartOptions4 = {
+      color:['#F17777', '#F17777', '#F17777'],
       series: [
         {
-          name: "Income",
+          name: "Ingreso",
           type: "column",
-          data: [1.4, 2, 2.5, 1.5, 2.5, 2.8, 3.8, 4.6]
+          data: ingresosData,
+          color: '#ffd60a'
         },
         {
-          name: "Cashflow",
+          name: "Gasto",
           type: "column",
-          data: [1.1, 3, 3.1, 4, 4.1, 4.9, 6.5, 8.5]
+          data: gastosData,
+          color: '#003566'
+          
         },
         {
-          name: "Revenue",
+          name: "Beneficio",
           type: "line",
-          data: [20, 29, 37, 36, 44, 45, 50, 58]
+          data: beneficiosData,
+          color: '#001d3d'
+
         }
       ],
       chart: {
@@ -140,7 +245,7 @@ export class ResultadosComponent implements OnInit{
         offsetX: 110
       },
       xaxis: {
-        categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016]
+        categories: categorias
       },
       yaxis: [
         {
@@ -188,44 +293,39 @@ export class ResultadosComponent implements OnInit{
             }
           }
         },
+        
+      ]
+    };
+    const totalIngresos = ingresosData.reduce((acc, curr) => acc + curr, 0);
+    const totalGastos = gastosData.reduce((acc, curr) => acc + curr, 0);
+    const totalBeneficios = beneficiosData.reduce((acc, curr) => acc + curr, 0);
+
+    this.chartOptions3 = {
+      series: [totalIngresos, totalGastos, totalBeneficios],
+      
+      chart: {
+        width: 380,
+        type: "pie"
+      },
+      colors:['#ffd60a','#003566','#001d3d'],
+      labels: ["Ingresos", "Gastos", "Beneficios"],
+      legend: {
+        position: 'top', // Cambiar la posición de la leyenda a 'top'
+        horizontalAlign: 'center', // Opciones: 'left', 'center', 'right'
+      },
+      responsive: [
         {
-          seriesName: "Revenue",
-          opposite: true,
-          axisTicks: {
-            show: true
-          },
-          axisBorder: {
-            show: true,
-            color: "#FEB019"
-          },
-          labels: {
-            style: {
-              color: "#FEB019"
-            }
-          },
-          title: {
-            text: "Revenue (thousand crores)",
-            style: {
-              color: "#FEB019"
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: "bottom"
             }
           }
         }
-      ],
-      tooltip: {
-        fixed: {
-          enabled: true,
-          position: "topLeft", // topRight, topLeft, bottomRight, bottomLeft
-          offsetY: 30,
-          offsetX: 60
-        }
-      },
-      legend: {
-        horizontalAlign: "left",
-        offsetX: 40
-      }
+      ]
     };
-  }
-  ngOnInit(): void {
-    initFlowbite();
   }
 }

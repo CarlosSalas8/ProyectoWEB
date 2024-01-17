@@ -1,7 +1,10 @@
 import { Component, OnInit,AfterViewInit,ElementRef,ChangeDetectorRef   } from '@angular/core';
 import { AuthService } from "../../services/login.service";
-import { startOfDay, subDays, subWeeks, subMonths, subYears } from 'date-fns';
+import { startOfDay, subWeeks, subMonths, subYears } from 'date-fns';
 import { initFlowbite } from 'flowbite';
+import { Flowbite } from 'src/app/services/flowbite-init.service';
+import { FlowbiteService } from 'src/app/services/flowbite-init.service';
+@Flowbite()
 @Component({
   selector: 'app-registro-datos',
   templateUrl: './registro-datos.component.html',
@@ -13,18 +16,21 @@ export class RegistroDatosComponent implements OnInit{
   datosFiltrados: any[] = [];
   paginaActual: number = 1;
   totalDeDatos: number = 1;
-  datosPorPagina: number = 10;
+  datosPorPagina: number = 6;
   fechaInicio: Date = new Date();
   fechaFin: Date = new Date();
   fechaHasta: Date = new Date();
   datosParaModal: any[] = [];
 
-  constructor(private authService: AuthService,private cdr: ChangeDetectorRef) {
+  constructor(private authService: AuthService,private cdr: ChangeDetectorRef,
+    private flowbiteService: FlowbiteService) {
    }
   estado: any = {};
   ngOnInit() {
     this.obtenerTodosLosDatos();
+    this.flowbiteService.initialize();
     initFlowbite();
+
   }
   obtenerTodosLosDatos() {
     this.authService.obtenerDatosDeMongo().subscribe(data => {
