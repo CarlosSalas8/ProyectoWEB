@@ -156,6 +156,7 @@ onSubmit(form: NgForm) {
         comentario: this.datosInventario.comentario,
         emprendimiento: [this.datosInventario.emprendimiento] 
       };
+      console.log(datosParaEnviar)
       if (this.itemToEdit) { // Suponiendo que 'editing' es una propiedad que indica si estás editando un elemento existente
         this.authService.actualizarInventario(this.itemToEdit.id, this.datosInventario).subscribe(
           (respuesta) => {

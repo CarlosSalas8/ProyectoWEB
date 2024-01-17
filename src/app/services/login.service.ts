@@ -103,6 +103,9 @@ export class AuthService {
   obtenerIdUsuario(): string | null {
     return localStorage.getItem('userId');
   }
+  obtenerIdEmprendimiento(): string | null {
+    return localStorage.getItem('emprendimientoId');
+  }
   obtenerDatosDeMongo(): Observable<any> {
     const token = localStorage.getItem('authToken');
     const headers = { 'Authorization': `Token ${token}` };

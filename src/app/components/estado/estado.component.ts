@@ -24,358 +24,249 @@ interface CampoFormulario {
 })
 export class EstadoComponent implements OnInit {
   miFormulario!: FormGroup;
-  ingresos: number = 0;
-  gastos: number = 0;
-  proyecciones: number = 0;
-  beneficios: number = 0;
-  tipoCampo: string = '';
-  tipoCampoEspecifico: string = '';
-  campoEspecificoSeleccionado: boolean = false;
-  formularios: CampoFormulario[] = [];
-  mostrarBotonAgregarCampos: boolean = false;
-  camposEspecificos: string[] = [];
-  index: number = 0;
+
+  ingresosTotal: number[] = [];
+  gastosTotal: number[] = [];
+  beneficiosTotal: number[] = [];
+
+
+  contadorIngresoNegocio: number = 0;
+  sumaIngresoNegocio: number = 0;
+
+  contadorGastoMantenimiento: number = 0;
+  sumaGastoMantenimiento: number = 0;
+
+  contadorGastosMarketing: number = 0;
+  sumaGastosMarketing: number = 0;
+
+  contadorGastoSalario: number = 0;
+  sumaGastoSalario: number = 0;
+
+  contadorGastosServicios: number = 0;
+  sumaGastosServicios: number = 0;
+
+  constructor(private fb: FormBuilder, private authService: AuthService) { }
 
 
 
-
-
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
-
-  }
 
   ngOnInit() {
-    // Calendario
     initTE({ Datepicker, Input });
-
-    this.agregarCampo();
-    
     this.miFormulario = this.fb.group({
-      tipoCampoEspecifico: [''],
-      tipoCampo: [''],
-      camposIngreso: this.fb.group({
-        ingresoTotal: ['', Validators.required],
-      }),
-      camposGasto: this.fb.group({
-        gastosOperativos: ['', Validators.required],
-        gastosMarketing: ['', Validators.required],
-        gastosDesarrollo: ['', Validators.required],
-        gastosAdicionales: [''],
-      }),
+      ingresoNegocio: ['', Validators.required],
+      gastoMantenimiento: ['', Validators.required],
+      gastosMarketing: ['', Validators.required],
+      gastoSalario: ['', Validators.required],
+      gastosServicios: [''],
       fecha: ['', Validators.required],
-      ingresos: [{ value: 0, disabled: true }],
-      gastos: [{ value: 0, disabled: true }],
-      beneficios: [{ value: 0, disabled: true }],
+      ingresosTotal: [{ value: 0, disabled: true }],
+      gastosTotal: [{ value: 0, disabled: true }],
+      beneficiosTotal: [{ value: 0, disabled: true }],
+      inputDeshabilitado: [{ value: '0', disabled: true }] 
+    });
+    // Ingresos
+    this.miFormulario.get('ingresoNegocio')?.valueChanges.subscribe((value: string) => {
+      const parsedValue = parseFloat(value);
+      if (!isNaN(parsedValue)) {
+        // No actualizar el contador automáticamente, solo al presionar "Enter"
+      }
     });
 
+    // Gasto de Mantenimiento
+    this.miFormulario.get('gastoMantenimiento')?.valueChanges.subscribe((value: string) => {
+      const parsedValue = parseFloat(value);
+      if (!isNaN(parsedValue)) {
+        // No actualizar el contador automáticamente, solo al presionar "Enter"
+      }
+    });
 
+    // Gastos de Marketing
+    this.miFormulario.get('gastosMarketing')?.valueChanges.subscribe((value: string) => {
+      const parsedValue = parseFloat(value);
+      if (!isNaN(parsedValue)) {
+        // No actualizar el contador automáticamente, solo al presionar "Enter"
+      }
+    });
+
+    // Gasto Salario
+    this.miFormulario.get('gastoSalario')?.valueChanges.subscribe((value: string) => {
+      const parsedValue = parseFloat(value);
+      if (!isNaN(parsedValue)) {
+        // No actualizar el contador automáticamente, solo al presionar "Enter"
+      }
+    });
+
+    // Gastos de Servicios
+    this.miFormulario.get('gastosServicios')?.valueChanges.subscribe((value: string) => {
+      const parsedValue = parseFloat(value);
+      if (!isNaN(parsedValue)) {
+        // No actualizar el contador automáticamente, solo al presionar "Enter"
+      }
+    });
   }
 
-
-  private generarIdUnico(): string {
-    return uuidv4(); // Utiliza la función v4 de uuid para generar IDs únicos
-  }
-
-  agregarCampo() {
-    const nuevoFormulario: CampoFormulario = { ...this.crearFormulario() };
-    this.formularios = [...this.formularios, nuevoFormulario];
-  }
   
 
 
-  private crearFormulario(): CampoFormulario {
-    const idUnico = this.generarIdUnico();
-
-    const nuevoFormulario: CampoFormulario = {
-      id: idUnico,
-      tipoCampo: '',
-      tipoCampoEspecifico: '',
-      camposIngreso: this.fb.group({
-        ingresoTotal: ['', Validators.required],
-      }),
-      camposGasto: this.fb.group({
-        gastosOperativos: ['', Validators.required],
-        gastosMarketing: ['', Validators.required],
-        gastosDesarrollo: ['', Validators.required],
-        gastosAdicionales: [''],
-      }),
-      fecha: '',
-      ingresos: 0,
-      gastos: 0,
-      beneficios: 0,
-    };
-
-    
-
-    return nuevoFormulario;
-  }
-
-
-  
-
-  obtenerNombre(): string {
-    return 'Ingrese Valor';
-  }
 
 
 
-  onTipoCampoChange(event: Event) {
-    this.tipoCampo = (event.target as HTMLSelectElement)?.value;
-    this.campoEspecificoSeleccionado = false;
-    this.mostrarBotonAgregarCampos = false;
-
-    const camposIngreso = this.miFormulario.get('camposIngreso') as FormGroup;
-    const camposGasto = this.miFormulario.get('camposGasto') as FormGroup;
-
-    // Establece el valor tanto en el formulario como en el componente
-    this.miFormulario.get('tipoCampo')?.setValue(this.tipoCampo);
-    this.formularios.forEach(formulario => formulario.tipoCampo = this.tipoCampo);
-
-    if (this.tipoCampo === 'ingreso') {
-      camposIngreso.setValidators([Validators.required]);
-      camposGasto.setValidators(null);
-    } else if (this.tipoCampo === 'gasto') {
-      camposGasto.setValidators([Validators.required]);
-    } else {
-      camposIngreso.setValidators(null);
-      camposGasto.setValidators(null);
-    }
-
-    camposIngreso.updateValueAndValidity();
-    camposGasto.updateValueAndValidity();
-  }
-
-
-
-
-
-  onTipoCampoEspecificoChange(event: any, index: number) {
-    const selectedTipoCampoEspecifico = event.target.value;
-
-    this.formularios[index].tipoCampoEspecifico = selectedTipoCampoEspecifico;
-    this.campoEspecificoSeleccionado = true;
-    this.mostrarBotonAgregarCampos = true;
-
-    // Actualiza solo el FormGroup y el control específico correspondiente
-    if (selectedTipoCampoEspecifico === 'ingresoTotal') {
-      this.actualizarFormGroupIngreso(index);
-    } else if (selectedTipoCampoEspecifico === 'gastosOperativos' || selectedTipoCampoEspecifico === 'gastosMarketing' || selectedTipoCampoEspecifico === 'gastosDesarrollo' || selectedTipoCampoEspecifico === 'gastosAdicionales') {
-      this.actualizarFormGroupGasto(index);
-    }
-  }
-
-  private actualizarFormGroupIngreso(index: number) {
-    const camposIngreso = this.formularios[index].camposIngreso;
-    if (!camposIngreso) {
-      // Crea un nuevo FormGroup para camposIngreso si no existe
-      this.formularios[index].camposIngreso = this.fb.group({
-        ingresoTotal: ['', Validators.required],
-      });
-    }
-  }
-
-  private actualizarFormGroupGasto(index: number) {
-    const camposGasto = this.formularios[index].camposGasto;
-    if (!camposGasto) {
-      // Crea un nuevo FormGroup para camposGasto si no existe
-      this.formularios[index].camposGasto = this.fb.group({
-        gastosOperativos: ['', Validators.required],
-        gastosMarketing: ['', Validators.required],
-        gastosDesarrollo: ['', Validators.required],
-        gastosAdicionales: [''],
-      });
-    }
-  }
-
-
-
-  getValorControl(formulario: CampoFormulario, grupo: 'camposIngreso' | 'camposGasto', campo: string): FormControl {
-    if (formulario && formulario[grupo]) {
-      const control = formulario[grupo].get(campo) as FormControl;
-  
-      if (control) {
-        return control;
+  onEnter(fieldName: string) {
+    const fieldValue = this.miFormulario.get(fieldName)?.value;
+    const parsedValue = parseFloat(fieldValue);
+    if (!isNaN(parsedValue)) {
+      switch (fieldName) {
+        case 'ingresoNegocio':
+          this.sumaIngresoNegocio += parsedValue;
+          this.contadorIngresoNegocio = this.sumaIngresoNegocio;
+          this.miFormulario.get('ingresosTotal')?.setValue(this.contadorIngresoNegocio);
+          this.miFormulario.get(fieldName)?.setValue(''); // Limpiar el campo después de ingresar el valor
+          break;
+        // Repite lo mismo para los demás campos
+        case 'gastoMantenimiento':
+          this.sumaGastoMantenimiento += parsedValue;
+          this.contadorGastoMantenimiento = this.sumaGastoMantenimiento;
+          this.miFormulario.get('gastosTotal')?.setValue(this.contadorGastoMantenimiento);
+          this.miFormulario.get(fieldName)?.setValue('');
+          break;
+        case 'gastosMarketing':
+          this.sumaGastosMarketing += parsedValue;
+          this.contadorGastosMarketing = this.sumaGastosMarketing;
+          this.miFormulario.get('gastosTotal')?.setValue(this.contadorGastosMarketing);
+          this.miFormulario.get(fieldName)?.setValue('');
+          break;
+        case 'gastoSalario':
+          this.sumaGastoSalario += parsedValue;
+          this.contadorGastoSalario = this.sumaGastoSalario;
+          this.miFormulario.get('gastosTotal')?.setValue(this.contadorGastoSalario);
+          this.miFormulario.get(fieldName)?.setValue('');
+          break;
+        case 'gastosServicios':
+          this.sumaGastosServicios += parsedValue;
+          this.contadorGastosServicios = this.sumaGastosServicios;
+          this.miFormulario.get('gastosTotal')?.setValue(this.contadorGastosServicios);
+          this.miFormulario.get(fieldName)?.setValue('');
+          break;
+        default:
+          break;
       }
     }
-  
-    // Si no existe el control o el FormGroup, lo creamos
-    const nuevoControl = this.fb.control(null);
-    if (!formulario[grupo]) {
-      formulario[grupo] = this.fb.group({});
-    }
-    formulario[grupo].addControl(campo, nuevoControl);
-    return nuevoControl;
-  }
-  
-
-  getIngeseValorControlIngreso(formulario: CampoFormulario): FormControl {
-    const control = this.getValorControl(formulario, 'camposIngreso', 'ingresoTotal');
-    console.log('Control de ingreso:', control.value);
-    return control;
-  }
-  
-  getIngeseValorControlGastoOperativos(formulario: CampoFormulario): FormControl {
-    const control = this.getValorControl(formulario, 'camposGasto', 'gastosOperativos');
-    console.log('Control de gastosOperativos:', control.value);
-    return control;
-  }
-  
-  getIngeseValorControlGastoMarketing(formulario: CampoFormulario): FormControl {
-    const control = this.getValorControl(formulario, 'camposGasto', 'gastosMarketing');
-    console.log('Control de gastosMarketing:', control.value);
-    return control;
-  }
-  
-  getIngeseValorControlGastoDesarrollo(formulario: CampoFormulario): FormControl {
-    const control = this.getValorControl(formulario, 'camposGasto', 'gastosDesarrollo');
-    console.log('Control de gastosDesarrollo:', control.value);
-    return control;
-  }
-  
-  getIngeseValorControlGastoAdicionales(formulario: CampoFormulario): FormControl {
-    const control = this.getValorControl(formulario, 'camposGasto', 'gastosAdicionales');
-    console.log('Control de gastosAdicionales:', control.value);
-    return control;
-  }
-  
-  
-
-
-  enviarDatos() {
-    let datosAGuardar = this.formularios.map((formulario, index) => {
-      // Imprimir los valores actuales de los formularios en la consola para depuración
-      console.log(`Datos del formulario ${index}:`, formulario);
-      
-      let datosFormulario = {
-        tipoCampo: formulario.tipoCampo,
-        tipoCampoEspecifico: formulario.tipoCampoEspecifico,
-        fecha: formulario.fecha,
-        ingresos: formulario.camposIngreso?.value?.ingresoTotal, // Asegúrate de que estos nombres coincidan con tus controles
-        gastos: formulario.camposGasto?.value?.gastosOperativos, // Asegúrate de que estos nombres coincidan con tus controles
-        // Continúa con el resto de los controles de gastos
-        beneficios: formulario.beneficios
-      };
-      
-      // Imprimir los datos que se están mapeando para cada formulario
-      console.log(`Datos mapeados del formulario ${index}:`, datosFormulario);
-  
-      return datosFormulario;
-    });
-  
-    // Imprimir el arreglo final de datos que se enviará
-    console.log('Datos a guardar:', datosAGuardar);
-    
-    // Aquí iría la lógica para enviar los datos al backend
-    // Ejemplo: this.servicioDeBackend.enviarDatos(datosAGuardar).subscribe(...);
-  }
-  
-  
-  
-
-
-
-
-
-  /*
-  enviarDatos(index: number) {
-    const tipoCampo = this.formularios[index].tipoCampo;
-
-    if (tipoCampo === 'gasto') {
-      this.enviarDatosGasto(index);
-    } else if (tipoCampo === 'ingreso') {
-      this.enviarDatosIngreso(index);
-    }
   }
 
-  private enviarDatosGasto(index: number) {
-    const formulario = this.formularios[index].camposGasto;
-  
-    if (formulario) {
-      const datosGasto = {
-        'TIPO DE CAMPO': 'GASTO',
-        'gastoAdicional': formulario.get('gastosAdicionales')?.value,
-        'gastoDesarrollo': formulario.get('gastosDesarrollo')?.value,
-        'gastoMarketing': formulario.get('gastosMarketing')?.value,
-        'gastoOperativo': formulario.get('gastosOperativos')?.value,
-      };
-  
-      console.log('Datos de Gasto a enviar:', datosGasto);
-  
-      this.guardarEnMongo(datosGasto);
-    } else {
-      console.error('El formulario de gastos es nulo o indefinido.');
-    }
+
+
+
+
+
+  calcularTotales(): void {
+    // Obtén los datos del formulario
+    const datosFormulario = this.miFormulario.value;
+
+    // Calcula los valores de ingresos, gastos y beneficios
+    const calcularTotalIngresos = () => {
+      return (
+        this.contadorIngresoNegocio
+      );
+    };
+
+    const calcularTotalGastos = () => {
+      return (
+        this.contadorGastoMantenimiento + this.contadorGastoSalario + this.contadorGastosMarketing + this.contadorGastosServicios
+      );
+    };
+
+    const calcularBeneficios = () => {
+      return calcularTotalIngresos() - calcularTotalGastos();
+    };
+
+    // Actualiza los resultados en el formulario
+    this.miFormulario.get('ingresosTotal')?.setValue(calcularTotalIngresos());
+    this.miFormulario.get('gastosTotal')?.setValue(calcularTotalGastos());
+    this.miFormulario.get('beneficiosTotal')?.setValue(calcularBeneficios());
+
+    // Agrega los valores calculados al objeto 'datosFormulario'
+    datosFormulario.ingresosTotal = calcularTotalIngresos();
+    datosFormulario.gastosTotal = calcularTotalGastos();
+    datosFormulario.beneficiosTotal = calcularBeneficios();
   }
 
-  private enviarDatosIngreso(index: number) {
-    const formulario = this.formularios[index].camposIngreso;
-  
-    if (formulario) {
-      const datosIngreso = {
-        'TIPO DE CAMPO': 'INGRESO',
-        'ingresoTotal': formulario.get('ingresoTotal')?.value,
-      };
-  
-      console.log('Datos de Ingreso a enviar:', datosIngreso);
-  
-      this.guardarEnMongo(datosIngreso);
-    } else {
-      console.error('El formulario de ingresos es nulo o indefinido.');
-    }
-  }
 
-  private guardarEnMongo(datos: any) {
-    this.authService.guardarDatosEnMongo(datos).subscribe(
-      respuesta => {
+
+  VisualizarDatos(): void {
+    // Llama al método para calcular los totales
+    this.calcularTotales();
+  
+    // Obtén los datos del formulario después de los cálculos
+    const datosFormulario = this.miFormulario.value;
+  
+    // Asigna la fecha actual al campo 'fecha'
+    datosFormulario.fecha = datosFormulario.fecha;
+  
+    const datosAEnviar = this.construirDatosAEnviar(datosFormulario);
+  
+    console.log('Datos a enviar:', datosAEnviar);
+    // Llama a enviarBase para enviar y obtener datos de MongoDB
+  }
+  
+  enviarDatos(datosFormulario: any): void {
+   
+    // Construye la estructura de datos a enviar
+    const datosAEnviar = {
+      ...this.construirDatosAEnviar(datosFormulario) // La API espera una lista de IDs
+    };
+  
+    // Guarda los datos en MongoDB
+    this.authService.guardarDatosEnMongo(datosAEnviar).subscribe(
+      (respuesta) => {
         console.log('Datos guardados en MongoDB:', respuesta);
         // Maneja la respuesta según tus necesidades
       },
-      error => {
+      (error) => {
         console.error('Error al guardar datos en MongoDB:', error);
         // Maneja el error según tus necesidades
       }
     );
   }
-
-
-
-
-
-  actualizarTotales(): void {
-    // Asegúrate de que miFormulario esté inicializado
-    if (this.miFormulario) {
-      // Calcula y actualiza los totales en tu componente
-      this.ingresos = this.calcularTotalIngresos();
-      this.gastos = this.calcularTotalGastos();
-      this.beneficios = this.calcularBeneficios();
+  
+ 
+  private construirDatosAEnviar(datosFormulario: any): any {
+    const usuarioId = this.authService.obtenerIdUsuario();
+    const emprendimientoId = this.authService.obtenerIdEmprendimiento();
+    console.log(usuarioId)
+    console.log(emprendimientoId)
+    if (!datosFormulario) {
+      console.error('Los datos del formulario son nulos o indefinidos.');
+      return null;
     }
-  }
   
-  calcularTotalIngresos(): number {
-    const ingresoTotalControl = this.miFormulario.get('camposIngreso.ingresoTotal.valor');
-    // Verifica que el control no sea nulo antes de acceder a su valor
-    return ingresoTotalControl ? Number(ingresoTotalControl.value) || 0 : 0;
+    // Asegúrate de que la fecha esté en el formato correcto (YYYY-MM-DD)
+      const fecha = new Date(datosFormulario.fecha);
+      const fechaFormatoCorrecto = fecha.getFullYear() + '-' +
+                               ('0' + (fecha.getMonth() + 1)).slice(-2) + '-' +
+                               ('0' + fecha.getDate()).slice(-2); // Modifica esto según cómo estés manejando las fechas
+        console.log(fechaFormatoCorrecto) // Modifica esto según cómo estés manejando las fechas
+
+    // Construye el objeto con la estructura deseada para tu API Django
+    return {
+      ingresos: [
+        { tipo: 'Ingreso de Negocio', valor: this.contadorGastoSalario }, // Asegúrate de que estos valores sean correctos
+      ],
+      gastos: [
+        { tipo: 'Gastos de Mantenimiento', valor: this.contadorGastoMantenimiento },
+        { tipo: 'Gastos de Salario', valor: this.contadorGastoSalario },
+        { tipo: 'Gastos de Marketing', valor: this.contadorGastosMarketing },
+        { tipo: 'Gastos de Servicios', valor: this.contadorGastosServicios },
+        // Agrega más objetos según sea necesario
+      ],
+      ingresoTotal: this.miFormulario.get('ingresosTotal')?.value ,
+      gastoTotal: this.miFormulario.get('gastosTotal')?.value ,
+      beneficiosTotal: this.miFormulario.get('beneficiosTotal')?.value ,
+      fecha: fechaFormatoCorrecto,
+      usuario: [usuarioId],
+      emprendimiento: [emprendimientoId]
+    };
   }
-  
-  calcularTotalGastos(): number {
-    const gastosOperativosControl = this.miFormulario.get('camposGasto.gastosOperativos.valor');
-    const gastosMarketingControl = this.miFormulario.get('camposGasto.gastosMarketing.valor');
-    const gastosDesarrolloControl = this.miFormulario.get('camposGasto.gastosDesarrollo.valor');
-    const gastosAdicionalesControl = this.miFormulario.get('camposGasto.gastosAdicionales.valor');
-    
-    // Verifica que los controles no sean nulos antes de acceder a sus valores
-    const totalGastos =
-      (gastosOperativosControl ? Number(gastosOperativosControl.value) : 0) +
-      (gastosMarketingControl ? Number(gastosMarketingControl.value) : 0) +
-      (gastosDesarrolloControl ? Number(gastosDesarrolloControl.value) : 0) +
-      (gastosAdicionalesControl ? Number(gastosAdicionalesControl.value) : 0);
-  
-    return totalGastos || 0;
-  }
-  
-  calcularBeneficios(): number {
-    return this.calcularTotalIngresos() - this.calcularTotalGastos();
-  }
-  */
+
+
 
 }
