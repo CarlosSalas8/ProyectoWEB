@@ -23,6 +23,7 @@ export class ContenidoCursoComponent implements OnInit{
     private http: HttpClient,
     private sanitizer: DomSanitizer,
     private authService: AuthService,
+
   ) {}
 
   ngOnInit() {
@@ -38,10 +39,17 @@ export class ContenidoCursoComponent implements OnInit{
   }
 
   seleccionarCurso(idCurso: number) {
-    this.contenidoSeleccionado = this.contenidoCurso.find(curso => curso.id === idCurso);
+    // Encuentra el curso por su ID
+    const cursoSeleccionado = this.contenidoCurso.find(curso => curso.id === idCurso);
+
+    // Crea una nueva instancia del objeto para forzar la detección de cambios
+    this.contenidoSeleccionado = { ...cursoSeleccionado };
+
+    // Llama a actualizarUrlsRecursos y otros métodos necesarios
     this.actualizarUrlsRecursos();
     this.safeConcepto = this.sanitizer.bypassSecurityTrustHtml(this.contenidoSeleccionado.concepto);
   }
+
 
   actualizarUrlsRecursos() {
     if (this.contenidoSeleccionado && this.contenidoSeleccionado.recursos) {
