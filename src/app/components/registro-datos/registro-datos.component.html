@@ -48,32 +48,32 @@
               <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioButton">
                 <li>
                   <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <input id="filter-radio-example-1" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="filter-radio-example-1" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last day</label>
+                    <input id="filter-radio-example-1" type="radio" value="" name="filter-radio" (change)="seleccionarFiltro('day')" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="filter-radio-example-1" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Este dia</label>
                   </div>
                 </li>
                 <li>
                   <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <input checked="" id="filter-radio-example-2" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="filter-radio-example-2" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last 7 days</label>
+                    <input checked="" id="filter-radio-example-2" type="radio" value="" name="filter-radio" (change)="seleccionarFiltro('week')" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="filter-radio-example-2" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Ultima semana </label>
                   </div>
                 </li>
                 <li>
                   <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <input id="filter-radio-example-3" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="filter-radio-example-3" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last 30 days</label>
+                    <input id="filter-radio-example-3" type="radio" value="" name="filter-radio" (change)="seleccionarFiltro('month')" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="filter-radio-example-3" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Ultimo més</label>
                   </div>
                 </li>
                 <li>
                   <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <input id="filter-radio-example-4" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="filter-radio-example-4" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last month</label>
+                    <input id="filter-radio-example-4" type="radio" value="" name="filter-radio"  (change)="seleccionarFiltro('year')" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="filter-radio-example-4" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Ultimo año</label>
                   </div>
                 </li>
                 <li>
                   <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <input id="filter-radio-example-5" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="filter-radio-example-5" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last year</label>
+                    <input id="filter-radio-example-5" type="radio" value="" name="filter-radio"  (change)="seleccionarFiltro('all')" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="filter-radio-example-5" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Todos los datos</label>
                   </div>
                 </li>
               </ul>
@@ -90,7 +90,7 @@
                   <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                 </svg>
             </div>
-            <input  datepicker datepicker-format="mm/dd/yyyy" name="start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
+            <input appFlowbiteDatepicker  datepicker datepicker-format="mm/dd/yyyy" name="start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
           </div>
           <span class="mx-4 text-gray-500">to</span>
           <div class="relative">
@@ -99,13 +99,9 @@
                   <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                 </svg>
             </div>
-            <input  datepicker datepicker-format="mm/dd/yyyy" name="end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+            <input appFlowbiteDatepicker  datepicker datepicker-format="mm/dd/yyyy" name="end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
         </div>
-
-
-        </div>
-
-        </div>
+        </div></div>
 
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -114,22 +110,16 @@
               Fecha
             </th>
             <th scope="col" class="px-6 py-3">
-              Precio Unidad
-            </th>
-            <th scope="col" class="px-6 py-3">
-              Cantidad
-            </th>
-            <th scope="col" class="px-6 py-3">
-              Ingresos Adicionales
-            </th>
-          <th scope="col" class="px-6 py-3">
-              Ingresos Totales
+                Ingresos Totales
             </th>
             <th scope="col" class="px-6 py-3">
               Gastos Totales
             </th>
             <th scope="col" class="px-6 py-3">
-              Beneficios Totales
+              Beneficios
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Estado del Beneficio
             </th>
             <th scope="col" class="px-6 py-3">
               Acción
@@ -139,28 +129,71 @@
           <tbody>
 
           <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-        *ngFor="let item of datosDeMongo">
-      <td class="px-6 py-4">
-        {{ item.fecha }}
-      </td>
-      <td class="px-6 py-4">
-        {{ item.precioVentaPorUnidad }}
-      </td>
-      <td class="px-6 py-4">
-        {{ item.cantidadProyectada }}
-      </td>
-      <td class="px-6 py-4">
-        {{ item.ingresosAdicionales }}
-      </td>
-      <td class="px-6 py-4">
-        {{ item.ingresos }}
-      </td>
-      <td class="px-6 py-4">
-        {{ item.gastos }}
-      </td>
-      <td class="px-6 py-4">
-        {{ item.beneficios }}
-      </td>
+          *ngFor="let item of datosPaginados; let i = index">
+          <td class="px-6 py-4">
+            {{ item.fecha }}
+          <td class="px-6 py-4">
+            {{ item.ingresoTotal }}
+          </td>
+          <td class="px-6 py-4">
+            <div class="flex items-center">
+            {{ item.gastoTotal }}
+            <!-- Modal toggle -->
+            <svg data-modal-target="crud-modal" (click)="abrirModalConDatos('gastos', item.gastos)" data-modal-toggle="crud-modal" class="w-4 h-4 text-gray-800 dark:text-white  ml-2 cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+            </svg>
+          </div>
+            <!-- Main modal -->
+            <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div class="relative p-4 w-full max-w-md max-h-full">
+                    <!-- Modal content -->
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <!-- Modal header -->
+                        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                                Conjunto de gastos
+                            </h3>
+                            <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                        <!-- Modal body -->
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                              <th scope="col" class="px-6 py-3">Tipo de Gasto</th>
+                              <th scope="col" class="px-6 py-3">Valor</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let dato of datosParaModal">
+                              <td  class="px-6 py-4">{{ dato.tipo }}</td>
+                              <td  class="px-6 py-4">{{ dato.valor }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> 
+          </td>
+          <td class="px-6 py-4">
+            {{ item.beneficiosTotal }}
+          </td>
+          <td class="px-6 py-4">
+            <div [ngClass]="{
+                  'alerta-verde': item.beneficiosTotal > 100,
+                  'alerta-amarilla': item.beneficiosTotal > 0 && item.beneficiosTotal <= 100,
+                  'alerta-roja': item.beneficiosTotal <= 0
+                }">
+              <!-- Icono o texto que desees mostrar -->
+              <span *ngIf="item.beneficiosTotal  > 100" class="text-green-900">✔️ Ganancia</span>
+              <span *ngIf="item.beneficiosTotal > 0 && item.beneficiosTotal <= 100" class="text-warning-600">Peligro</span>
+              <span *ngIf="item.beneficiosTotal <= 0" class="text-danger-800">❌ Perdida</span>
+            </div>
+          </td>
       <td class="px-6 py-4">
         <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
       </td>
@@ -168,7 +201,38 @@
 
           </tbody>
         </table>
-
+        <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
+          <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+              Mostrando
+              <span class="font-semibold text-gray-900 dark:text-white">1-10</span>
+          </span>
+          <ul class="inline-flex items-stretch -space-x-px">
+              <li>
+                  <a (click)="paginaAnterior()" class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                      <span class="sr-only">Anterior</span>
+                      <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                  </a>
+                    <li *ngFor="let num of getArrayFromNumber(totalPaginas()); let i = index">
+                      <a href="javascript:void(0)" 
+                         class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                         [class.text-primary-600]="paginaActual === i + 1"
+                         [class.bg-primary-50]="paginaActual === i + 1"
+                         (click)="cambiarPagina(i + 1)">
+                        {{ i + 1 }}
+                      </a>
+                    </li>
+                   <li>
+                  <a (click)="paginaSiguiente()" class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                      <span class="sr-only">Siguiente</span>
+                      <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                      </svg>
+                  </a>
+              </li>
+          </ul>
+      </nav>
         
       </div>
     </div>

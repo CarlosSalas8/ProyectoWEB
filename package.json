@@ -21,6 +21,7 @@
     "@preline/dropdown": "^2.0.1",
     "apexcharts": "^3.45.1",
     "axios": "^1.6.2",
+    "date-fns": "^3.2.0",
     "flowbite": "^2.2.1",
     "flowbite-datepicker": "^1.2.6",
     "material-ripple-effect": "^1.1.0",
