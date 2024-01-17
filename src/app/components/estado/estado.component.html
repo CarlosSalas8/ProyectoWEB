@@ -26,22 +26,19 @@
   </ul>
   <div class="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
 
-
-
     <form [formGroup]="miFormulario">
 
-    
         <div class=" container mx-auto mr-8">
-    
-          <div class="flex items-center justify-center">
-            <p class="text-5xl text-[#00327B] font-bold pb-10 p-4 m-4 ml-[-9rem]">ESTADO DE NEGOCIO</p>
+
+          <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+            <p class="mb-10 text-3xl font-bold text-gray-900 dark:text-white border-b ">Estado del negocio</p>
           </div>
 
           <div class="flex items-end justify-between">
-    
-            <p class="text-4xl text-[#00327B] font-bold pb-10 p-4 ml-20">INGRESOS</p>
 
-    
+            <p class="mb-10 text-3xl font-bold text-gray-900 dark:text-white border-b ">Ingresos</p>
+
+
             <div class="sm:w-1/3 mx-auto mr-8">
               <div class="max-w-md mx-auto p-6 bg-white dark:bg-gray-800 rounded-md shadow-md  ml-[-2rem] ">
                 <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">FECHA</label>
@@ -50,7 +47,7 @@
                   <input type="text" id="fecha" formControlName="fecha"
                     class="peer block min-h-[auto] w-full rounded border-2 border-#00327B bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                     placeholder="Selecciona una fecha" />
-    
+
                   <label for="floatingInput"
                     class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-#00327B transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-#00327B peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-#00327B">
                     Selecciona una fecha
@@ -59,14 +56,14 @@
               </div>
             </div>
           </div>
-    
+
           <div class="flex items-center justify-between mt-8">
             <!-- Input de ingreso del negocio -->
             <div class="sm:w-1/3 mb-6 px-4 ml-20">
               <div class="max-w-md mx-auto mt-6 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
                 <label for="ingresoNegocio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ingreso del
                   Negocio</label>
-    
+
                 <div class="flex items-center border-b border-gray-300 dark:border-gray-600">
                   <input type="number" id="ingresoNegocio" formControlName="ingresoNegocio"
                     class="bg-gray-50 border-none text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -74,20 +71,20 @@
                 </div>
               </div>
             </div>
-    
+
             <!-- Contador de ingreso del negocio -->
             <div class="sm:w-1/6 mb-6 ml-0 flex flex-col items-center">
               <div class="text-sm text-gray-500 mr-4">{{ contadorIngresoNegocio }}</div>
               <div class="border-b border-gray-300 dark:border-gray-600 w-full"></div>
               <div class="mt-1 text-xs font-medium text-gray-900 dark:text-white">Ingresos Registrados</div>
             </div>
-    
+
             <!-- Nuevo input deshabilitado con el valor del contador -->
             <div class="sm:w-1/3 mb-6 px-4 ml-2">
               <div class="max-w-md mx-auto mt-6 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
                 <label for="inputDeshabilitado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ingreso
                   Total</label>
-    
+
                 <div class="flex items-center border-b border-gray-300 dark:border-gray-600">
                   <!-- Cambiado el tipo de input a 'number' y eliminado el binding [value] -->
                   <input type="text" id="inputDeshabilitado" formControlName="inputDeshabilitado" [attr.disabled]="true"
@@ -97,15 +94,15 @@
               </div>
             </div>
           </div>
-    
-    
+
+
           <div class="flex items-start justify-start">
             <p class="text-4xl text-[#00327B] font-bold pb-10 p-4 m-2 ml-20">GASTOS</p>
           </div>
-    
+
 
           <div class="flex items-center justify-between mt-8">
-    
+
             <div class="sm:w-1/3 mb-10 px-4 ml-20">
               <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
                 <label for="gastoMantenimiento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gastos
@@ -116,20 +113,20 @@
                   placeholder="Ingrese un valor" (keyup.enter)="onEnter('gastoMantenimiento')" required>
               </div>
             </div>
-    
+
             <!-- Contador de ingreso del negocio -->
             <div class="sm:w-1/6 mb-6 ml-0 flex flex-col items-center">
               <div class="text-sm text-gray-500 mr-4">{{ contadorGastoMantenimiento }}</div>
               <div class="border-b border-gray-300 dark:border-gray-600 w-full"></div>
               <div class="mt-1 text-xs font-medium text-gray-900 dark:text-white">Gastos Registrados</div>
             </div>
-    
+
             <!-- Nuevo input deshabilitado con el valor del contador -->
             <div class="sm:w-1/3 mb-6 px-4 ml-2">
               <div class="max-w-md mx-auto mt-6 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
                 <label for="inputDeshabilitado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Total
                   Gasto Mantenimiento</label>
-    
+
                 <div class="flex items-center border-b border-gray-300 dark:border-gray-600">
                   <!-- Cambiado el tipo de input a 'number' y eliminado el binding [value] -->
                   <input type="text" id="inputDeshabilitado" formControlName="inputDeshabilitado" [attr.disabled]="true"
@@ -138,13 +135,13 @@
                 </div>
               </div>
             </div>
-    
-          </div>
-    
 
-    
+          </div>
+
+
+
           <div class="flex items-center justify-between mt-8">
-    
+
             <div class="sm:w-1/3 mb-10 px-4 ml-20">
               <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
                 <label for="gastosMarketing" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gastos
@@ -154,20 +151,20 @@
                   placeholder="Ingrese un valor" (keyup.enter)="onEnter('gastosMarketing')" required>
               </div>
             </div>
-    
+
             <!-- Contador de ingreso del negocio -->
             <div class="sm:w-1/6 mb-6 ml-0 flex flex-col items-center">
               <div class="text-sm text-gray-500 mr-4">{{ contadorGastosMarketing }}</div>
               <div class="border-b border-gray-300 dark:border-gray-600 w-full"></div>
               <div class="mt-1 text-xs font-medium text-gray-900 dark:text-white">Gastos Registrados</div>
             </div>
-    
+
             <!-- Nuevo input deshabilitado con el valor del contador -->
             <div class="sm:w-1/3 mb-6 px-4 ml-2">
               <div class="max-w-md mx-auto mt-6 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
                 <label for="inputDeshabilitado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Total
                   Gasto Marketing</label>
-    
+
                 <div class="flex items-center border-b border-gray-300 dark:border-gray-600">
                   <!-- Cambiado el tipo de input a 'number' y eliminado el binding [value] -->
                   <input type="text" id="inputDeshabilitado" formControlName="inputDeshabilitado" [attr.disabled]="true"
@@ -176,10 +173,10 @@
                 </div>
               </div>
             </div>
-    
+
           </div>
 
-    
+
           <div class="flex items-center justify-between mt-8">
             <div class="sm:w-1/3 mb-10 px-4 ml-20">
               <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
@@ -190,20 +187,20 @@
                   placeholder="Ingrese un valor" (keyup.enter)="onEnter('gastoSalario')" required>
               </div>
             </div>
-    
+
             <!-- Contador de ingreso del negocio -->
             <div class="sm:w-1/6 mb-6 ml-0 flex flex-col items-center">
               <div class="text-sm text-gray-500 mr-4">{{ contadorGastoSalario }}</div>
               <div class="border-b border-gray-300 dark:border-gray-600 w-full"></div>
               <div class="mt-1 text-xs font-medium text-gray-900 dark:text-white">Gastos Registrados</div>
             </div>
-    
+
             <!-- Nuevo input deshabilitado con el valor del contador -->
             <div class="sm:w-1/3 mb-6 px-4 ml-2">
               <div class="max-w-md mx-auto mt-6 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
                 <label for="inputDeshabilitado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Total
                   Gastos Salarios</label>
-    
+
                 <div class="flex items-center border-b border-gray-300 dark:border-gray-600">
                   <!-- Cambiado el tipo de input a 'number' y eliminado el binding [value] -->
                   <input type="text" id="inputDeshabilitado" formControlName="inputDeshabilitado" [attr.disabled]="true"
@@ -212,11 +209,11 @@
                 </div>
               </div>
             </div>
-    
+
           </div>
-    
-    
-    
+
+
+
           <div class="flex items-center justify-between mt-8">
             <div class="sm:w-1/3 mb-10 px-4 ml-20">
               <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
@@ -233,13 +230,13 @@
               <div class="border-b border-gray-300 dark:border-gray-600 w-full"></div>
               <div class="mt-1 text-xs font-medium text-gray-900 dark:text-white">Gastos Registrados</div>
             </div>
-    
+
             <!-- Nuevo input deshabilitado con el valor del contador -->
             <div class="sm:w-1/3 mb-6 px-4 ml-2">
               <div class="max-w-md mx-auto mt-6 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
                 <label for="inputDeshabilitado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Total
                   Gastos Servicios</label>
-    
+
                 <div class="flex items-center border-b border-gray-300 dark:border-gray-600">
                   <!-- Cambiado el tipo de input a 'number' y eliminado el binding [value] -->
                   <input type="text" id="inputDeshabilitado" formControlName="inputDeshabilitado" [attr.disabled]="true"
@@ -248,18 +245,18 @@
                 </div>
               </div>
             </div>
-    
+
           </div>
-   
-    
+
+
           <div class="flex items-center mx-auto pt-16 justify-center">
             <button type="submit" (click)="VisualizarDatos()"
               class="cursor-pointer transition-all bg-[#00327B] text-white px-6 py-2 rounded-lg border-[#00327B] border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] justify-center mt-auto">
               ACTUALIZAR
             </button>
           </div>
-          
-    
+
+
           <div class="flex flex-wrap -mx-4 -mb-10 text-center">
             <div class="sm:w-1/3 mb-10 px-4">
               <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
@@ -269,7 +266,7 @@
                   placeholder="Valor Automático" readonly>
               </div>
             </div>
-    
+
             <div class="sm:w-1/3 mb-10 px-4">
               <div class="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
                 <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">GASTOS</label>
@@ -297,8 +294,111 @@
             </div>
           </div>
         </div>
-    
+
     </form>
+    <section class="bg-gray-100">
+      <form [formGroup]="miFormulario" class="container mx-auto px-4">
+          <div class="py-8 px-4 mx-auto max-w-4xl lg:py-16">
+              <h2 class="mb-4 text-3xl font-bold text-gray-900">Estado del negocio</h2>
+              <h3 class="mb-4 text-xl font-bold text-gray-900">Ingresos</h3>
+
+              <!-- Date Picker -->
+              <div class="mb-6 max-w-md p-6 bg-white rounded-md shadow-md">
+                  <label for="fecha" class="block mb-2 text-sm font-medium text-gray-900">Fecha</label>
+                  <input type="text" id="fecha" class="form-input mt-1 block w-full" placeholder="Selecciona una fecha">
+              </div>
+
+              <!-- Ingreso del Negocio & Contador & Ingreso Total -->
+              <div class="flex flex-wrap justify-between">
+                  <div class="mb-6 w-full md:w-1/3 px-4">
+                      <div class="p-6 bg-white rounded-md shadow-md">
+                          <label for="ingresoNegocio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ingreso del Negocio</label>
+                          <input type="number" id="ingresoNegocio" formControlName="ingresoNegocio"
+                          class="bg-gray-50 border-none text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="Ingrese un valor" (keyup.enter)="onEnter('ingresoNegocio')" required>
+                      </div>
+                  </div>
+
+                  <div class="mb-6 flex w-full md:w-1/6 justify-center">
+                      <div class="text-center pt-6">
+                          <div lass="text-sm text-gray-500 mr-4">{{ contadorIngresoNegocio }}</div>
+                          <div class="mt-1 text-xs font-medium text-gray-900">Ingresos Registrados</div>
+                      </div>
+                  </div>
+
+                  <div class="mb-6 w-full md:w-1/3 px-4">
+                      <div class="p-6 bg-white rounded-md shadow-md">
+                          <label for="inputDeshabilitado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ingreso Total</label>
+                          <input type="text" id="inputDeshabilitado" formControlName="inputDeshabilitado" [attr.disabled]="true"
+                          [value]="contadorIngresoNegocio"
+                          class="bg-gray-50 border-none text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Gastos Section -->
+              <h2 class="mb-4 text-xl font-bold text-gray-900">Gastos</h2>
+
+              <!-- Gastos de Mantenimiento & Contador & Total Gasto Mantenimiento -->
+              <div class="flex flex-wrap justify-between">
+                  <div class="mb-6 w-full md:w-1/3 px-4">
+                      <div class="p-6 bg-white rounded-md shadow-md">
+                          <label for="gastoMantenimiento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gastos de Mantenimiento del Negocio</label>
+                          <input type="number" id="gastoMantenimiento" formControlName="gastoMantenimiento"
+                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="Ingrese un valor" (keyup.enter)="onEnter('gastoMantenimiento')" required>
+                      </div>
+                  </div>
+
+                  <div class="mb-6 flex w-full md:w-1/6 justify-center">
+                      <div class="text-center pt-6">
+                          <div class="text-sm text-gray-500 mr-4">{{ contadorGastoMantenimiento }}</div>
+                          <div class="mt-1 text-xs font-medium text-gray-900">Gastos Registrados</div>
+                      </div>
+                  </div>
+
+                  <div class="mb-6 w-full md:w-1/3 px-4">
+                      <div class="p-6 bg-white rounded-md shadow-md">
+                          <label for="inputDeshabilitado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Total Gasto Mantenimiento</label>
+                          <input type="text" id="inputDeshabilitado" formControlName="inputDeshabilitado" [attr.disabled]="true"
+                          [value]="contadorGastoMantenimiento"
+                          class="bg-gray-50 border-none text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Gastos Marketing & Contador & Total Gasto Marketing -->
+              <!-- This section should be repeated for each expense category -->
+
+              <!-- Actualizar & Visualizar Resultados Buttons -->
+              <div class="flex justify-center py-8">
+                  <button type="submit" class="mx-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out">
+                      Actualizar
+                  </button>
+                  <button type="button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out">
+                      Visualizar Resultados
+                  </button>
+              </div>
+
+              <!-- Totales Section -->
+              <div class="flex flex-wrap -mx-4 text-center">
+                  <div class="w-full md:w-1/3 px-4 mb-6">
+                      <div class="p-6 bg-white rounded-md shadow-md">
+                          <label for="ingresosTotal" class="block mb-2 text-sm font-medium text-gray-900">INGRESOS</label>
+                          <input type="number" id="ingresosTotal" class="form-input mt-1 block w-full" placeholder="Valor Automático" readonly>
+                      </div>
+                  </div>
+
+                  <!-- Repeated for GASTOS & BENEFICIOS -->
+                  <!-- ... -->
+
+              </div>
+          </div>
+      </form>
+      <script>
+          // Your JavaScript or Angular logic goes here
+      </script>
+  </section>
 
   </div>
 </div>

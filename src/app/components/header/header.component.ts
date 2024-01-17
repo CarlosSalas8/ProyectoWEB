@@ -31,7 +31,12 @@ export class HeaderComponent {
     this.authService.logout();
   }
 
+  isMobileMenuVisible: boolean = false;
 
+  // Método para alternar la visibilidad del menú móvil
+  toggleMobileMenu() {
+    this.isMobileMenuVisible = !this.isMobileMenuVisible;
+  }
 
 }
 

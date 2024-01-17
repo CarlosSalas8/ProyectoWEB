@@ -8,24 +8,46 @@
         <main class="bg-white p-6 shadow-md w-full lg:w-3/4 rounded-lg">
           <!-- Contenido del curso -->
           <div *ngIf="contenidoSeleccionado" class="space-y-4">
-              <h2 class="text-xl font-semibold text-gray-800">{{ contenidoSeleccionado.titulo }}</h2>
-              <div class="flex flex-col lg:flex-row gap-4">
-                  <img [src]="contenidoSeleccionado.imagen" alt="Descripción detallada de la imagen" class="lg:w-1/2 rounded-lg shadow-lg" *ngIf="contenidoSeleccionado.imagen">
-                  <div class="prose lg:w-1/2 text-justify" [innerHTML]="safeConcepto"></div>
-              </div>
-              <ng-container *ngFor="let recurso of contenidoSeleccionado.recursos">
-                  <h3 class="text-lg font-semibold text-gray-800">{{ recurso.nombre }}</h3>
-                  <div class="prose text-justify" *ngIf="recurso.detalle_recurso.texto" [innerHTML]="recurso.detalle_recurso.texto"></div>
-                  <img [src]="recurso.detalle_recurso.imagen" alt="Descripción detallada de la imagen" class="rounded-lg shadow-lg" *ngIf="recurso.detalle_recurso.imagen">
-                  <video *ngIf="recurso.detalle_recurso.video" [src]="recurso.detalle_recurso.video" controls class="rounded-lg shadow-lg"></video>
-                  <a *ngIf="recurso.detalle_recurso.url_video" [href]="recurso.detalle_recurso.url_video" target="_blank" class="text-blue-600 hover:underline">Ver Video</a>
-              </ng-container>
-          </div>
-          <button class="btn btn-primary mt-4">Siguiente clase</button>
-      </main>
+              <h2 class="max-w-full mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white ">{{ contenidoSeleccionado.titulo }}</h2>
 
+               <!-- Sección de descripción del contenido con imagen y texto -->
+              <div class="flex flex-col lg:flex-row gap-4">
+                  <img [src]="contenidoSeleccionado.imagen" alt="Descripción detallada de la imagen" class=" lg:w-[27%] rounded-lg shadow-lg" *ngIf="contenidoSeleccionado.imagen">
+                  <div class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400 text-justify" [innerHTML]="safeConcepto"></div>
+              </div>
+              <br>
+              <!-- Iteración sobre los recursos del contenido -->
+              <ng-container *ngFor="let recurso of contenidoSeleccionado.recursos">
+                  <h3 class="max-w-full mb-4 text-2xl font-extrabold tracking-tight leading-none  dark:text-white ">{{ recurso.nombre }}</h3>
+
+                  <!-- Sección para mostrar texto, imagen y video del recurso -->
+                  <div class="max-w-[95%] mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400 text-justify pb-4" *ngIf="recurso.detalle_recurso.texto" [innerHTML]="recurso.detalle_recurso.texto"></div>
+                  <div class="flex justify-center items-center">
+                    <img [src]="recurso.detalle_recurso.imagen" alt="Descripción detallada de la imagen" class="lg:w-[60%] rounded-lg shadow-lg" *ngIf="recurso.detalle_recurso.imagen">
+
+                  </div>
+                  <!-- <video *ngIf="recurso.detalle_recurso.video" [src]="recurso.detalle_recurso.video" controls class="rounded-lg shadow-lg"></video>-->
+                  <ng-container *ngIf="recurso.detalle_recurso.url_video">
+                    <!-- Contenedor responsivo para el iframe con una relación de aspecto de 16:9 -->
+                    <div class="w-full relative" style="padding-top: 56.25%;">
+                        <iframe
+                            [src]="getSafeUrl(recurso.detalle_recurso.url_video)"
+                            class="absolute top-0 left-0 w-full h-full pb-6"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </ng-container>
+
+
+
+                </ng-container>
+
+          </div>
+      </main>
+          <!-- Barra lateral para mostrar títulos y navegación del curso -->
           <aside class="w-full lg:w-1/4">
-              <!-- Barra lateral para mostrar títulos y navegación del curso -->
               <div class="bg-white p-4 shadow-md rounded-lg">
                   <h2 class="text-lg font-semibold mb-4">Contenido</h2>
                   <div class="flow-root">

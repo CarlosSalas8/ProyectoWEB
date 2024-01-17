@@ -7,7 +7,7 @@
        <!-- Botón de menú para dispositivos móviles -->
        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
         <!-- Botón para abrir y cerrar el menú móvil -->
-        <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+        <button type="button"(click)="toggleMobileMenu()" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
           <span class="absolute -inset-0.5"></span>
           <span class="sr-only">Open main menu</span>
           <!-- Icono cuando el menú está cerrado -->
@@ -75,7 +75,7 @@
 
     </div>
     <!-- Menú móvil, visible u oculto según el estado -->
-    <div class="sm:hidden" id="mobile-menu">
+    <div class="sm:hidden" [class.hidden]="!isMobileMenuVisible" id="mobile-menu">
       <div class="space-y-1 px-2 pb-3 pt-2">
         <!-- Estilos para enlaces del menú móvil -->
         <a href="/inicioCurso" class="text-gray-300 hover:bg-azul-marino hover:text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page" [ngClass]="{'text-white bg-azul-marino': currentPage === '/inicio'}">Inicio</a>
