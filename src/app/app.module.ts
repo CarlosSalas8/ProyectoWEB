@@ -28,7 +28,7 @@ import { ResultadosComponent } from './components/resultados/resultados.componen
 import { NgApexchartsModule } from "ng-apexcharts";
 import { TabbarComponent } from './components/tabbar/tabbar.component';
 import { InicioRegistroComponent } from './components/inicio-registro/inicio-registro.component';
-import { InventarioComponent } from './inventario/inventario.component';
+import { InventarioComponent } from './components/inventario/inventario.component';
 
 @NgModule({
   declarations: [

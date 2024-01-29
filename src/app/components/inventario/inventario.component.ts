@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { AuthService } from '../services/login.service';
+import { AuthService } from '../../services/login.service';
 import { NgForm } from '@angular/forms';
 import { initFlowbite } from 'flowbite';
 @Component({
@@ -9,10 +9,10 @@ import { initFlowbite } from 'flowbite';
 })
 export class InventarioComponent implements OnInit {
   opcionesActualesDeProductos: string[] = [];
-  datosInventarioApi: any[] = []; 
+  datosInventarioApi: any[] = [];
   datosInvetarioCon: any[] = [];
   paginaActual: number = 1;
-  totalDeProductos: number = 1; 
+  totalDeProductos: number = 1;
   productosPorPagina: number = 10;
   datosInventarioApiPaginados: any[] = [];
   filtrosActivos: Set<string> = new Set();
@@ -29,8 +29,8 @@ export class InventarioComponent implements OnInit {
     "Ropa Deportiva",
     "Accesorios de Moda"
   ],
-  
-  
+
+
 
   'Joyería Artesanal' : [
     "Collares Hechos a Mano",
@@ -134,7 +134,7 @@ export class InventarioComponent implements OnInit {
     cantidad: null,
     precio: null,
     comentario: '',
-    emprendimiento: null, 
+    emprendimiento: null,
   };
 
 
@@ -143,7 +143,7 @@ export class InventarioComponent implements OnInit {
   ngOnInit(): void {
     this.cargarEmprendimiento();
     this.cargarDatosInventario();
-  
+
     initFlowbite();
   }
 onSubmit(form: NgForm) {
@@ -154,7 +154,7 @@ onSubmit(form: NgForm) {
         cantidad: Number(this.datosInventario.cantidad),
         precio: Number(this.datosInventario.precio),
         comentario: this.datosInventario.comentario,
-        emprendimiento: [this.datosInventario.emprendimiento] 
+        emprendimiento: [this.datosInventario.emprendimiento]
       };
       console.log(datosParaEnviar)
       if (this.itemToEdit) { // Suponiendo que 'editing' es una propiedad que indica si estás editando un elemento existente
@@ -162,7 +162,7 @@ onSubmit(form: NgForm) {
           (respuesta) => {
             console.log('Datos actualizados con éxito:', respuesta);
             this.itemToEdit  = null; // Resetea la condición de edición
-            this.cargarDatosInventario(); 
+            this.cargarDatosInventario();
             this.resetForm(form);// Recargar los datos
             this.cargarEmprendimiento();
 
@@ -197,12 +197,12 @@ onSubmit(form: NgForm) {
       cantidad: null,
       precio: null,
       comentario: '',
-      emprendimiento: null, 
+      emprendimiento: null,
     };
     if (form) {
       form.resetForm();
     }
-    
+
   }
   cargarEmprendimiento(): void {
     const userId = this.authService.obtenerIdUsuario();
@@ -225,7 +225,7 @@ onSubmit(form: NgForm) {
   actualizarOpcionesDeProductos(event: Event): void {
     const selectElement = event.target as HTMLSelectElement; // Cast del EventTarget a HTMLSelectElement
     const valor = selectElement.value; // Obtén el valor seleccionado
-    this.opcionesActualesDeProductos = this.opcionesDeEmprendimiento[valor] || []; 
+    this.opcionesActualesDeProductos = this.opcionesDeEmprendimiento[valor] || [];
     this.datosInventario.tipoProducto = '';
 
   }
@@ -236,7 +236,7 @@ onSubmit(form: NgForm) {
     (datos) => {
     this.datosInventarioApi = datos;
     this.datosInvetarioCon =datos;
-    this.totalDeProductos = datos.length; 
+    this.totalDeProductos = datos.length;
     const categorias: string[] = Array.from(new Set(datos.map((item: { tipoProducto: string; }) => item.tipoProducto)));
     this.opcionesActualesDeProductos = categorias;
     console.log('Categorías únicas:', categorias);
@@ -260,7 +260,7 @@ onSubmit(form: NgForm) {
     }
   }
   editItem(item: any,section: string): void {
-    this.itemToEdit = { ...item }; 
+    this.itemToEdit = { ...item };
     this.datosInventario = { ...this.itemToEdit };
     const element = document.querySelector('#' + section);
     if (element) {
@@ -322,7 +322,7 @@ contarProductosPorCategoria(categoria: string): number {
 }
 aplicarFiltros(): void {
   if (this.filtrosActivos.size > 0) {
-    this.datosFiltrados = this.datosInvetarioCon.filter((producto) => 
+    this.datosFiltrados = this.datosInvetarioCon.filter((producto) =>
       this.filtrosActivos.has(producto.tipoProducto),
 
     );

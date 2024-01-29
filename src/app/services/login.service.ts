@@ -49,7 +49,7 @@ export class AuthService {
         console.error('Logout failed', error);
       });
 
-    this.router.navigate(['login']);
+    this.router.navigate(['inicio']);
   }
   isUserAuthenticated(): boolean {
     const token = localStorage.getItem('authToken');

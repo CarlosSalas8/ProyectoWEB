@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from "../../services/login.service";
 import { Datepicker, Input, initTE } from 'tw-elements';
-import { FormControl } from '@angular/forms';
-import { v4 as uuidv4 } from 'uuid';
-import { Router } from '@angular/router';
+import flatpickr from 'flatpickr';
+import { Spanish } from 'flatpickr/dist/l10n/es.js';
+
 interface CampoFormulario {
   id: string;
   tipoCampoEspecifico: string;
@@ -52,6 +52,23 @@ export class EstadoComponent implements OnInit {
 
   ngOnInit() {
     initTE({ Datepicker, Input });
+    flatpickr("#date-picker", {
+      // Personaliza el formato de la fecha
+      dateFormat: "Y-m-d",
+
+      // Permite seleccionar una fecha inicial
+      defaultDate: "today",
+
+      // Establece el idioma del calendario (puedes cambiarlo según tus necesidades)
+      locale: Spanish,
+      onChange: (selectedDates, dateStr) => {
+      const fechaControl = this.miFormulario.get('fecha');
+      if (fechaControl) {
+        fechaControl.setValue(dateStr);
+      }
+    }
+
+    });
     this.miFormulario = this.fb.group({
       ingresoNegocio: ['', Validators.required],
       gastoMantenimiento: ['', Validators.required],
@@ -62,7 +79,7 @@ export class EstadoComponent implements OnInit {
       ingresosTotal: [{ value: 0, disabled: true }],
       gastosTotal: [{ value: 0, disabled: true }],
       beneficiosTotal: [{ value: 0, disabled: true }],
-      inputDeshabilitado: [{ value: '0', disabled: true }] 
+      inputDeshabilitado: [{ value: '0', disabled: true }]
     });
     // Ingresos
     this.miFormulario.get('ingresoNegocio')?.valueChanges.subscribe((value: string) => {
@@ -105,7 +122,7 @@ export class EstadoComponent implements OnInit {
     });
   }
 
-  
+
 
 
 
@@ -195,26 +212,26 @@ export class EstadoComponent implements OnInit {
   VisualizarDatos(): void {
     // Llama al método para calcular los totales
     this.calcularTotales();
-  
+
     // Obtén los datos del formulario después de los cálculos
     const datosFormulario = this.miFormulario.value;
-  
+
     // Asigna la fecha actual al campo 'fecha'
     datosFormulario.fecha = datosFormulario.fecha;
-  
+
     const datosAEnviar = this.construirDatosAEnviar(datosFormulario);
-  
+
     console.log('Datos a enviar:', datosAEnviar);
     // Llama a enviarBase para enviar y obtener datos de MongoDB
   }
-  
+
   enviarDatos(datosFormulario: any): void {
-   
+
     // Construye la estructura de datos a enviar
     const datosAEnviar = {
       ...this.construirDatosAEnviar(datosFormulario) // La API espera una lista de IDs
     };
-  
+
     // Guarda los datos en MongoDB
     this.authService.guardarDatosEnMongo(datosAEnviar).subscribe(
       (respuesta) => {
@@ -227,8 +244,8 @@ export class EstadoComponent implements OnInit {
       }
     );
   }
-  
- 
+
+
   private construirDatosAEnviar(datosFormulario: any): any {
     const usuarioId = this.authService.obtenerIdUsuario();
     const emprendimientoId = this.authService.obtenerIdEmprendimiento();
@@ -238,13 +255,14 @@ export class EstadoComponent implements OnInit {
       console.error('Los datos del formulario son nulos o indefinidos.');
       return null;
     }
-  
+
     // Asegúrate de que la fecha esté en el formato correcto (YYYY-MM-DD)
-      const fecha = new Date(datosFormulario.fecha);
-      const fechaFormatoCorrecto = fecha.getFullYear() + '-' +
-                               ('0' + (fecha.getMonth() + 1)).slice(-2) + '-' +
-                               ('0' + fecha.getDate()).slice(-2); // Modifica esto según cómo estés manejando las fechas
-        console.log(fechaFormatoCorrecto) // Modifica esto según cómo estés manejando las fechas
+    const fecha = new Date(datosFormulario.fecha);
+    const fechaUTC = new Date(fecha.getTime() + fecha.getTimezoneOffset() * 60000);
+    const fechaFormatoCorrecto = fechaUTC.getFullYear() + '-' +
+                                 ('0' + (fechaUTC.getMonth() + 1)).slice(-2) + '-' +
+                                 ('0' + fechaUTC.getDate()).slice(-2);
+
 
     // Construye el objeto con la estructura deseada para tu API Django
     return {
