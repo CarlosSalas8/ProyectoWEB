@@ -2,9 +2,8 @@ import { Component, OnInit,AfterViewInit,ElementRef,ChangeDetectorRef   } from '
 import { AuthService } from "../../services/login.service";
 import { startOfDay, subWeeks, subMonths, subYears } from 'date-fns';
 import { initFlowbite } from 'flowbite';
-import { Flowbite } from 'src/app/services/flowbite-init.service';
-import { FlowbiteService } from 'src/app/services/flowbite-init.service';
-@Flowbite()
+import { formatDate } from '@angular/common';
+
 @Component({
   selector: 'app-registro-datos',
   templateUrl: './registro-datos.component.html',
@@ -17,18 +16,14 @@ export class RegistroDatosComponent implements OnInit{
   paginaActual: number = 1;
   totalDeDatos: number = 1;
   datosPorPagina: number = 6;
-  fechaInicio: Date = new Date();
-  fechaFin: Date = new Date();
-  fechaHasta: Date = new Date();
+
   datosParaModal: any[] = [];
 
-  constructor(private authService: AuthService,private cdr: ChangeDetectorRef,
-    private flowbiteService: FlowbiteService) {
+  constructor(private authService: AuthService,private cdr: ChangeDetectorRef) {
    }
   estado: any = {};
   ngOnInit() {
     this.obtenerTodosLosDatos();
-    this.flowbiteService.initialize();
     initFlowbite();
 
   }
@@ -43,7 +38,7 @@ export class RegistroDatosComponent implements OnInit{
       this.cargarDatosDePagina(this.paginaActual);
     });
   }
-  
+
   seleccionarFiltro(tiempo: string) {
     console.log('Filtrando por:', tiempo);
     if (tiempo === 'all') {
@@ -52,7 +47,7 @@ export class RegistroDatosComponent implements OnInit{
       const hoy = startOfDay(new Date());
       let fechaDesde;
       let fechaHasta = hoy; // Incluye el día actual hasta el final del día
-      
+
       switch (tiempo) {
         case 'day':
           fechaDesde = hoy;
@@ -70,11 +65,11 @@ export class RegistroDatosComponent implements OnInit{
           fechaDesde = null;
           fechaHasta = hoy;
       }
-      console.log('Filtrando desde:', fechaDesde, 'hasta:', fechaHasta);  
+      console.log('Filtrando desde:', fechaDesde, 'hasta:', fechaHasta);
 this.filtrarDatos(fechaDesde, fechaHasta);
     }
   }
-  
+
   filtrarDatos(fechaDesde: Date | null, fechaHasta: Date | null) {
     if (fechaDesde && fechaHasta) {
       this.datosFiltrados = this.datosDeMongo.filter(dato => {
@@ -89,7 +84,7 @@ this.filtrarDatos(fechaDesde, fechaHasta);
     this.paginaActual = 1;
     this.cargarDatosDePagina(this.paginaActual);
   }
-  
+
   cargarDatosDePagina(pagina: number) {
     const inicio = (pagina - 1) * this.datosPorPagina;
     const fin = inicio + this.datosPorPagina;
@@ -104,13 +99,13 @@ this.filtrarDatos(fechaDesde, fechaHasta);
       this.cargarDatosDePagina(this.paginaActual - 1);
     }
   }
-  
+
   paginaSiguiente(): void {
     if (this.paginaActual < Math.ceil(this.totalDeDatos / this.datosPorPagina)) {
       this.cargarDatosDePagina(this.paginaActual + 1);
     }
   }
-  
+
   totalPaginas(): number {
     return Math.ceil(this.totalDeDatos / this.datosPorPagina);
   }
@@ -130,17 +125,13 @@ this.filtrarDatos(fechaDesde, fechaHasta);
     this.cargarDatosDePagina(this.paginaActual);
     console.log('Filtros quitados, mostrando todos los datos');
   }
-  obtenerTiposIngresos(ingresos: any[]): string {
-    return ingresos.map(ingreso => `${ingreso.tipo}: ${ingreso.valor}`).join(', ');
-  }
-  
-  obtenerTiposGastos(gastos: any[]): string {
-    return gastos.map(gasto => `${gasto.tipo}: ${gasto.valor}`).join(', ');
-  }
+
   abrirModalConDatos(tipo: 'ingresos' | 'gastos', datos: any[]): void {
     this.datosParaModal = datos;
     console.log('Datos para modal:', this.datosParaModal);
   }
+
+
 }
 
 

@@ -62,11 +62,11 @@ export class EstadoComponent implements OnInit {
       // Establece el idioma del calendario (puedes cambiarlo según tus necesidades)
       locale: Spanish,
       onChange: (selectedDates, dateStr) => {
-      const fechaControl = this.miFormulario.get('fecha');
-      if (fechaControl) {
-        fechaControl.setValue(dateStr);
+        const fechaControl = this.miFormulario.get('fecha');
+        if (fechaControl) {
+          fechaControl.setValue(dateStr);
+        }
       }
-    }
 
     });
     this.miFormulario = this.fb.group({
@@ -260,8 +260,8 @@ export class EstadoComponent implements OnInit {
     const fecha = new Date(datosFormulario.fecha);
     const fechaUTC = new Date(fecha.getTime() + fecha.getTimezoneOffset() * 60000);
     const fechaFormatoCorrecto = fechaUTC.getFullYear() + '-' +
-                                 ('0' + (fechaUTC.getMonth() + 1)).slice(-2) + '-' +
-                                 ('0' + fechaUTC.getDate()).slice(-2);
+      ('0' + (fechaUTC.getMonth() + 1)).slice(-2) + '-' +
+      ('0' + fechaUTC.getDate()).slice(-2);
 
 
     // Construye el objeto con la estructura deseada para tu API Django
