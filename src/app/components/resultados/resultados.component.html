@@ -1,6 +1,9 @@
 <app-header></app-header>
 <app-tabbar></app-tabbar>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <div class="p-5">
       <!-- TITULO -->
       <div class="flex flex-row mb-1 sm:mb-0 justify-between w-full">
@@ -25,10 +28,12 @@
                   </div>
                 </div>
                 <div class="flex flex-col items-end justify-center">
-                  <span [ngClass]="{'text-green-600': comparacionIngresos.aumento, 'text-red-600': !comparacionIngresos.aumento}" class="text-green-600 text-md font-bold flex items-center">
-                    <i [ngClass]="{'fas fa-arrow-up ': comparacionIngresos.aumento, 'fas fa-arrow-down': !comparacionIngresos.aumento}" ></i>{{comparacionIngresos.porcentaje | number:'1.2-2'}}%
-                  </span>
-                  <p class="text-3xl font-bold text-gray-800">{{totalIngresosMesActual}}</p>
+  <span [ngClass]="{'text-green-600': comparacionIngresos.aumento, 'text-red-600': !comparacionIngresos.aumento}" class="text-md font-bold flex items-center">
+    <i *ngIf="comparacionIngresos.aumento" class="material-icons" style="color: green;">arrow_upward</i>
+    <i *ngIf="!comparacionIngresos.aumento" class="material-icons" style="color: red;">arrow_downward</i>
+    {{ comparacionIngresos.porcentaje | number:'1.2-2' }}%
+  </span>
+                  <p class="text-3xl font-bold text-gray-800">{{ totalIngresosMesActual }}</p>
                 </div>
               </div>
             </div>
@@ -45,9 +50,11 @@
                   </div>
                 </div>
                 <div class="flex flex-col items-end justify-center">
-                  <span [ngClass]="{'text-green-600': comparacionGastos.aumento, 'text-red-600': !comparacionGastos.aumento}" class="text-green-600 text-md font-bold flex items-center">
-                    <i [ngClass]="{'fas fa-arrow-up ': comparacionGastos.aumento, 'fas fa-arrow-down': !comparacionGastos.aumento}" ></i>{{comparacionGastos.porcentaje | number:'1.2-2'}}%
-                  </span>
+                  <span [ngClass]="{'text-green-600': comparacionGastos.aumento, 'text-red-600': !comparacionGastos.aumento}" class="text-md font-bold flex items-center">
+                  <i *ngIf="comparacionGastos.aumento" class="material-icons" style="color: green;">arrow_upward</i>
+                  <i *ngIf="!comparacionGastos.aumento" class="material-icons" style="color: red;">arrow_downward</i>
+                    {{ comparacionGastos.porcentaje | number:'1.2-2' }}%
+                </span>
                   <p class="text-3xl font-bold text-gray-800">{{totalGastosMesActual}}</p>
                 </div>
               </div>
@@ -65,9 +72,11 @@
                   </div>
                 </div>
                 <div class="flex flex-col items-end justify-center">
-                  <span [ngClass]="{'text-green-600': comparacionBeneficios.aumento, 'text-red-600': !comparacionBeneficios.aumento}" class="text-green-600 text-md font-bold flex items-center">
-                    <i [ngClass]="{'fas fa-arrow-up ': comparacionBeneficios.aumento, 'fas fa-arrow-down': !comparacionBeneficios.aumento}" ></i>{{comparacionBeneficios.porcentaje | number:'1.2-2'}}%
-                  </span>
+                <span [ngClass]="{'text-green-600': comparacionBeneficios.aumento, 'text-red-600': !comparacionBeneficios.aumento}" class="text-md font-bold flex items-center">
+                  <i *ngIf="comparacionBeneficios.aumento" class="material-icons" style="color: green;">arrow_upward</i>
+                  <i *ngIf="!comparacionBeneficios.aumento" class="material-icons" style="color: red;">arrow_downward</i>
+                  {{ comparacionBeneficios.porcentaje | number:'1.2-2' }}%
+                </span>
                   <p class="text-3xl font-bold text-gray-800">{{beneficiosMesActual}}</p>
                 </div>
               </div>
