@@ -48,61 +48,7 @@ export class ResultadosComponent implements OnInit{
 
 
   constructor(private authService: AuthService) {
-    this.chartOptions1 = {
-      series: [
-        {
-           name: "My-series",
-          data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-        }
-      ],
-      chart: {
-        height: 350,
-        type: "bar"
-      },
-      title: {
-        text: "My First Angular Chart"
-      },
-      xaxis: {
-        categories: ["Jan", "Feb",  "Mar",  "Apr",  "May",  "Jun",  "Jul",  "Aug", "Sep"]
-      }
-    };
 
-    this.chartOptions2 = {
-      series: [
-        {
-          name: "basic",
-          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
-        }
-      ],
-      chart: {
-        type: "bar",
-        height: 350
-      },
-      plotOptions: {
-        bar: {
-          horizontal: true
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      xaxis: {
-        categories: [
-          "South Korea",
-          "Canada",
-          "United Kingdom",
-          "Netherlands",
-          "Italy",
-          "France",
-          "Japan",
-          "United States",
-          "China",
-          "Germany"
-        ]
-      }
-    };
-
-   
   }
   ngOnInit(): void {
     this.obtenerTodosLosDatos();
@@ -120,13 +66,13 @@ export class ResultadosComponent implements OnInit{
   calculoDeTotales() {
     const hoy = startOfDay(new Date());
     const mesAnterior = subMonths(hoy, 1);
-  
+
     let totalIngresosMesAnterior = 0;
     let totalGastosMesAnterior = 0;
-  
+
     this.datosDeMongo.forEach(dato => {
       const fechaDato = new Date(dato.fecha);
-  
+
       if (isSameMonth(fechaDato, hoy)) {
         // Convertir a número antes de sumar
         this.totalIngresosMesActual += Number(dato.ingresoTotal);
@@ -141,7 +87,7 @@ export class ResultadosComponent implements OnInit{
         console.log('totalGastosMesAnterior', totalGastosMesAnterior);
       }
     });
-  
+
     this.beneficiosMesActual = this.totalIngresosMesActual - this.totalGastosMesActual;
     console.log('BENEDICIOSMESACTUAL',this.beneficiosMesActual);
     // Calcula la comparación con el mes anterior
@@ -202,8 +148,8 @@ procesarDatosParaGrafica(datos: any[]) {
     gastosData.push(acumuladosPorFecha[claveFecha].gastoTotal);
     beneficiosData.push(acumuladosPorFecha[claveFecha].beneficiosTotal);
   });
-    
-    
+
+
     this.chartOptions4 = {
       color:['#F17777', '#F17777', '#F17777'],
       series: [
@@ -218,7 +164,7 @@ procesarDatosParaGrafica(datos: any[]) {
           type: "column",
           data: gastosData,
           color: '#003566'
-          
+
         },
         {
           name: "Beneficio",
@@ -293,7 +239,7 @@ procesarDatosParaGrafica(datos: any[]) {
             }
           }
         },
-        
+
       ]
     };
     const totalIngresos = ingresosData.reduce((acc, curr) => acc + curr, 0);
@@ -302,16 +248,16 @@ procesarDatosParaGrafica(datos: any[]) {
 
     this.chartOptions3 = {
       series: [totalIngresos, totalGastos, totalBeneficios],
-      
+
       chart: {
-        width: 380,
+        width: 360,
         type: "pie"
       },
       colors:['#ffd60a','#003566','#001d3d'],
       labels: ["Ingresos", "Gastos", "Beneficios"],
       legend: {
         position: 'top', // Cambiar la posición de la leyenda a 'top'
-        horizontalAlign: 'center', // Opciones: 'left', 'center', 'right'
+        horizontalAlign: 'left', // Opciones: 'left', 'center', 'right'
       },
       responsive: [
         {

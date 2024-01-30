@@ -25,8 +25,7 @@ export class RegisterComponent implements OnInit {
 
   registerUser() {
     if (this.registerForm.valid) {
-      this.authService.registerUser(this.registerForm.value).subscribe(
-        response => {
+      this.authService.registerUser(this.registerForm.value).subscribe(response => {
           this.errorMessage = 'Registro existoso';
           setTimeout(() => {
             this.router.navigate(['/login']); // Asegúrate de que '/login' sea la ruta correcta a tu página de inicio de sesión
